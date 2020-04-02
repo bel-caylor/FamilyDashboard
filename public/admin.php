@@ -19,13 +19,20 @@ require_once(SHARED_PATH . '/optionUsers.php');
   </header>
 
   <main>
-    <!-- Messages -->
+    <!-- Reports -->
+      <!-- Daily Completed Minutes -->
+      <!-- 7-Day Completed Minutes -->
+      <!-- Family Meter - with colors users and bar representing % of task. -->
 
     <!-- House Tasks -->
+      <!-- Assigned Tasks  -->
+      <!-- Available Tasks -->
 
     <!-- Personal Tasks -->
 
-    <!-- Create & Assign Tasks -->
+    <!-- Meal Plan -->
+
+    <!-- Assign Tasks -->
     <div class="section inline">
       <button onclick="clickExpandBtn('assignTask')">
         <img class="btn inline" src="images/button-expand.png">
@@ -36,8 +43,29 @@ require_once(SHARED_PATH . '/optionUsers.php');
       <?php include(SHARED_PATH . '/sectionAssignTask.php'); ?>
     </div>
 
-
     <!-- Create Tasks -->
+    <div class="section inline">
+      <button onclick="clickExpandBtn('createTask')">
+        <img class="btn inline" src="images/button-expand.png">
+        <h2 class="inline">Create Tasks</h2>
+      </button>
+    </div>
+    <div id="assignTask">
+      <?php include(SHARED_PATH . '/sectionCreateTask.php'); ?>
+    </div>
+
+    <!-- Create Categories -->
+    <!-- NEED A REDIRECT -->
+        <!-- <div class="section inline">
+          <button onclick="clickExpandBtn('createCategories')">
+            <img class="btn inline" src="images/button-expand.png">
+            <h2 class="inline">Create Categories & Tasks</h2>
+          </button>
+        </div>
+        <div id="assignTask">
+          <?php //include(SHARED_PATH . '/sectionCreateCategory.php'); ?>
+        </div> -->
+
 
   </main>
 <?php include(SHARED_PATH . '/footer.php') ?>
