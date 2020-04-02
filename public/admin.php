@@ -1,4 +1,6 @@
-<?php require_once('../private/initialize.php'); ?>
+<?php require_once('../private/initialize.php');
+require_once(SHARED_PATH . '/optionUsers.php');
+ ?>
 
 <?php
   //Session Parimeters
@@ -12,6 +14,9 @@
  <?php include(SHARED_PATH . '/header.php') ?>
 
 <body>
+  <header>
+    Family Dashboard
+  </header>
 
   <main>
     <!-- Messages -->
@@ -21,12 +26,18 @@
     <!-- Personal Tasks -->
 
     <!-- Create & Assign Tasks -->
-    <?php
-      include(SHARED_PATH . '/sectionCategory.php');
-      include(SHARED_PATH . '/optionsFreq.php');
-      include(SHARED_PATH . '/optionsType.php');
-    ?>
+    <div class="section inline">
+      <button onclick="clickExpandBtn('assignTask')">
+        <img class="btn inline" src="images/button-expand.png">
+        <h2 class="inline">Assign Tasks</h2>
+      </button>
+    </div>
+    <div id="assignTask">
+      <?php include(SHARED_PATH . '/sectionAssignTask.php'); ?>
+    </div>
 
-    <!-- Edit & Create Categories -->
+
+    <!-- Create Tasks -->
 
   </main>
+<?php include(SHARED_PATH . '/footer.php') ?>

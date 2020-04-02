@@ -1,0 +1,83 @@
+//Main Sections
+body {
+    margin: 2px;
+}
+
+h2 {
+  margin: 5px 5px 1px 5px;
+}
+
+.inline {
+  display: inline;
+}
+
+button {
+  background-color: transparent;
+  border-style: none;
+}
+button:hover {
+  opacity: 07;
+}
+
+.btn {
+  height: auto;
+  max-width: 15px;
+  // vertical-align: bottom;
+}
+
+//Section class names
+.section {
+  display: flex;
+  border-width: 0 0 1px 0;
+  border-color: black;
+  border-style: groove;
+  margin-top:10px;
+}
+
+#assignTask {
+  display: none;
+}
+
+.category {
+  background-color: #d5d5d5;
+  margin-top: 2px;
+  padding: 2px 0 2px 10px;
+
+}
+
+.table {
+  background-color: white;
+  // display: block;
+}
+
+.row {
+  display: grid;
+  grid-template-columns:0.5fr 2fr 10fr;
+  // grid-template-rows: 1fr 3fr 0fr;
+  grid-template-areas:
+    "time assn task";
+  padding: 1px 0 1px 5px;
+}
+
+.task {
+  grid-area: task;
+  padding-left: 5px;
+}
+
+.assigned {
+  grid-area: assn;
+}
+
+.time {
+  grid-area: time;
+}
+
+// .frequency {
+//   grid-area: freq;
+// }
+//
+// .note {
+//   // visibility: hidden;
+//   // display: none;
+//   grid-area: note;
+// }

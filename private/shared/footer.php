@@ -3,7 +3,7 @@
 ?>
 <footer class="page_footer">
   <div>&copy; <?php echo date('Y') . ' ' .$Company; ?></div>
-  </div> -->
+  </div>
 </footer>
 <script src="index.js">
 </script>

@@ -25,7 +25,7 @@ function query_familyTasksCategories($familyID) {
 }
 
 function query_tasks($familyID, $Cat_Name_ID) {
-  $sql = "SELECT tasks.ID, tasks.Task, users.ID, users.Name, frequency.Frequency, tasks.Time, tasks.Note ";
+  $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, users.ID AS User_ID, users.Name, frequency.Frequency, tasks.Time, tasks.Note ";
   $sql .= "FROM tasks LEFT JOIN users ON tasks.Assigned_User_ID = users.ID ";
   $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
   $sql .= "WHERE tasks.Cat_Name_ID = " . $Cat_Name_ID .  " AND tasks.Family_ID = " . $familyID;
