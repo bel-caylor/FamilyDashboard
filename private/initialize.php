@@ -5,11 +5,12 @@
   define("PUBLIC_PATH", PROJECT_PATH . '/public');
   define("SHARED_PATH", PRIVATE_PATH . '/shared');
 
-  define("WWW_ROOT", '/~FamilyDashboard/public');
+  define("WWW_ROOT", '/FamilyDashboard/public');
 
   // require_once('functions.php');
   require_once('database.php');
   require_once('sqlFunctions.php');
+  require_once('functions.php');
 
   $db = dbConnect();
  ?>

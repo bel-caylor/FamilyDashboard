@@ -33,9 +33,29 @@ function query_tasks($familyID, $Cat_Name_ID) {
   return query_db($sql);
 }
 
+function insert_db($sql) {
+  global $db;
+  $result = mysqli_query($db, $sql);
+  if($result == 0) {   //Failed change
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+  return mysqli_insert_id($db);
+}
+
 function query_Users($familyID) {
   $sql = "SELECT * FROM `users` ";
   return query_db($sql);
 }
 
+function createFamily($familyName, $zip) {
+  $sql = "INSERT INTO family ";
+  $sql .= "(Family, Postal_Code) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $familyName . "',";
+  $sql .= "'" . $zip . "'";
+  $sql .= ")";
+  return insert_db($sql);  //return ID of new family
+}
  ?>

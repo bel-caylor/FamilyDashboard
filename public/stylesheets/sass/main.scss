@@ -11,6 +11,10 @@ h2 {
   display: inline;
 }
 
+input {
+  padding-left: 5px;
+}
+
 button {
   background-color: transparent;
   border-style: none;
@@ -36,6 +40,30 @@ button:hover {
 
 #assignTask {
   display: none;
+}
+
+#editFamily {
+  display: block;
+}
+
+.form {
+  margin: 10px auto 10px auto;
+  width: 80%;
+  display: inline-block;
+  text-align: center;
+  label {
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  input {
+    display: inline;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  button {
+    margin-top: 10px;
+  }
 }
 
 .category {
