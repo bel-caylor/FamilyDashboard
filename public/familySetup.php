@@ -6,10 +6,11 @@
   $stepID = $_POST['step'] ?? '1';
   $stepID = substr($stepID,0,1) ?? '1';
   $header = 'Welcome to Family Dashboard';
-  $familyID = $_POST['familyID'] ?? '';
-  $familyName = $_POST['family'] ?? '';
+  $familyID = $_COOKIE['familyID'] ?? $_POST['familyID'] ?? '';
+  $familyName = $_COOKIE['family'] ?? $_POST['family'] ?? '';
   $postalCode = $_POST['postalCode'] ?? '';
   $updateMsg = '';
+  $expires = time() + 60*60*24*14; //expires in 2 weeks
 
 
   //NEED TO ADD ERROR HANDLING!!!
@@ -29,7 +30,9 @@
           $updateMsg = $result;
         } else {
         //Return familyID after Create
-            $familyID = $result;
+          setcookie('familyID', $familyID, $expires);
+          setcookie('family', $_POST['family'], $expires);
+          $familyID = $result;
         }
         $stepID = '2';
         $header = $familyName . ' Dashboard ';
