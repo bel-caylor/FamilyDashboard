@@ -1,5 +1,6 @@
 body {
-  margin: 2px; }
+  margin: 2px;
+  font-color: red; }
 
 h2 {
   margin: 5px 5px 1px 5px; }
@@ -15,7 +16,8 @@ button {
   border-style: none; }
 
 button:hover {
-  opacity: 07; }
+  opacity: 0.7;
+  color: blue; }
 
 .btn {
   height: auto;
@@ -34,10 +36,12 @@ button:hover {
 #editFamily {
   display: block; }
 
+.hidden {
+  display: none; }
+
 .form {
   margin: 10px auto 10px auto;
   width: 80%;
-  display: inline-block;
   text-align: center; }
   .form label {
     display: inline;
@@ -46,9 +50,24 @@ button:hover {
   .form input {
     display: inline;
     margin-top: 5px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    font-weight: bold; }
   .form button {
     margin-top: 10px; }
+
+.message {
+  color: red;
+  font-weight: bold;
+  text-align: center; }
+
+.arrowUp {
+  transform: rotate(180deg); }
+
+.arrowSide {
+  transform: rotate(90deg); }
+
+.formReadOnly {
+  border-style: none; }
 
 .category {
   background-color: #d5d5d5;

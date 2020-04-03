@@ -1,5 +1,6 @@
 <?php
 
+//QUERY FUNCTIONS
 function query_db($sql) {
   global $db;
   $data = mysqli_query($db, $sql);
@@ -33,29 +34,80 @@ function query_tasks($familyID, $Cat_Name_ID) {
   return query_db($sql);
 }
 
-function insert_db($sql) {
-  global $db;
-  $result = mysqli_query($db, $sql);
-  if($result == 0) {   //Failed change
-    echo mysqli_error($db);
-    db_disconnect($db);
-    exit;
-  }
-  return mysqli_insert_id($db);
-}
-
 function query_Users($familyID) {
   $sql = "SELECT * FROM `users` ";
   return query_db($sql);
 }
 
-function createFamily($familyName, $zip) {
-  $sql = "INSERT INTO family ";
-  $sql .= "(Family, Postal_Code) ";
-  $sql .= "VALUES (";
-  $sql .= "'" . $familyName . "',";
-  $sql .= "'" . $zip . "'";
-  $sql .= ")";
-  return insert_db($sql);  //return ID of new family
+//INSERT FUNCTIONS
+function insert_db($sql) {
+  global $db;
+  $result = mysqli_query($db, $sql);
+  if($result) {         //Insert succeeded
+    return mysqli_insert_id($db);
+  } else {              //Failed change
+    echo mysqli_error($db);
+    dbDisConnect($db);
+    exit;
+  }
 }
+
+//EDIT FUNCTIONS
+function edit_db($sql) {
+  global $db;
+  $result = mysqli_query($db, $sql);
+  if($result) {         //Insert succeeded
+    return "Family Updated";
+  } else {              //Failed change
+    echo mysqli_error($db);
+    dbDisConnect($db);
+    exit;
+  }
+}
+
+function sqlCreateFamily($familyName, $postalCode, $familyID) {
+
+  $errors = validateFamily($familyName);
+  // echo $errors[0];
+  if (!empty($errors)) {
+    return $errors;
+  }
+  // echo $familyID;
+  if ($familyID != "") {
+    //Edit record
+    $sql = "UPDATE family SET ";
+    $sql .= "Family='" . $familyName . "', ";
+    $sql .= "Postal_Code='" . $postalCode . "' ";
+    $sql .= "WHERE ID='" . $familyID . "' ";
+    $sql .= "LIMIT 1";
+    return edit_db($sql);
+  }else {
+    //Add record
+    $sql = "INSERT INTO family ";
+    $sql .= "(Family, Postal_Code) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . $familyName . "',";
+    $sql .= "'" . $postalCode . "'";
+    // $sql .= "'" . $familyID . "'";
+    $sql .= ")";
+    //return ID of new family
+    return insert_db($sql);
+  }
+}
+
+//VALIDATION FUNCTIONS
+function validateFamily($familyName) {
+  $errors = [];
+  //Family name
+  // echo has_length_greater_than($familyName, 1) . "<br>";
+    if(has_length_greater_than($familyName, 1) === 0) {
+      $errors[] = "Name must be between 2 and 10 characters.";
+    }
+    //trying to figure out regex
+    // if(validStringOnly($familyName, 2, 10) === 1) {
+    //   $errors[] = "Use only characters a-z.";
+    // }
+  return $errors;
+}
+
  ?>
