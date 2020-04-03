@@ -23,6 +23,7 @@ require_once(SHARED_PATH . '/optionUsers.php');
       <!-- Daily Completed Minutes -->
       <!-- 7-Day Completed Minutes -->
       <!-- Family Meter - with colors users and bar representing % of task. -->
+      <!-- Idea for Completion change background color from red - yellow - blue based on % complete -->
 
     <!-- House Tasks -->
       <!-- Assigned Tasks  -->

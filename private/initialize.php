@@ -11,6 +11,7 @@
   require_once('database.php');
   require_once('sqlFunctions.php');
   require_once('functions.php');
+  require_once('validationFunctions.php');  
 
   $db = dbConnect();
  ?>
