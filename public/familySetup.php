@@ -1,6 +1,4 @@
 <?php require_once('../private/initialize.php'); ?>
-<?php require_once('../private/shared/sectionCreateFamily.php'); ?>
-<?php require_once('../private/shared/sectionCreateFamilyMembers.php'); ?>
 
 <?php
   //Session Parimeters
@@ -8,7 +6,7 @@
   // $stepID = substr($stepID,0,1) ?? '1';
   $header = 'Welcome to Family Dashboard';
   $familyID = $_COOKIE['familyID'] ?? $_POST['familyID'] ?? '';
-  $familyName = $_COOKIE['family'] ?? $_POST['family'] ?? '';
+  $family = $_COOKIE['family'] ?? $_POST['family'] ?? '';
   $postalCode = $_POST['postalCode'] ?? '';
   $updateMsg = '';
   $expires = time() + 60*60*24*14; //expires in 2 weeks
@@ -62,27 +60,32 @@
 <!-- Step 1 - Create/Edit Family  -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
-        <img class="btn inline <?php if ($stepID == 1) {echo "arrowUp";}?>" src="images/button-expand.png">
-        <h2 class="inline">
-          <?php if ($stepID == 1) {echo "Create Family";}else {echo "Edit Family";}?>
+        <h2 id="head1" class="inline">&#9660;
+          <?php if ($familyID == '') {echo "Create Family";}else {echo "Edit Family";}?>
         </h2>
       </button>
     </div>
+
+    <!-- CREATE Family Form -->
     <!-- Hide section if moving onto Step 2. -->
-    <div id="Step1" class="form <?php if ($stepID == 2 && $updateMsg == '') {echo "hidden";}?>">
-      <?php
-      //UPDATE Message
-      if ($updateMsg != "") {echo "<div class=message>" . $updateMsg . "</div>";}
-      //CREATE Family Form
-      echo createFamily($stepID, $familyName, $postalCode, $familyID);
-      ?>
+    <div id="Step1" class="form">
+      <form action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
+        <fieldset>
+          <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
+          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10"  pattern="[A-Za-z]{2-10}" required><br>
+          <label for="postalCode" class="tooltip"><span class="tooltiptext">ZIP Code</span>Postal Code:  </label>
+          <input type="text" id="postalCode" name="postalCode" value="<?php echo $postalCode?>" maxlength="10" size="10" required><br>
+          <input type="hidden" name="step" value="1">
+          <input type="hidden" name="familyID" value="<?php echo $familyID?>">
+          <input type="submit" <?php if ($familyID == "") {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
+        </fieldset>
+      </form>
     </div>
 
     <!-- Step 2 - Add Family Members -->
     <div id="Step2" class="section inline">
       <button onclick="clickExpandBtn('addUsers')">
-        <img class="btn inline" src="images/button-expand.png">
-        <h2 class="inline">Add/Edit Family Members</h2>
+        <h2 class="inline">&#9660; Add/Edit Family Members</h2>
       </button>
     </div>
     <div id="Step2" class="form <?php if ($stepID !== 2 && $updateMsg == '') {echo "hidden";}?>">
@@ -112,24 +115,21 @@
     <!-- Step 3 - Add Rooms/Categories  -->
     <div id="Step3" class="section inline">
       <button onclick="clickExpandBtn('addCategories')">
-        <img class="btn inline" src="images/button-expand.png">
-        <h2 class="inline">Add Rooms/Categories</h2>
+        <h2 class="inline">&#9660; Add Rooms/Categories</h2>
       </button>
     </div>
 
     <!-- Step 4 - Import Default Tasks  -->
     <div id="Step4" class="section inline">
-      <button onclick="clickExpandBtn('importDftTasks')">
-        <img class="btn inline" src="images/button-expand.png">
-        <h2 class="inline">Import Default Tasks</h2>
+      <button onclick="clickExpandBtn('importTasks')">
+        <h2 class="inline">&#9660; Import Default Tasks</h2>
       </button>
     </div>
 
     <!-- Step 5 - Edit Frequency, Delete Unwanted, Add Additional -->
     <div id="Step5" class="section inline">
       <button onclick="clickExpandBtn('editTasks')">
-        <img class="btn inline" src="images/button-expand.png">
-        <h2 class="inline">Edit Tasks</h2>
+        <h2 class="inline">&#9660; Edit Tasks</h2>
       </button>
     </div>
 
