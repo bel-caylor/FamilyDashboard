@@ -1,10 +1,11 @@
 <?php require_once('../private/initialize.php'); ?>
 <?php require_once('../private/shared/sectionCreateFamily.php'); ?>
+<?php require_once('../private/shared/sectionCreateFamilyMembers.php'); ?>
 
 <?php
   //Session Parimeters
-  $stepID = $_POST['step'] ?? '1';
-  $stepID = substr($stepID,0,1) ?? '1';
+  $stepID = $_COOKIE['step'] ?? $_POST['step'] ?? '1';
+  // $stepID = substr($stepID,0,1) ?? '1';
   $header = 'Welcome to Family Dashboard';
   $familyID = $_COOKIE['familyID'] ?? $_POST['familyID'] ?? '';
   $familyName = $_COOKIE['family'] ?? $_POST['family'] ?? '';
@@ -19,7 +20,8 @@
 
   if($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($stepID) {
-      case 1:
+
+      case 1:  //CREATE or EDIT Family
         $result = sqlCreateFamily(h($_POST['family']), h($_POST['postalCode']), $familyID);
         //Check for errors
         if (is_array($result)) {
@@ -34,16 +36,17 @@
           setcookie('family', $_POST['family'], $expires);
           $familyID = $result;
         }
-        $stepID = '2';
+        setcookie('step', 2, $expires);
         $header = $familyName . ' Dashboard ';
         break;
-      case 2:
 
-      case 3:
+      case 2:  //CREATE or EDIT Family Members
 
-      case 4:
+      case 3:  //CREATE or EDIT Rooms or Categories
 
-      case 5:
+      case 4:  //Import Default Tasks
+
+      case 5:  //CREATE or EDIT Tasks
     }
   }
  ?>
@@ -79,8 +82,31 @@
     <div id="Step2" class="section inline">
       <button onclick="clickExpandBtn('addUsers')">
         <img class="btn inline" src="images/button-expand.png">
-        <h2 class="inline">Add Family Members</h2>
+        <h2 class="inline">Add/Edit Family Members</h2>
       </button>
+    </div>
+    <div id="Step2" class="form <?php if ($stepID !== 2 && $updateMsg == '') {echo "hidden";}?>">
+      <?php
+      //UPDATE Message
+      if ($updateMsg != "") {echo "<div class=message>" . $updateMsg . "</div>";}
+      //CREATE Family Form
+      $html = '<form action="' . WWW_ROOT . '/familySetup.php" method="POST">';
+      $html .= '<label for="family">Name:  </label>';
+      $html .= '<input type="text" id="name" name="name" value="'  . $Name .  '" maxlength="10" size="10"  pattern="[A-Za-z]{2-10}" required><br>';
+      $html .= '<label  class="tooltip" for="Initial"><span class="tooltiptext">Unique for each family member</span>Initial:&nbsp;&nbsp;</label>';
+      $html .= '<input type="text" id="Initial" name="Initial" value="'  . $Initial .  '" maxlength="1" size="1" required>';
+      // $html .= '(unique for each family member)<br>';
+      $html .= '<label for="postalCode"> &nbsp;&nbsp;&nbsp;&nbsp;Admin:  </label>';
+      $html .= '<input type="checkbox" id="Admin" name="Admin" value="'  . $Admin .  '"><br>';
+      $html .= '<input type="submit" ';
+      if ($Name === "") {
+        $html .= 'value="Add">';
+      }else{
+        $html .= 'value="Save Changes">';
+        }
+      $html .= '</form>';
+      echo $html;
+      ?>
     </div>
 
     <!-- Step 3 - Add Rooms/Categories  -->
