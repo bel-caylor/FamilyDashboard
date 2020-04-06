@@ -8,6 +8,7 @@
   $familyID = $_SESSION['familyID'] ?? $_POST['familyID'] ?? '';
   $family = $_SESSION['family'] ?? $_POST['family'] ?? '';
   $postalCode = $_SESSION['postalCode'] ?? '';
+  $statusMessage = $_SESSION['status-message'] ?? '';
 
   //NEED TO ADD ERROR HANDLING!!!
   // echo $stepID;
@@ -34,14 +35,18 @@
 
     <!-- CREATE Family Form -->
     <!-- Hide section if moving onto Step 2. -->
-    <div id="Step1" class="form">
-      <form action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
+    <div id="Step1" class="form<?php if ($stepID == '2') {echo " hidden";} ?>">
+      <form id="form1" action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
           <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required><br>
           <label for="postalCode" class="tooltip"><span class="tooltiptext">ZIP Code</span>Postal Code:  </label>
           <input type="text" id="postalCode" name="postalCode" value="<?php echo $postalCode?>" maxlength="10" size="10" required><br>
-          <input type="submit" <?php if ($stepID == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
+          <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
+          <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
+          <p role="alert" class="status-message" <?php if ($statusMessage == '') {echo "hidden";} ?>>
+            <?php $statusMessage ?></p>
+          <input id="btn1" type="submit" <?php if ($stepID == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
         </fieldset>
       </form>
     </div>
@@ -54,8 +59,6 @@
     </div>
     <div id="Step2" class="form <?php if ($stepID !== 2 && $updateMsg == '') {echo "hidden";}?>">
       <?php
-      //UPDATE Message
-      if ($updateMsg != "") {echo "<div class=message>" . $updateMsg . "</div>";}
       //CREATE Family Form
       $html = '<form action="' . WWW_ROOT . '/familySetup.php" method="POST">';
       $html .= '<label for="family">Name:  </label>';

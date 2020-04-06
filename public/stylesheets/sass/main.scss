@@ -79,11 +79,14 @@ button:hover {
   }
 }
 
-.message {
+
+
+.status-message {
   color: red;
   font-weight:bold;
   text-align: center;
-  // text-align: left;
+  margin-block-start: 3px;
+  margin-block-end: 3px;
 }
 
 .arrowUp {
