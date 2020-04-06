@@ -65,48 +65,41 @@ function edit_db($sql) {
   }
 }
 
-function sqlCreateFamily($familyName, $postalCode, $familyID) {
-
+function sqlCreateFamily($familyName, $postalCode) {
   $errors = validateFamily($familyName);
-  // echo $errors[0];
-  if (!empty($errors)) {
-    return $errors;
-  }
-  // echo $familyID;
-  if ($familyID != "") {
-    //Edit record
-    $sql = "UPDATE family SET ";
-    $sql .= "Family='" . $familyName . "', ";
-    $sql .= "Postal_Code='" . $postalCode . "' ";
-    $sql .= "WHERE ID='" . $familyID . "' ";
-    $sql .= "LIMIT 1";
-    return edit_db($sql);
-  }else {
-    //Add record
-    $sql = "INSERT INTO family ";
-    $sql .= "(Family, Postal_Code) ";
-    $sql .= "VALUES (";
-    $sql .= "'" . $familyName . "',";
-    $sql .= "'" . $postalCode . "'";
-    // $sql .= "'" . $familyID . "'";
-    $sql .= ")";
-    //return ID of new family
-    return insert_db($sql);
-  }
+  if (!empty($errors)) {return $errors;}
+
+  //Add record
+  $sql = "INSERT INTO family ";
+  $sql .= "(Family, Postal_Code) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $familyName . "',";
+  $sql .= "'" . $postalCode . "'";
+  // $sql .= "'" . $familyID . "'";
+  $sql .= ")";
+  //return ID of new family
+  return insert_db($sql);
+}
+
+function sqlEditFamily($familyName, $postalCode, $familyID) {
+  $errors = validateFamily($familyName);
+  if (!empty($errors)) {return $errors;}
+
+  $sql = "UPDATE family SET ";
+  $sql .= "Family='" . $familyName . "', ";
+  $sql .= "Postal_Code='" . $postalCode . "' ";
+  $sql .= "WHERE ID='" . $familyID . "' ";
+  $sql .= "LIMIT 1";
+  return edit_db($sql);
 }
 
 //VALIDATION FUNCTIONS
 function validateFamily($familyName) {
   $errors = [];
   //Family name
-  // echo has_length_greater_than($familyName, 1) . "<br>";
     if(has_length_greater_than($familyName, 1) === 0) {
       $errors[] = "Name must be between 2 and 10 characters.";
     }
-    //trying to figure out regex
-    // if(validStringOnly($familyName, 2, 10) === 1) {
-    //   $errors[] = "Use only characters a-z.";
-    // }
   return $errors;
 }
 

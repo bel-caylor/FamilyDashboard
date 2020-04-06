@@ -8,8 +8,7 @@
   $familyID = $_COOKIE['familyID'] ?? $_POST['familyID'] ?? '';
   $family = $_COOKIE['family'] ?? $_POST['family'] ?? '';
   $postalCode = $_POST['postalCode'] ?? '';
-  $updateMsg = '';
-  $expires = time() + 60*60*24*14; //expires in 2 weeks
+  // $updateMsg = '';
 
 
   //NEED TO ADD ERROR HANDLING!!!
@@ -72,11 +71,11 @@
       <form action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
-          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10"  pattern="[A-Za-z]{2-10}" required><br>
+          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must 2-10 letters." required><br>
           <label for="postalCode" class="tooltip"><span class="tooltiptext">ZIP Code</span>Postal Code:  </label>
           <input type="text" id="postalCode" name="postalCode" value="<?php echo $postalCode?>" maxlength="10" size="10" required><br>
-          <input type="hidden" name="step" value="1">
-          <input type="hidden" name="familyID" value="<?php echo $familyID?>">
+          <!-- <input type="hidden" name="step" value="<?php echo $stepID ?>">
+          <input type="hidden" name="familyID" value="<?php echo $familyID?>"> -->
           <input type="submit" <?php if ($familyID == "") {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
         </fieldset>
       </form>
