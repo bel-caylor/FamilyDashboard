@@ -2,50 +2,17 @@
 
 <?php
   //Session Parimeters
-  $stepID = $_COOKIE['step'] ?? $_POST['step'] ?? '1';
+  $stepID = $_SESSION['step'] ?? $_POST['step'] ?? '1';
   // $stepID = substr($stepID,0,1) ?? '1';
   $header = 'Welcome to Family Dashboard';
-  $familyID = $_COOKIE['familyID'] ?? $_POST['familyID'] ?? '';
-  $family = $_COOKIE['family'] ?? $_POST['family'] ?? '';
-  $postalCode = $_POST['postalCode'] ?? '';
-  // $updateMsg = '';
-
+  $familyID = $_SESSION['familyID'] ?? $_POST['familyID'] ?? '';
+  $family = $_SESSION['family'] ?? $_POST['family'] ?? '';
+  $postalCode = $_SESSION['postalCode'] ?? '';
 
   //NEED TO ADD ERROR HANDLING!!!
   // echo $stepID;
   // echo $_SERVER['REQUEST_METHOD'];
 
-  if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    switch ($stepID) {
-
-      case 1:  //CREATE or EDIT Family
-        $result = sqlCreateFamily(h($_POST['family']), h($_POST['postalCode']), $familyID);
-        //Check for errors
-        if (is_array($result)) {
-          var_dump($result);
-          break;
-        //Check for Update
-        } elseif ($result === "Family Updated"){
-          $updateMsg = $result;
-        } else {
-        //Return familyID after Create
-          setcookie('familyID', $familyID, $expires);
-          setcookie('family', $_POST['family'], $expires);
-          $familyID = $result;
-        }
-        setcookie('step', 2, $expires);
-        $header = $familyName . ' Dashboard ';
-        break;
-
-      case 2:  //CREATE or EDIT Family Members
-
-      case 3:  //CREATE or EDIT Rooms or Categories
-
-      case 4:  //Import Default Tasks
-
-      case 5:  //CREATE or EDIT Tasks
-    }
-  }
  ?>
 
  <?php include(SHARED_PATH . '/header.php') ?>
@@ -60,7 +27,7 @@
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
         <h2 id="head1" class="inline">&#9660;
-          <?php if ($familyID == '') {echo "Create Family";}else {echo "Edit Family";}?>
+          <?php if ($stepID == '1') {echo "Create Family";}else {echo "Edit Family";}?>
         </h2>
       </button>
     </div>
@@ -71,12 +38,10 @@
       <form action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
-          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must 2-10 letters." required><br>
+          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required><br>
           <label for="postalCode" class="tooltip"><span class="tooltiptext">ZIP Code</span>Postal Code:  </label>
           <input type="text" id="postalCode" name="postalCode" value="<?php echo $postalCode?>" maxlength="10" size="10" required><br>
-          <!-- <input type="hidden" name="step" value="<?php echo $stepID ?>">
-          <input type="hidden" name="familyID" value="<?php echo $familyID?>"> -->
-          <input type="submit" <?php if ($familyID == "") {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
+          <input type="submit" <?php if ($stepID == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
         </fieldset>
       </form>
     </div>
