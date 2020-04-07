@@ -16,6 +16,8 @@ h2 {
 
 fieldset {
   border-style: none;
+  margin:  0 0 0 10px;
+  padding: 0;
 }
 
 input {
@@ -62,16 +64,16 @@ button:hover {
 .form {
   margin: 10px auto 10px auto;
   width: 80%;
-  text-align: center;
+  text-align: left;
   label {
-    display: inline;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 3px;
   }
   input {
-    display: inline;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    display: inline-block;
+    margin-top: 3px;
+    margin-bottom: 5px;
     font-weight: bold;
   }
   button {

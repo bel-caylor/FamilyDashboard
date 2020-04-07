@@ -52,37 +52,49 @@
     </div>
 
     <!-- Step 2 - Add Family Members -->
-    <div id="Step2" class="section inline">
-      <button onclick="clickExpandBtn('addUsers')">
-        <h2 class="inline">&#9660; Add/Edit Family Members</h2>
+    <div class="section inline">
+      <button onclick="clickExpandBtn('Step2')">
+        <h2 class="inline">&#9660; Add Users</h2>
       </button>
     </div>
-    <div id="Step2" class="form <?php if ($stepID !== 2 && $updateMsg == '') {echo "hidden";}?>">
-      <?php
-      //CREATE Family Form
-      $html = '<form action="' . WWW_ROOT . '/familySetup.php" method="POST">';
-      $html .= '<label for="family">Name:  </label>';
-      $html .= '<input type="text" id="name" name="name" value="'  . $Name .  '" maxlength="10" size="10"  pattern="[A-Za-z]{2-10}" required><br>';
-      $html .= '<label  class="tooltip" for="Initial"><span class="tooltiptext">Unique for each family member</span>Initial:&nbsp;&nbsp;</label>';
-      $html .= '<input type="text" id="Initial" name="Initial" value="'  . $Initial .  '" maxlength="1" size="1" required>';
-      // $html .= '(unique for each family member)<br>';
-      $html .= '<label for="postalCode"> &nbsp;&nbsp;&nbsp;&nbsp;Admin:  </label>';
-      $html .= '<input type="checkbox" id="Admin" name="Admin" value="'  . $Admin .  '"><br>';
-      $html .= '<input type="submit" ';
-      if ($Name === "") {
-        $html .= 'value="Add">';
-      }else{
-        $html .= 'value="Save Changes">';
-        }
-      $html .= '</form>';
-      echo $html;
-      ?>
+
+    <!-- CREATE Users Form -->
+    <div id="Step2" class="form">
+      <form action="' . WWW_ROOT . '/familySetup.php" method="POST">
+        <fieldset>
+          <!-- <label for="name">Name:  </label> -->
+          <input type="text" id="name" name="name" placeholder="User Name" maxlength="10" size="10"  pattern="[A-Za-z]{2-10}" title="Must be 2-10 letters." required>&nbsp;&nbsp;
+          <label class="tooltip" for="Initial"><span class="tooltiptext">Unique for each family member</span>Initial:
+          <input type="text" id="Initial" name="Initial" maxlength="1" size="1" required></label><br>
+          <label class="tooltip" for="color"><span class="tooltiptext">Unique color<br>for reporting.</span>Color:
+          <input type="color" id="color" name="color" value="#337AFF"></label>
+          <label class="tooltip" for="Admin"><span class="tooltiptext">Able to create/assign<br>& grade tasks.</span> &nbsp;&nbsp;&nbsp;&nbsp;Admin:
+          <input type="checkbox" id="Admin" name="Admin" value="'  . $Admin .  '"></label><br>
+          <label class="tooltip" for="email"><span class="tooltiptext">Email will be<br>used for login.</span>Email:  </label>
+          <input type="text" id="email" name="email" placeholder="Email Address" maxlength="255"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter valide email." required><br>
+          <label class="tooltip" for="password"><span class="tooltiptext">Initial passwords for users will all be identical.</span>Password:  </label><br>
+          <input type="text" id="password" name="password" placeholder="Create password" maxlength="10" size="15"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be 8 to 10 characters long and contain at least one number and one uppercase and lowercase letter." required>&nbsp;&nbsp;
+          <input type="text" id="password2" name="password2" placeholder="Re-type password" maxlength="255" size="15" required><br>
+          <input type="submit" value="Add">
+        </fieldset>
+      </form>
     </div>
 
-    <!-- Step 3 - Add Rooms/Categories  -->
+    <!-- Step 3 - Edit Users -->
+    <div class="section inline">
+      <button onclick="clickExpandBtn('Step3')">
+        <h2 class="inline">&#9660; Edit Users</h2>
+      </button>
+    </div>
+
+
+
+
+
+    <!-- Step 3 - Add Categories  -->
     <div id="Step3" class="section inline">
       <button onclick="clickExpandBtn('addCategories')">
-        <h2 class="inline">&#9660; Add Rooms/Categories</h2>
+        <h2 class="inline">&#9660; Add Categories</h2>
       </button>
     </div>
 

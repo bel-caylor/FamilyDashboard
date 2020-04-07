@@ -50,7 +50,9 @@ h2 {
   display: inline; }
 
 fieldset {
-  border-style: none; }
+  border-style: none;
+  margin: 0 0 0 10px;
+  padding: 0; }
 
 input {
   padding-left: 5px; }
@@ -86,15 +88,15 @@ button:hover {
 .form {
   margin: 10px auto 10px auto;
   width: 80%;
-  text-align: center; }
+  text-align: left; }
   .form label {
-    display: inline;
-    margin-top: 10px;
-    margin-bottom: 5px; }
-  .form input {
-    display: inline;
+    display: inline-block;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 3px; }
+  .form input {
+    display: inline-block;
+    margin-top: 3px;
+    margin-bottom: 5px;
     font-weight: bold; }
   .form button {
     margin-top: 10px; }
