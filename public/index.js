@@ -1,9 +1,5 @@
 function clickExpandBtn(section) {
-  if (document.getElementById(section).style.display == "none") {
-    document.getElementById(section).style.display = "inline";
-  }else{
-    document.getElementById(section).style.display = "none";
-  }
+  document.getElementById(section).classList.toggle("hidden");
 }
 
 document.addEventListener('submit', e => {
@@ -78,3 +74,15 @@ function appUpdate(step, doc) {
       break;
   };
 };
+
+function togglePwdVisible() {
+  var pwd1 = document.getElementById("password");
+  var pwd2 = document.getElementById("password2");
+  if (pwd1.type === "password") {
+    pwd1.type = "text";
+    pwd2.type = "text";
+  } else {
+    pwd1.type = "password";
+    pwd2.type = "password";
+  }
+}
