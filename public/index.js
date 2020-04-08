@@ -30,11 +30,11 @@ document.addEventListener('submit', e => {
       statusBusy.hidden = true;
       statusMessage.hidden = false;
       form.getElementsByTagName("fieldset")[0].disabled = false;
-      statusMessage.innerHTML = doc.body.querySelector('.status-message').innerHTML;
+      // statusMessage.innerHTML = doc.body.querySelector('.status-message').innerHTML;
 
       //Make changes to app based on Step1
-      const step = doc.body.querySelector('.Step').innerHTML;
-      appUpdate(step, doc);
+      // const step = doc.body.querySelector('.Step').innerHTML;
+      // appUpdate(step, doc);
 
     })
     .catch(err => {

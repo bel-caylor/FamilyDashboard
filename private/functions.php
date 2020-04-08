@@ -1,5 +1,19 @@
 <?php
 
+function setValue($value, $default) {
+  if ($value === '') {return $default;}
+  return $value;
+
+}
+
+function addMsgs($msgs) {
+  $html = '';
+  foreach($msgs as $msg) {
+    $html .= $msg . "<br>";
+  }
+  return $html;
+}
+
 function url_for($script_path) {
   // add the leading '/' if not present
   if($script_path[0] != '/') {
