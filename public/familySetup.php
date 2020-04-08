@@ -2,14 +2,7 @@
 <?php require_once('familySetup/sessionValues.php'); ?>
 <?php
   //Session Parimeters
-  $stepID = $_SESSION['step'] ?? $_POST['step'] ?? '1';
-  // $stepID = substr($stepID,0,1) ?? '1';
   $header = 'Welcome to Family Dashboard';
-  $familyID = $_SESSION['familyID'] ?? $_POST['familyID'] ?? '';
-  $family = $_SESSION['family'] ?? $_POST['family'] ?? '';
-  $postalCode = $_SESSION['postalCode'] ?? '';
-  $step1Msgs = $_SESSION['status-message'] ?? [];
-  $step2Msgs = $_SESSION['step2Msgs'] ?? [];
 
   //NEED TO ADD ERROR HANDLING!!!
   // echo $stepID;
@@ -31,25 +24,25 @@
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
         <h2 id="head1" class="inline">&#9660;
-          <?php if ($stepID == '1') {echo "Create Family";}else {echo "Edit Family";}?>
+          <?php if ($_SESSION['step'] == '1') {echo "Create Family";}else {echo "Edit Family";}?>
         </h2>
       </button>
     </div>
 
     <!-- CREATE Family Form -->
     <!-- Hide section if moving onto Step 2. -->
-    <div id="Step1" class="form<?php if ($stepID == '2') {echo " hidden";} ?>">
+    <div id="Step1" class="form<?php if ($_SESSION['step'] == '2') {echo " hidden";} ?>">
       <form id="form1" action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
-          <input type="text" id="family" name="family" value="<?php echo $family ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required><br>
+          <input type="text" id="family" name="family" value="<?php echo  $_SESSION['family'] ?>" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required><br>
           <label for="postalCode" class="tooltip"><span class="tooltiptext">ZIP Code</span>Postal Code:  </label>
-          <input type="text" id="postalCode" name="postalCode" value="<?php echo $postalCode?>" maxlength="10" size="10" required><br>
+          <input type="text" id="postalCode" name="postalCode" value="<?php echo $_SESSION['postalCode']?>" maxlength="10" size="10" required><br>
           <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
           <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
-          <p role="alert" class="status-message" <?php if ($step1Msgs == []) {echo "hidden";} ?>>
-            <?php if ($step2Msgs !== []) {echo addMsgs($step2Msgs);} ?></p>
-          <input id="btn1" type="submit" <?php if ($stepID == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
+          <p role="alert" class="status-message" <?php if ($_SESSION['status-message'] == []) {echo "hidden";} ?>>
+            <?php if ($_SESSION['step2Msgs'] !== []) {echo echoMsgArray($_SESSION['step2Msgs']);} ?></p>
+          <input id="btn1" type="submit" <?php if ($_SESSION['step'] == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
         </fieldset>
       </form>
     </div>
@@ -62,7 +55,7 @@
     </div>
 
     <!-- CREATE Users Form -->
-    <div id="Step2" class="form"<?php if ($stepID !== '2') {echo " hidden";}?>>
+    <div id="Step2" class="form"<?php if ($_SESSION['step'] !== '2') {echo " hidden";}?>>
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -84,7 +77,7 @@
           </div>
           <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
           <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
-          <p role="alert" class="status-message"><?php if ($step2Msgs !== []) {echo addMsgs($step2Msgs);} ?></p>
+          <p role="alert" class="status-message"><?php if ($_SESSION['step2Msgs'] !== []) {echo echoMsgArray($_SESSION['step2Msgs']);} ?></p>
           <input type="submit" value="Add">
         </fieldset>
       </form>
