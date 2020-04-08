@@ -4,7 +4,7 @@
   $_SESSION['family'] = $_SESSION['family'] ?? '';
   $_SESSION['step'] = $_SESSION['step'] ?? '1';
   $_SESSION['postalCode'] = $_SESSION['postalCode'] ?? '';
-  $_SESSION['status-message'] = $_SESSION['status-message'] ?? [];
+  $_SESSION['step1Msgs'] = $_SESSION['step1Msgs'] ?? [];
   //Step2
   $_SESSION['name'] = $_SESSION['name'] ?? '';
   $_SESSION['initial'] = $_SESSION['initial'] ?? '';
@@ -26,7 +26,8 @@
       echo 'familyID=' . $_SESSION['familyID'] . '<br>';
       echo 'family=' . $_SESSION['family'] . '<br>';
       echo 'postalCode=' . $_SESSION['postalCode'] . '<br>';
-      echo 'status-message=' . $_SESSION['status-message'] . '<br>';
+      // echo 'step1Msgs=' . $_SESSION['step1Msgs'] . '<br>';
+      echo 'step1Msgs=<br>' . echoMsgArray($_SESSION['step1Msgs']);
       //Step2
       echo 'name=' . $_SESSION['name'] . '<br>';
       echo 'initial=' . $_SESSION['initial'] . '<br>';
@@ -43,7 +44,7 @@
 
 function echoMsgArray($array) {
   foreach($array as $msg) {
-    echo '----' . $msg . '<br>';
+    echo $msg . '<br>';
   }
 }
 
