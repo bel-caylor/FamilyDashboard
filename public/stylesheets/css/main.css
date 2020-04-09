@@ -39,6 +39,24 @@
   visibility: visible;
   opacity: 1; }
 
+table {
+  width: 90%;
+  border-collapse: collapse; }
+  table input[type=color] {
+    border-width: 0;
+    border-style: none;
+    width: 20px;
+    height: 20px;
+    padding: 0; }
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 2px 4px 2px 4px; }
+
+tr:nth-child(even) {
+  background-color: #dddddd; }
+
 body {
   margin: 2px;
   font-color: red; }
@@ -83,7 +101,8 @@ button:hover {
   display: block; }
 
 .hidden {
-  display: none; }
+  display: none;
+  visibility: hidden; }
 
 .form {
   margin: 10px auto 10px auto;

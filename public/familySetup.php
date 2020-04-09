@@ -92,9 +92,9 @@
       </button>
     </div>
 
-
-
-
+    <div id="Step3" class="form"<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>>
+      <?php include(PUBLIC_PATH . '/familySetup/tblUsers.php') ?>
+    </div>
 
     <!-- Step 3 - Add Categories  -->
     <div id="Step3" class="section inline">
