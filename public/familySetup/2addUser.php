@@ -28,11 +28,14 @@
             $_SESSION['currentUserID'] = $result;
             array_push($_SESSION['step2Msgs'],"User Added");
             $_SESSION['users'][$_SESSION['name']] = array(
-              'id' => $_SESSION['userID'],
-              'initial' => $_SESSION['initial'],
-              'color' => $_SESSION['color']
+              'ID' => $result,
+              'Initial' => $_SESSION['initial'],
+              'Color' => $_SESSION['color']
+              'Admin' => $_SESSION['admin']
+              'Email' => $_SESSION['email']
             );
           //Reset form fields.
+          $_SESSION['currentUserID'] = $_SESSION['userID']
           $_SESSION['name'] = '';
           $_SESSION['initial'] = '';
           $_SESSION['color'] = '';

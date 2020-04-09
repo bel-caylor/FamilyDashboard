@@ -1,7 +1,9 @@
 <?php require_once('../private/initialize.php'); ?>
-<?php require_once('familySetup/sessionValues.php'); ?>
 <?php
   //Session Parimeters
+  if ($_SESSION['family'] !== "") {$_SESSION['step'] = 2;}
+  if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 3;}
+
   if ($_SESSION['family'] !== "") {
     $header = $_SESSION['family'] . " Dashboard";
   }else{
@@ -33,7 +35,7 @@
 
     <!-- CREATE Family Form -->
     <!-- Hide section if moving onto Step 2. -->
-    <div id="Step1" class="form<?php if ($_SESSION['step'] == '2') {echo " hidden";} ?>">
+    <div id="Step1" class="form<?php if ($_SESSION['step'] > 2) {echo " hidden";} ?>">
       <form id="form1" action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
@@ -57,7 +59,7 @@
     </div>
 
     <!-- CREATE Users Form -->
-    <div id="Step2" class="form"<?php if ($_SESSION['step'] !== '2') {echo " hidden";}?>>
+    <div id="Step2" class="form"<?php if ($_SESSION['step'] < 2) {echo " hidden";}?>>
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -70,7 +72,7 @@
           <input type="checkbox" id="admin" name="admin" value="<?php echo setValue($_SESSION['admin'], "1"); ?>"></label><br>
           <label class="tooltip" for="email"><span class="tooltiptext">Email will be<br>used for login.</span>Email:  </label>
           <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $_SESSION['email']; ?>"maxlength="255" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter valide email." required><br>
-          <div id="pwds">
+          <div id="pwds"<?php if ($_SESSION['currentUserID'] == '') {echo " hidden";}?>>
             <label class="tooltip" for="password"><span class="tooltiptext">Initial passwords for users will all be identical.</span>Password:  </label>
             <input type="button" value="View passwords" onclick="togglePwdVisible()"><br>
             <input type="password" id="password" name="password" placeholder="Create password" maxlength="10" size="15" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>&nbsp;&nbsp;
