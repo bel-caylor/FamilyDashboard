@@ -17,7 +17,7 @@
       return $msg;}}
 
   function dbConfirmDataReturned($data) {
-    if (!$data) {
+    if (is_array($data) == 0) {
       return "TRUE";}}
 
   //QUERY FUNCTIONS

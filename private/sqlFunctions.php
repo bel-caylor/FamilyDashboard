@@ -1,14 +1,21 @@
 <?php
 
 function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValue = '') {
-  $sql = "SELECT * FROM " . $table . " ";
+  $errors = array();
+  $sql = "SELECT * FROM `" . $table . "` ";
   if ($filter != 'NONE') {
-    $sql .= "WHERE " . $filter . " = " . $filterValue . " ";
+    $sql .= "WHERE " . $filter . "=\"" . $filterValue . "\" ";
   };
   $sql .= "ORDER BY " . $orderBy . " " . $ord . " ";
-  if (query_db($sql) !== "No data") {
+  // echo $sql;
+  $results = query_db($sql);
+  // echo "<pre>";
+  // print_r($results);
+  // echo '</pre>';
+  if ($results !== "No data") {
     return query_db($sql);
   }else {
+    // array_push($errors,"Passwords DON'T match.");}
     return "No data returned.";
   }
 

@@ -2,7 +2,7 @@
 function optionUsers($Family_ID, $Task_ID, $User_ID) {
   $html = "<select id=`" . $Task_ID . "`>";
 
-  $arrayType = query_Select("users", $Family_ID);
+  $arrayType = sqlSelect("users", $Family_ID);
   //Blank Assignment
   if ($User_ID == NULL) {
     $html .= "<option value=`` selected>Assign to</option>";

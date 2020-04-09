@@ -1,5 +1,11 @@
 <?php
 
+function printArray($array) {
+  echo "<pre>";
+  print_r($array);
+  echo "</pre>";
+}
+
 function echoMsgArray($array) {
   $result = '';
   foreach($array as $msg) {
