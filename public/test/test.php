@@ -2,8 +2,10 @@
 <?php require_once('../../private/initialize.php');
 $errors = [];
 
-@test_ConnectionFail();
-@test_dbConfirmDataReturned();
+print_r($_SESSION['users']);
+
+// @test_ConnectionFail();
+// @test_dbConfirmDataReturned();
 
 // $errors[] = @test_ConnectionFail();
 // $errors[] = @test_dbConfirmDataReturned();
@@ -12,14 +14,14 @@ $errors = [];
 //   echo '<p>' . $value . '</p>';
 // }
 
-function test_ConnectionFail() {
-    $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, "DB_NAME");
-    dbConnectConfirm();
-}
+// function test_ConnectionFail() {
+//     $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, "DB_NAME");
+//     dbConnectConfirm();
+// }
 
-function test_dbConfirmDataReturned() {
-  sqlSelect('family', ID, $ord = 'ASC', ID, '-1');
-}
+// function test_dbConfirmDataReturned() {
+//   sqlSelect('family', ID, $ord = 'ASC', ID, '-1');
+// }
 
   // $_SESSION['status-message'] = [];
   // $_SESSION['users'] = array (

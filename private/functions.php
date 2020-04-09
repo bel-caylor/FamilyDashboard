@@ -1,5 +1,13 @@
 <?php
 
+function echoMsgArray($array) {
+  $result = '';
+  foreach($array as $msg) {
+    $result .= $msg . '<br>';
+  }
+  return $result;
+}
+
 function setValue($value, $default) {
   if ($value === '') {return $default;}
   return $value;
