@@ -83,4 +83,80 @@ function validateFamily($familyName) {
   return $errors;
 }
 
+function sqlAddUser() {
+  $errors = validateUser();
+  if (!empty($errors)) {return $errors;}
+
+  $sql = "INSERT INTO `family-members` ";
+  $sql .= "(Family_ID, Name, Initial, Color, Admin, Email, hashed_password) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $_SESSION['familyID'] ."', ";
+  $sql .= "'" . $_SESSION['name'] ."', ";
+  $sql .= "'" . $_SESSION['initial'] ."', ";
+  $sql .= "'" . $_SESSION['color'] ."', ";
+  $sql .= "'" . $_SESSION['admin'] ."', ";
+  $sql .= "'" . $_SESSION['email'] ."', ";
+  $sql .= "'" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) ."'";
+  $sql .= ")";
+  //return ID of new family
+  $result = insert_db($sql);
+  return $result;
+}
+
+function sqlEditUser() {
+  // $errors = validateUser();
+  // if (!empty($errors)) {return $errors;}
+
+  $sql = "UPDATE `family-members` SET ";
+  $sql .= "Name='" . $_SESSION['name'] . "', ";
+  $sql .= "Initial='" . $_SESSION['initial'] . "', ";
+  $sql .= "Color='" . $_SESSION['color'] . "', ";
+  $sql .= "Color='" . $_SESSION['color'] . "', ";
+  $sql .= "Email='" . $_SESSION['admin'] . "' ";
+  // $SQL .= "hashed_password'" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "', ";
+  $sql .= "WHERE ID='" . $_SESSION['userID'] . "' ";
+  $sql .= "LIMIT 1";
+  $result = edit_db($sql);
+  if ($result == "edit failed") {
+    return ["insert failed"];
+  }else {
+    return $result;
+  }}
+
+function validateUser() {
+  $errors = array();
+  //Validate passwords match
+    if ($_POST['password'] !== $_POST['password2']) {
+      array_push($_SESSION['step2Msgs'],"Passwords DON'T match.");}
+
+  //Validate unique User
+    foreach($_SESSION['users'] as $user) {
+      if ($user == $_POST['name']) {
+        array_push($_SESSION['step2Msgs'],"Duplicate user name.");}}
+
+  //Validate unique initial
+    foreach(array_column($_SESSION['users'], 'initial') as $initial) {
+      if ($initial == $_POST['initial']) {
+        array_push($_SESSION['step2Msgs'],"Duplicate initial.");}}
+
+  //Validate unique color
+    foreach(array_column($_SESSION['users'], 'color') as $color) {
+      if ($color == $_POST['color']) {
+        array_push($_SESSION['step2Msgs'],"Duplicate color.");}}
+
+  //FamilyID
+    // if(has_presence($_SESSION['userID']) !== 1) {
+    //   // $errors() = "No familyID.";
+    //   array_push($errors,"No familyID.");
+    // }
+  //Name
+    if(has_presence($_SESSION['name']) != 1) {
+        // $errors() = "No Name.";
+        array_push($errors,"No Name.");
+    }
+    // echo $errors[0];
+    // echo $errors[1];
+    return $errors;
+}
+
  ?>
