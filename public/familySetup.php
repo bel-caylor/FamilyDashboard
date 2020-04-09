@@ -2,7 +2,11 @@
 <?php require_once('familySetup/sessionValues.php'); ?>
 <?php
   //Session Parimeters
-  $header = 'Welcome to Family Dashboard';
+  if ($_SESSION['family'] !== "") {
+    $header = $_SESSION['family'] . " Dashboard";
+  }else{
+    $header = 'Welcome to Family Dashboard';
+  }
 
   //NEED TO ADD ERROR HANDLING!!!
   // echo $stepID;
@@ -14,9 +18,7 @@
 
 <body>
   <header>
-    <?php echo $header . '<br>';
-    // echo $_SESSION['password'];
-    ?>
+    <?php echo $header . '<br>';?>
   </header>
 
   <main>
