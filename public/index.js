@@ -83,3 +83,51 @@ function togglePwdVisible() {
     pwd2.type = "password";
   }
 }
+
+function editUser(userID) {
+
+  //Change column name
+    document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Save User</span>Sav";
+
+  //Change symbol and Edit action to Save Action
+    let html = `<button type=\"submit\"  onclick="saveUser(` + userID + `)">&#128428;</button>`;
+    document.getElementById('Edt' + userID).innerHTML = html;
+
+  //Unhide second row
+    document.getElementById('Hdn' + userID).classList.toggle("hidden");
+    document.getElementById('Hdn' + userID).classList.toggle("edit");
+
+  //Highlight rows to show in Edit mode
+    document.getElementById('userID' + userID).classList.toggle("edit");
+
+  //enable form fields
+    document.querySelector("#userID" + userID + " > th:nth-child(2) > input").disabled = false;
+    document.querySelector("#userID" + userID + " > th:nth-child(3) > input").disabled = false;
+
+}
+
+function saveUser(userID) {
+  //Create data to send to server.
+    let data = {
+      userID: userID,
+      name: document.querySelector("#userID" + userID + " > th:nth-child(2) > input").value,
+      initial: document.querySelector("#Hdn" + userID + " > th.initial > input").value,
+      color: document.querySelector("#userID" + userID + "  > th:nth-child(3) > input").value,
+      admin: document.querySelector("#Hdn" + userID + " > th.admin > input").value,
+      email: document.querySelector("#Hdn" + userID + " > th.email > input").value,
+    };
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/familySetup/3editUser.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+  .then(resp => {
+
+
+  })
+    //change background to green
+
+    //change button back to edit
+
+}
