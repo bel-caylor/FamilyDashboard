@@ -104,7 +104,7 @@ function editUser(userID) {
     document.querySelector("#userID" + userID + " > th:nth-child(2) > input").disabled = false;
     document.querySelector("#userID" + userID + " > th:nth-child(3) > input").disabled = false;
 
-}
+};
 
 function saveUser(userID) {
   //Create data to send to server.
@@ -122,12 +122,36 @@ function saveUser(userID) {
     method: 'post',
     body: JSON.stringify(data)
   })
-  .then(resp => {
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('step3Msgs').innerHTML = status;
+        })
 
+    if (status = "Update Succeeded.") {
 
-  })
+    //Change column name
+      document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Edit User</span>Edit";
+
+    //Change symbol and Save action to Edit Action
+      let html = `<button onclick="editUser(` + userID + `)">&#128393;</button>`;
+      document.getElementById('Edt' + userID).innerHTML = html;
+
+    //HIDE second row
+      document.getElementById('Hdn' + userID).classList.toggle("hidden");
+      document.getElementById('Hdn' + userID).classList.toggle("edit");
+
+    //Highlight rows to show in Edit mode
+      document.getElementById('userID' + userID).classList.toggle("edit");
+      document.getElementById('userID' + userID).classList.toggle("saved");
+    //enable form fields
+      document.querySelector("#userID" + userID + " > th:nth-child(2) > input").disabled = false;
+      document.querySelector("#userID" + userID + " > th:nth-child(3) > input").disabled = false;
     //change background to green
 
     //change button back to edit
 
-}
+  }
+
+};

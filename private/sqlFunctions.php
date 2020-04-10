@@ -118,14 +118,12 @@ function sqlEditUser() {
   $sql .= "Name='" . $_SESSION['name'] . "', ";
   $sql .= "Initial='" . $_SESSION['initial'] . "', ";
   $sql .= "Color='" . $_SESSION['color'] . "', ";
-  $sql .= "Color='" . $_SESSION['color'] . "', ";
-  $sql .= "Email='" . $_SESSION['admin'] . "' ";
-  // $SQL .= "hashed_password'" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) . "', ";
+  $sql .= "Email='" . $_SESSION['email'] . "' ";
   $sql .= "WHERE ID='" . $_SESSION['userID'] . "' ";
   $sql .= "LIMIT 1";
   $result = edit_db($sql);
   if ($result == "edit failed") {
-    return ["insert failed"];
+    return ["edit failed"];
   }else {
     return $result;
   }}
