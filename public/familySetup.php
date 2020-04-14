@@ -94,7 +94,8 @@
       </button>
     </div>
 
-    <div id="Step3" class="form"<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>>
+    <div id="Step3" <?php if ($_SESSION['step'] < 3) {echo " hidden";}?> >
+      <p role="alert" id="step3Msgs"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
       <?php include(PUBLIC_PATH . '/familySetup/tblUsers.php') ?>
     </div>
 

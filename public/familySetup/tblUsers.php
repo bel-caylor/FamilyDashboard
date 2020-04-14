@@ -1,5 +1,6 @@
 
-
+<!-- Delete User Alert -->
+<?php include(SHARED_PATH . '/alertPopUp.php') ?>
 
 <table id="tblUsers" class="table"<?php if ($_SESSION['step'] !== '2' and $_SESSION['currentUserID'] == '') {echo " hidden";}?>>
   <!-- Column Names-->

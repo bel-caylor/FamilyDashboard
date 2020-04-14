@@ -1,0 +1,44 @@
+.showPopUp {
+  display: block;
+}
+
+.popUp {
+  cursor: pointer;
+  position: fixed;
+  text-align: center;
+  // top: 0;
+  width: 100%;
+  z-index: 100;
+  button{
+    background-color: white;
+    padding: 6px;
+    border-radius: 1px;
+    border-color: black;
+    box-shadow: 1px 1px 1px #b1b1b1;
+    margin-top: 20px;
+    // position: relative;
+    // bottom: 0px;
+  }
+  p {
+    color: black;
+  }
+}
+
+.popUp .alert {
+    display: inline-block;
+    background-color: #ffebea;
+    box-shadow: 3px 3px 10px #b1b1b1;
+    height: auto;
+    max-width: 300px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 3px;
+    padding: 10px 5%;
+}
+
+.alert {
+  color: red;
+  font-weight: bold;
+}

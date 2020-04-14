@@ -155,3 +155,41 @@ function saveUser(userID) {
   }
 
 };
+
+function toggleClass(ID, className) {
+  document.getElementById(ID).classList.toggle(className);
+}
+
+function clickDeleteUser(userID, userName) {
+  //Change alert message
+  let divMsg = document.getElementById('delUserMsg');
+  divMsg.innerHTML = "<p>Are you sure you want to delete user - " + userName + "?</p>";
+  //Change OK button click function.
+  let btn = document.getElementById('btnOK');
+  btn.setAttribute("onclick", "deleteUser(" + userID + ", '" + userName + "')");
+  btn.innerHTML = "Yes";
+  //make message visible
+  toggleClass("delUser", "hidden");
+}
+
+function deleteUser(userID) {
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/familySetup/3deleteUser.php?id=' + userID, {
+    method: 'GET',
+    // body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('step3Msgs').innerHTML = status;
+        })
+
+    if (status = "Delete Succeeded.") {
+      toggleClass("delUser", "hidden");
+  }
+}
+
+function closePopUp() {
+
+}

@@ -61,4 +61,15 @@
     }
   }
 
+  //DELETE FUNCTION
+  function delete_db($sql) {
+    global $db;
+    $result = mysqli_query($db, $sql);
+    if(mysqli_affected_rows($db) > 0) {  //Insert succeeded
+      return "delete succeeded";
+    } else {              //Failed change
+      return "delete failed";
+    }
+  }
+
  ?>

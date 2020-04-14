@@ -39,7 +39,7 @@ function updateUsersArray($userID) {
   $_SESSION['users'][$userID]['Email'] = $_SESSION['email'];
 
   $_SESSION['name'] = '';
-  $_SESSION['inital'] = '';
+  $_SESSION['initial'] = '';
   $_SESSION['color'] = '';
   $_SESSION['email'] = '';
   $_SESSION['userID'] = '';
