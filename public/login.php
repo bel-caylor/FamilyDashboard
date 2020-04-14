@@ -16,12 +16,12 @@ $stepID = $_POST['StepID'] ?? '';
           //Set $_SESSION VALUES
             //Create users array
             while($row = mysqli_fetch_assoc($results)) {
-              $_SESSION['users'][$row['Name']] = $row;
+              $_SESSION['users'][$row['ID']] = $row;
             };
             // $_SESSION['users'] = $results;
             $users = $_SESSION['users'];
-            $userNames = array_keys($_SESSION['users']);
-            $_SESSION['familyID'] = $_SESSION['users'][$userNames[0]]['Family_ID'];
+            $userIDs = array_keys($_SESSION['users']);
+            $_SESSION['familyID'] = $_SESSION['users'][$userIDs[0]]['Family_ID'];
             $family = mysqli_fetch_assoc(sqlSelect("family", "ID", "ASC", "ID", $_SESSION['familyID']));
             $_SESSION['family'] = $family['Family'];
             $_SESSION['postalCode'] =$family['Postal_Code'];
@@ -36,13 +36,12 @@ $stepID = $_POST['StepID'] ?? '';
          case '3':  //Select User
            $_SESSION['currentUserID'] = $_POST['User'];
            $user = mysqli_fetch_assoc(sqlSelect("family-members", "ID", "ASC", "ID", $_SESSION['currentUserID']));
-           $_SESSION['currentName'] = $user['Name'];
-           $_SESSION['password'] = $user['hashed_password'];
+           $_SESSION['currentName'] = $_SESSION['users'][$_POST['User']]['Name'];
+           $_SESSION['password'] = $_SESSION['users'][$_POST['User']]['hashed_password'];
            $step = '4-password';
            break;
          case '4':
-            // $pass = password_verify($_POST['password'], $_SESSION['password']);
-            // echo $pass;
+///NEED TO FIX!!
             if(password_verify($_POST['password'], $_SESSION['password']) == 0) {
               header("Location: " . WWW_ROOT . "/familySetup.php");
               exit;
@@ -53,6 +52,8 @@ $stepID = $_POST['StepID'] ?? '';
        }
        //Check for Users with that Email
      }
+   }else {
+     session_destroy();
    }
    $stepID = substr($step, 0, 1)
 ?>
@@ -84,12 +85,12 @@ $stepID = $_POST['StepID'] ?? '';
           if (mysqli_num_rows($results) > 0) {
             $count = 1;
             $checked = " checked";
-            foreach($userNames as $name) {
+            foreach($userIDs as $ID) {
               if ($count > 1) {
                 $checked = "";
               };
-              echo "<input type='radio' id='" . $users[$name]['ID'] . "' name='User' value='" . $users[$name]['ID'] . "' " . $checked .  ">";
-              echo "<label for='" . $name . "'>" . $name . "</label><br>";
+              echo "<input type='radio' id='" . $ID . "' name='User' value='" . $ID . "' " . $checked .  ">";
+              echo "<label for='" . $_SESSION['users'][$ID]['Name'] . "'>" . $_SESSION['users'][$ID]['Name'] . "</label><br>";
               $count = $count + 1;
             }
             // while($row = mysqli_fetch_assoc($users)) {
@@ -103,7 +104,7 @@ $stepID = $_POST['StepID'] ?? '';
     </div>
 
   <!-- ENTER PASSWORD  -->
-    <div <?php if ($stepID > 5) {echo " hidden";} ?>>
+    <div <?php if ($stepID < 4) {echo " hidden";} ?>>
       <h2 class="section">Enter Password</h2>
       <form class="form" action="<?php echo WWW_ROOT?>/login.php" method="post">
         <input type="password" name="password" placeholder="password">
