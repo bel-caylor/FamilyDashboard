@@ -74,10 +74,10 @@ function sqlEditFamily($familyName, $postalCode, $familyID) {
   $sql .= "WHERE ID='" . $familyID . "' ";
   $sql .= "LIMIT 1";
   $result = edit_db($sql);
-  if ($result == "edit failed") {
-    return ["insert failed"];
-  }else {
+  if ($result == "update succeeded") {
     return $result;
+  }else {
+    return ["insert failed"];
   }}
 
 //VALIDATION FUNCTIONS
@@ -121,12 +121,25 @@ function sqlEditUser() {
   $sql .= "Email='" . $_SESSION['email'] . "' ";
   $sql .= "WHERE ID='" . $_SESSION['userID'] . "' ";
   $sql .= "LIMIT 1";
+  // echo $sql;
   $result = edit_db($sql);
-  if ($result == "edit failed") {
-    return ["edit failed"];
-  }else {
+  if ($result == "update succeeded") {
     return $result;
-  }}
+  }else {
+    return ["edit failed"];
+}}
+
+function sqlDeleteUser($userID) {
+  $sql = "DELETE FROM `family-members` ";
+  $sql .= "WHERE ID='" . $userID . "' ";
+  $sql .= "LIMIT 1";
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["delete failed"];
+  }
+}
 
 function validateUser() {
   $errors = array();
