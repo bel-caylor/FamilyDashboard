@@ -161,21 +161,21 @@ function toggleClass(ID, className) {
   document.getElementById(ID).classList.toggle(className);
 }
 
-function clickDeleteUser(userID, userName) {
+function clickDeleteUser(row, ID, userName) {
   //Change alert message
   let divMsg = document.getElementById('delUserMsg');
   divMsg.innerHTML = "<p>Are you sure you want to delete user - " + userName + "?</p>";
   //Change OK button click function.
   let btn = document.getElementById('btnOK');
-  btn.setAttribute("onclick", "deleteUser(" + userID + ", '" + userName + "')");
+  btn.setAttribute("onclick", "deleteUser(" + row + ", '" + ID + "')");
   btn.innerHTML = "Yes";
   //make message visible
   toggleClass("delUser", "hidden");
 }
 
-function deleteUser(userID) {
+function deleteUser(row, ID) {
   //call 3editUser.php
-  fetch('/FamilyDashboard/public/familySetup/3deleteUser.php?id=' + userID, {
+  fetch('/FamilyDashboard/public/familySetup/3deleteUser.php?row=' + row + '&id=' + ID, {
     method: 'GET',
     // body: JSON.stringify(data)
   })
@@ -184,13 +184,16 @@ function deleteUser(userID) {
         .then(doc => {
           let status = doc.body.innerHTML;
           document.getElementById('step3Msgs').innerHTML = status;
+          //Remove user row from tblUsers
+          document.getElementById('userID' + ID).remove();
         })
 
     if (status = "Delete Succeeded.") {
       toggleClass("delUser", "hidden");
+      deleteStatusMessage('step2Msgs');
   }
 }
 
-function closePopUp() {
-
+function deleteStatusMessage(id) {
+  document.getElementById(id).innerHTML = '';
 }

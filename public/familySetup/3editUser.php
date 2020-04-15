@@ -1,5 +1,7 @@
 <?php require_once('../../private/initialize.php');
   $input = get_object_vars(json_decode(file_get_contents('php://input')));
+  $_SESSION['step2Msgs'] = array();
+  $_SESSION['step3Msgs'] = array();
 
   //Set variables.
   $_SESSION['input'] = $input;

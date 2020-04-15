@@ -1,11 +1,15 @@
 <?php require_once('../../private/initialize.php');
   $ID = $_GET['id'];
+  $row = $_GET['row'];
   $result = sqlDeleteUser($ID);
-
+  $_SESSION['step2Msgs'] = array();
+  $_SESSION['step3Msgs'] = array();
+  
   if ($result[0] !== "delete failed") {
     //Edit complete.
     echo "Delete Succeeded.";
-    unset( $_SESSION['users']['$ID']);
+    //Remove user from session users
+    unset( $_SESSION['users'][$row]);
   }else {
     //Edit failed.
     echo "Delete Failed. Please try again later.";

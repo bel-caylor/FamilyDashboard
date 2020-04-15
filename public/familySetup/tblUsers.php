@@ -23,7 +23,7 @@
               <th colspan="2"><input type="text" size="4" class="name trans" value="<?php echo $Users[$User]['Name'] ?>" disabled></th>
               <th colspan="1"><input type="color" class="trans color" value="<?php echo $Users[$User]['Color'] ?>" size="1" disabled></th>
               <th id="Edt<?php echo $Users[$User]['ID'] ?>"><button type="button" onclick="editUser(<?php echo $Users[$User]['ID'] ?>)">&#128393;</button></th>
-              <th><button type="button" onclick="clickDeleteUser(<?php echo $Users[$User]['ID'] ?>, '<?php echo $User ?>')">&#128465;</button></th>
+              <th><button type="button" onclick="clickDeleteUser(<?php echo $User ?>, <?php echo $Users[$User]['ID'] ?>, '<?php echo $Users[$User]['Name'] ?>')">&#128465;</button></th>
             </tr>
               <tr id="Hdn<?php echo $Users[$User]['ID'] ?>" class="hidden">
               <th colspan="3" class="email"><input type="text" size="15" class="trans" value="<?php echo $Users[$User]['Email'] ?>"></th>
