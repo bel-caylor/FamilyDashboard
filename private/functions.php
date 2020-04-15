@@ -1,4 +1,19 @@
+<?php require_once('initialize.php'); ?>
 <?php
+
+function printValue($val) {
+  if (is_array($_SESSION[$val])) {
+    if ($_SESSION[$val] == []) {
+      echo $val . '= []<br>';
+    } else {
+      echo $val . '=';
+      echo printArray($_SESSION[$val]) . '<br>';
+    }
+
+  } else {
+    echo $val . '=' . $_SESSION[$val] . '<br>';
+  }
+}
 
 function printArray($array) {
   echo "<pre>";

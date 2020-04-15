@@ -5,11 +5,14 @@
   $_SESSION['input'] = $input;
   $userID = $input['userID'] ?? $_POST['userID'];
   // echo $userID;
-  $_SESSION['name'] = $input['name'];
-  $_SESSION['initial'] = $input['initial'];
-  $_SESSION['color'] = $input['color'];
-  $_SESSION['email'] = $input['email'];
-  $_SESSION['userID'] = $input['userID'];
+  $_SESSION['aryUser'] = [
+      ['id'] = $userID,
+      ['name'] = $input['name'],
+      ['initial'] = $input['initial'],
+      ['color'] = $input['color'],
+      ['admin'] = isset($input['admin']) ?? '',
+      ['email'] = $input['email']
+    ];
 
   //Need to fix
   // $_SESSION['step3Msgs'] = validateUser();
@@ -32,17 +35,13 @@
   // }
 
 function updateUsersArray($userID) {
-  $_SESSION['users'][$userID]['Name'] = $_SESSION['name'];
-  $_SESSION['users'][$userID]['Initial'] = $_SESSION['initial'];
-  $_SESSION['users'][$userID]['Color'] = $_SESSION['color'];
-  $_SESSION['users'][$userID]['Admin'] = $_SESSION['admin'];
-  $_SESSION['users'][$userID]['Email'] = $_SESSION['email'];
+  $_SESSION['users'][$userID]['Name'] = $_SESSION['aryUser']['name'];
+  $_SESSION['users'][$userID]['Initial'] = $_SESSION['aryUser']['initial'];
+  $_SESSION['users'][$userID]['Color'] = $_SESSION['aryUser']['color'];
+  $_SESSION['users'][$userID]['Admin'] = $_SESSION['aryUser']['admin'];
+  $_SESSION['users'][$userID]['Email'] = $_SESSION['aryUser']['email'];
 
-  $_SESSION['name'] = '';
-  $_SESSION['initial'] = '';
-  $_SESSION['color'] = '';
-  $_SESSION['email'] = '';
-  $_SESSION['userID'] = '';
+$_SESSION['aryUser'] = [];
 }
 
 ?>

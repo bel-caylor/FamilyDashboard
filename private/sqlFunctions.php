@@ -91,19 +91,19 @@ function validateFamily($familyName) {
 }
 
 function sqlAddUser() {
-  $errors = validateUser();
-  if (!empty($errors)) {return $errors;}
+  // $errors = validateUser();
+  // if (count($errors) > 0) {return $errors;}
 
   $sql = "INSERT INTO `family-members` ";
   $sql .= "(Family_ID, Name, Initial, Color, Admin, Email, hashed_password) ";
   $sql .= "VALUES (";
   $sql .= "'" . $_SESSION['familyID'] ."', ";
-  $sql .= "'" . $_SESSION['name'] ."', ";
-  $sql .= "'" . $_SESSION['initial'] ."', ";
-  $sql .= "'" . $_SESSION['color'] ."', ";
-  $sql .= "'" . $_SESSION['admin'] ."', ";
-  $sql .= "'" . $_SESSION['email'] ."', ";
-  $sql .= "'" . password_hash($_SESSION['password'], PASSWORD_DEFAULT) ."'";
+  $sql .= "'" . $_SESSION['aryUser']['name'] ."', ";
+  $sql .= "'" . $_SESSION['aryUser']['initial'] ."', ";
+  $sql .= "'" . $_SESSION['aryUser']['color'] ."', ";
+  $sql .= "'" . $_SESSION['aryUser']['admin'] ."', ";
+  $sql .= "'" . $_SESSION['aryUser']['email'] ."', ";
+  $sql .= "'" . password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT) ."'";
   $sql .= ")";
   //return ID of new family
   $result = insert_db($sql);
@@ -115,11 +115,11 @@ function sqlEditUser() {
   // if (!empty($errors)) {return $errors;}
 
   $sql = "UPDATE `family-members` SET ";
-  $sql .= "Name='" . $_SESSION['name'] . "', ";
-  $sql .= "Initial='" . $_SESSION['initial'] . "', ";
-  $sql .= "Color='" . $_SESSION['color'] . "', ";
-  $sql .= "Email='" . $_SESSION['email'] . "' ";
-  $sql .= "WHERE ID='" . $_SESSION['userID'] . "' ";
+  $sql .= "Name='" . $_SESSION['aryUser']['name'] . "', ";
+  $sql .= "Initial='" . $_SESSION['aryUser']['initial'] . "', ";
+  $sql .= "Color='" . $_SESSION['aryUser']['color'] . "', ";
+  $sql .= "Email='" . $_SESSION['aryUser']['email'] . "' ";
+  $sql .= "WHERE ID='" . $_SESSION['aryUser']['userID'] . "' ";
   $sql .= "LIMIT 1";
   // echo $sql;
   $result = edit_db($sql);
@@ -142,24 +142,24 @@ function sqlDeleteUser($userID) {
 }
 
 function validateUser() {
-  $errors = array();
+  // $errors = array();
   //Validate passwords match
-    if ($_POST['password'] !== $_POST['password2']) {
+    if ($_SESSION['aryUser']['password1'] !== $_SESSION['aryUser']['password2']) {
       array_push($_SESSION['step2Msgs'],"Passwords DON'T match.");}
 
   //Validate unique User
     foreach($_SESSION['users'] as $user) {
-      if ($user == $_POST['name']) {
+      if ($user == $_SESSION['aryUser']['name']) {
         array_push($_SESSION['step2Msgs'],"Duplicate user name.");}}
 
   //Validate unique initial
     foreach(array_column($_SESSION['users'], 'initial') as $initial) {
-      if ($initial == $_POST['initial']) {
+      if ($initial == $_SESSION['aryUser']['initial']) {
         array_push($_SESSION['step2Msgs'],"Duplicate initial.");}}
 
   //Validate unique color
     foreach(array_column($_SESSION['users'], 'color') as $color) {
-      if ($color == $_POST['color']) {
+      if ($color == $_SESSION['aryUser']['color']) {
         array_push($_SESSION['step2Msgs'],"Duplicate color.");}}
 
   //FamilyID
@@ -168,13 +168,13 @@ function validateUser() {
     //   array_push($errors,"No familyID.");
     // }
   //Name
-    if(has_presence($_SESSION['name']) != 1) {
+    if(has_presence($_SESSION['aryUser']['name']) != 1) {
         // $errors() = "No Name.";
         array_push($errors,"No Name.");
     }
     // echo $errors[0];
     // echo $errors[1];
-    return $errors;
+    // return $errors;
 }
 
  ?>

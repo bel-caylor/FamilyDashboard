@@ -1,51 +1,52 @@
 <?php require_once('../../private/initialize.php');
-  $familyID = $_POST['familyID'] ?? $_SESSION['familyID'] ?? '';
-  $step = $_GET['step'] ?? $_POST['step'] ?? $_SESSION['step'] ?? '';
-  $_SESSION['users'] = $_SESSION['users'] ?? [];
-  $_SESSION['step2Msgs'] = [];
+  // $familyID = $_POST['familyID'] ?? $_SESSION['familyID'] ?? '';
+  // $step = $_GET['step'] ?? $_POST['step'] ?? $_SESSION['step'] ?? '';
+  // $_SESSION['users'] = $_SESSION['users'] ?? [];
+  $errors = array();
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['initial'] = $_POST['initial'];
-    $_SESSION['color'] = $_POST['color'];
-    $_SESSION['admin'] = isset($_POST['admin']) ?? '';
-    $_SESSION['email'] = $_POST['email'];
-    // $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    // $_SESSION['password2'] = password_hash($_POST['password2'], PASSWORD_DEFAULT);
-  }
+    $_SESSION['aryUser'] = array(
+        'name' => $_POST['name'],
+        'initial' => $_POST['initial'],
+        'color' => $_POST['color'],
+        'admin' => isset($_POST['admin']) ?? '',
+        'email' => $_POST['email'],
+        'password1' => $_POST['password1'],
+        'password2' => $_POST['password2']
+      );
+
 
   validateUser();
+  // $_SESSION['step2Msgs'] = validateUser();
+
+  // echo count($errors) . '<br>';
 
   //Add data to Database & session['Users']
-    if ($_SESSION['step2Msgs'] == []) {
+    if (count($_SESSION['step2Msgs']) == 0) {
         $result = sqlAddUser();
         if ($result == 1) {  //UPDATE FAILED
           array_push($_SESSION['step2Msgs'],"Update failed.  Please try again.");
+
         }else {  //UPDATE PASSED
-          //Remove AddUser session VALUES
 
           //Add User to session['Users']
             $_SESSION['currentUserID'] = $result;
             array_push($_SESSION['step2Msgs'],"User Added");
-            $_SESSION['users'][$_SESSION['name']] = array(
+            array_push($_SESSION['users'],
+              array(
               'ID' => $result,
-              'Initial' => $_SESSION['initial'],
-              'Color' => $_SESSION['color']
-              'Admin' => $_SESSION['admin']
-              'Email' => $_SESSION['email']
+              'Name' => $_SESSION['aryUser']['name'],
+              'Initial' => $_SESSION['aryUser']['initial'],
+              'Color' => $_SESSION['aryUser']['color'],
+              'Admin' => $_SESSION['aryUser']['admin'],
+              'Email' => $_SESSION['aryUser']['email'])
             );
           //Reset form fields.
-          $_SESSION['currentUserID'] = $_SESSION['userID']
-          $_SESSION['name'] = '';
-          $_SESSION['initial'] = '';
-          $_SESSION['color'] = '';
-          $_SESSION['admin'] = '';
-          $_SESSION['userID'] = '';
+          $_SESSION['aryUser'] = [];
+
         }
-    } else {
-
-    }
-
+    } 
+    };
   //IF POST Create transition page.
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $html = '';
@@ -58,6 +59,5 @@
      // ELSE redirect to familySetup.php
         // header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT
     }
-
 
   ?>

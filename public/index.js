@@ -73,7 +73,7 @@ function appUpdate(step, doc) {
 };
 
 function togglePwdVisible() {
-  var pwd1 = document.getElementById("password");
+  var pwd1 = document.getElementById("password1");
   var pwd2 = document.getElementById("password2");
   if (pwd1.type === "password") {
     pwd1.type = "text";
@@ -116,6 +116,7 @@ function saveUser(userID) {
       admin: document.querySelector("#Hdn" + userID + " > th.admin > input").value,
       email: document.querySelector("#Hdn" + userID + " > th.email > input").value,
     };
+  // console.log(data);
 
   //call 3editUser.php
   fetch('/FamilyDashboard/public/familySetup/3editUser.php', {

@@ -59,24 +59,31 @@
     </div>
 
     <!-- CREATE Users Form -->
+    <?php  //Form Values
+      $name = $_SESSION['aryUser']['name'] ?? '';
+      $initial = $_SESSION['aryUser']['initial'] ?? '';
+      $color = $_SESSION['aryUser']['color'] ?? '';
+      $email = $_SESSION['aryUser']['email'] ?? '';
+      $admin = $_SESSION['aryUser']['admin'] ?? '';
+     ?>
     <div id="Step2" class="form"<?php if ($_SESSION['step'] < 2) {echo " hidden";}?>>
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
-          <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" placeholder="User Name" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required>&nbsp;&nbsp;
+          <input type="text" id="name" name="name" value="<?php echo $name; ?>" placeholder="User Name" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required>&nbsp;&nbsp;
           <label class="tooltip" for="initial"><span class="tooltiptext">Unique for each family member</span>Initial:
-          <input type="text" id="initial" name="initial" value="<?php echo $_SESSION['initial']; ?>" maxlength="1" size="1" required></label><br>
+          <input type="text" id="initial" name="initial" value="<?php echo $initial; ?>" maxlength="1" size="1" required></label><br>
           <label class="tooltip" for="color"><span class="tooltiptext">Unique color<br>for reporting.</span>Color:
-          <input type="color" id="color" name="color" value="<?php echo setValue($_SESSION['color'], "#337AFF"); ?>"></label>
+          <input type="color" id="color" name="color" value="<?php echo setValue($color, "#337AFF"); ?>"></label>
           <label class="tooltip" for="admin"><span class="tooltiptext">Able to create/assign<br>& grade tasks.</span> &nbsp;&nbsp;&nbsp;&nbsp;Admin:
-          <input type="checkbox" id="admin" name="admin" value="<?php echo setValue($_SESSION['admin'], "1"); ?>"></label><br>
+          <input type="checkbox" id="admin" name="admin" value="<?php echo setValue($admin, "1"); ?>"></label><br>
           <label class="tooltip" for="email"><span class="tooltiptext">Email will be<br>used for login.</span>Email:  </label>
-          <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $_SESSION['email']; ?>"maxlength="255" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter valide email." required><br>
-          <div id="pwds"<?php if ($_SESSION['currentUserID'] == '') {echo " hidden";}?>>
+          <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $email; ?>"maxlength="255" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter valide email." required><br>
+          <div id="pwds"<?php if ($_SESSION['currentUserID'] !== '') {echo " hidden";}?>>
             <label class="tooltip" for="password"><span class="tooltiptext">Initial passwords for users will all be identical.</span>Password:  </label>
             <input type="button" value="View passwords" onclick="togglePwdVisible()"><br>
-            <input type="password" id="password" name="password" placeholder="Create password" maxlength="10" size="15" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>&nbsp;&nbsp;
-            <input type="password" id="password2" name="password2" placeholder="Re-type password" maxlength="255" size="15" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br>
+            <input type="password" id="password1" name="password1" placeholder="Create password" maxlength="10" size="15" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if ($_SESSION['currentUserID'] == '') {echo " required";}?>>&nbsp;&nbsp;
+            <input type="password" id="password2" name="password2" placeholder="Re-type password" maxlength="255" size="15" autocomplete="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if ($_SESSION['currentUserID'] == '') {echo " required";}?>><br>
             Must be 8 to 10 characters long and contain at least one number and one uppercase and lowercase letter.<br>
           </div>
           <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>

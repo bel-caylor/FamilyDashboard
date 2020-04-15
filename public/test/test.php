@@ -1,8 +1,33 @@
-<?php require_once('../familySetup/sessionValues.php'); ?>
 <?php require_once('../../private/initialize.php');
-$errors = [];
 
+$errors = [];
+// $_SESSION['users'] = [];
+// // echo $_SESSION['users'];
+// $results = sqlSelect("family-members", "ID", "ASC", "Email", "dkcaylor@gmail.com");
+// while($row = mysqli_fetch_assoc($results)) {
+//   $_SESSION['users'][$row['Name']] = $row;
+// };
+echo "<pre>";
 print_r($_SESSION['users']);
+echo "</pre>";
+
+
+  // echo "<pre>";
+  // echo implode(" ", mysqli_fetch_assoc($results));
+  // print_r(explode(" ", $row[0]));
+  // echo '</pre>';
+  // $json = json_encode(mysqli_fetch_assoc($results));
+  // echo "<pre>";
+  // print_r(mysqli_fetch_assoc($results));
+  // echo '</pre>';
+// $_SESSION['users']['Darden']['id'] = 45;
+// $_SESSION['users']['Belinda']['id'] = 46;
+// $_SESSION['users']['Joshua']['id'] = 47;
+// echo is_array(array_keys($_SESSION['users']));
+// echo '<pre>';
+// print_r($_SESSION['users']);
+//  echo '</pre>';
+// print_r($_SESSION['users']['Darden']['id']);
 
 // @test_ConnectionFail();
 // @test_dbConfirmDataReturned();
