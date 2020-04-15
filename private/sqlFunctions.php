@@ -119,7 +119,7 @@ function sqlEditUser() {
   $sql .= "Initial='" . $_SESSION['aryUser']['initial'] . "', ";
   $sql .= "Color='" . $_SESSION['aryUser']['color'] . "', ";
   $sql .= "Email='" . $_SESSION['aryUser']['email'] . "' ";
-  $sql .= "WHERE ID='" . $_SESSION['aryUser']['userID'] . "' ";
+  $sql .= "WHERE ID='" . $_SESSION['aryUser']['id'] . "' ";
   $sql .= "LIMIT 1";
   // echo $sql;
   $result = edit_db($sql);

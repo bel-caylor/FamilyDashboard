@@ -5,14 +5,14 @@
   $_SESSION['input'] = $input;
   $userID = $input['userID'] ?? $_POST['userID'];
   // echo $userID;
-  $_SESSION['aryUser'] = [
-      ['id'] = $userID,
-      ['name'] = $input['name'],
-      ['initial'] = $input['initial'],
-      ['color'] = $input['color'],
-      ['admin'] = isset($input['admin']) ?? '',
-      ['email'] = $input['email']
-    ];
+  $_SESSION['aryUser'] = array(
+      'id' => $userID,
+      'name' => $input['name'],
+      'initial' => $input['initial'],
+      'color' => $input['color'],
+      'admin' => isset($input['admin']) ?? '',
+      'email' => $input['email']
+    );
 
   //Need to fix
   // $_SESSION['step3Msgs'] = validateUser();
