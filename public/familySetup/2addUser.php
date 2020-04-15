@@ -1,7 +1,7 @@
 <?php require_once('../../private/initialize.php');
   // $familyID = $_POST['familyID'] ?? $_SESSION['familyID'] ?? '';
   // $step = $_GET['step'] ?? $_POST['step'] ?? $_SESSION['step'] ?? '';
-  // $_SESSION['users'] = $_SESSION['users'] ?? [];
+  $_SESSION['step2Msgs'] = array();
   $errors = array();
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,7 +45,7 @@
           $_SESSION['aryUser'] = [];
 
         }
-    } 
+    }
     };
   //IF POST Create transition page.
   if($_SERVER['REQUEST_METHOD'] == 'POST') {

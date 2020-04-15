@@ -35,11 +35,16 @@
   // }
 
 function updateUsersArray($userID) {
-  $_SESSION['users'][$userID]['Name'] = $_SESSION['aryUser']['name'];
-  $_SESSION['users'][$userID]['Initial'] = $_SESSION['aryUser']['initial'];
-  $_SESSION['users'][$userID]['Color'] = $_SESSION['aryUser']['color'];
-  $_SESSION['users'][$userID]['Admin'] = $_SESSION['aryUser']['admin'];
-  $_SESSION['users'][$userID]['Email'] = $_SESSION['aryUser']['email'];
+  foreach ($_SESSION['users'] as $user) {
+    if ($user[ID] == $_SESSION['aryUser']['id']) {
+      $user['Name'] = $_SESSION['aryUser']['name'];
+      $user['Initial'] = $_SESSION['aryUser']['initial'];
+      $user['Color'] = $_SESSION['aryUser']['color'];
+      $user['Admin'] = $_SESSION['aryUser']['admin'];
+      $user['Email'] = $_SESSION['aryUser']['email'];
+      break;
+    }
+  }
 
 $_SESSION['aryUser'] = [];
 }

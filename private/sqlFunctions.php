@@ -149,32 +149,25 @@ function validateUser() {
 
   //Validate unique User
     foreach($_SESSION['users'] as $user) {
-      if ($user == $_SESSION['aryUser']['name']) {
-        array_push($_SESSION['step2Msgs'],"Duplicate user name.");}}
+      if ($user['Name'] == $_SESSION['aryUser']['name']) {
+        array_push($_SESSION['step2Msgs'],"Duplicate user name.");
+        break;}}
 
   //Validate unique initial
-    foreach(array_column($_SESSION['users'], 'initial') as $initial) {
-      if ($initial == $_SESSION['aryUser']['initial']) {
+    foreach($_SESSION['users'] as $user) {
+      if ($user['Initial'] == $_SESSION['aryUser']['initial']) {
         array_push($_SESSION['step2Msgs'],"Duplicate initial.");}}
 
   //Validate unique color
-    foreach(array_column($_SESSION['users'], 'color') as $color) {
-      if ($color == $_SESSION['aryUser']['color']) {
+    foreach($_SESSION['users'] as $user) {
+      if ($user['Color'] == $_SESSION['aryUser']['color']) {
         array_push($_SESSION['step2Msgs'],"Duplicate color.");}}
 
-  //FamilyID
-    // if(has_presence($_SESSION['userID']) !== 1) {
-    //   // $errors() = "No familyID.";
-    //   array_push($errors,"No familyID.");
-    // }
   //Name
     if(has_presence($_SESSION['aryUser']['name']) != 1) {
         // $errors() = "No Name.";
         array_push($errors,"No Name.");
     }
-    // echo $errors[0];
-    // echo $errors[1];
-    // return $errors;
 }
 
  ?>

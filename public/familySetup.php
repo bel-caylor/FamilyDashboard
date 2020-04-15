@@ -88,7 +88,7 @@
           </div>
           <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
           <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
-          <p role="alert" class="status-message"><?php if ($_SESSION['step2Msgs'] !== []) {echo echoMsgArray($_SESSION['step2Msgs']);} ?></p>
+          <p role="alert" class="status-message"><?php echo echoMsgArray($_SESSION['step2Msgs']); ?></p>
           <input type="submit" value="Add">
         </fieldset>
       </form>

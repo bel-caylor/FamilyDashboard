@@ -8,6 +8,12 @@ body {
     font-color: red;
 }
 
+// p[role=alert] {
+//   text-align: center;
+//   color: red;
+//   font-weight: bold;
+// }
+
 h2 {
   margin: 5px 5px 1px 5px;
 }
@@ -83,8 +89,6 @@ button:hover {
     margin-top: 10px;
   }
 }
-
-
 
 .status-message {
   color: red;
