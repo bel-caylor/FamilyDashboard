@@ -102,15 +102,31 @@
       <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
     </div>
 
-    <div id="Step3" <?php if ($_SESSION['step'] < 3) {echo " hidden";}?> >
+    <div id="Step3" class="<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>" >
       <?php include(PUBLIC_PATH . '/familySetup/tblUsers.php') ?>
     </div>
 
-    <!-- Step 3 - Add Categories  -->
-    <div id="Step3" class="section inline">
-      <button onclick="clickExpandBtn('addCategories')">
-        <h2 class="inline">&#9660; Add Categories</h2>
+    <!-- Step 4 - Add Tasks  -->
+    <div id="Step4" class="section inline">
+      <button onclick="clickExpandBtn('addTasks')">
+        <h2 class="inline">&#9660; Add Tasks</h2>
       </button>
+    </div>
+
+    <div id="addTasks" class="<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>">
+      <div class="form">
+        <form id="form4" action="<?php echo WWW_ROOT?>/familySetup/4addCategory.php" method="POST">
+          <fieldset>
+            <label class="tooltip" for="category"><span class="tooltiptext">Category Type</span>Type:
+            <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
+            <label class="tooltip" for="name"><span class="tooltiptext">Room name:</span>Name:
+            <input type="text" id="catName" name="catName" value="Master" maxlength="20" size="10" required></label><br>
+            <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Default Tasks:
+            <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
+            <input type="submit" value="Add Category">
+          </fieldset>
+        </form>
+      </div>
     </div>
 
     <!-- Step 4 - Import Default Tasks  -->

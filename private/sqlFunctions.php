@@ -18,7 +18,6 @@ function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValu
     // array_push($errors,"Passwords DON'T match.");}
     return "No data returned.";
   }
-
 }
 
 function sqlFamilyTasksCategories($familyID) {
@@ -170,4 +169,35 @@ function validateUser() {
     }
 }
 
+function sqlAddCategory($Category, $Name) {
+  $sql = "INSERT INTO `category_names` ";
+  $sql .= "(Family_ID, Category_ID, Name) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $_SESSION['familyID'] ."', ";
+  $sql .= "'" . $Category ."', ";
+  $sql .= "'" . $Name ."' ";
+  $sql .= ")";
+  //return ID of new family
+  $result = insert_db($sql);
+  return $result;
+}
+
+function sqlAddDefaultTasks($Category) {
+  //query Default tasks
+    $defaultTasks = sqlSelect('default_tasks', 'ID', 'ASC', 'Category_ID', $Category);
+
+  //Add tasks
+    foreach ($defaultTasks as $task) {
+      $sql = "INSERT INTO `tasks` ";
+      $sql .= "(Family_ID, Cat_Name_ID, Task, Freq_ID, Time) ";
+      $sql .= "VALUES (";
+      $sql .= "'" . $_SESSION['familyID'] ."', ";
+      $sql .= "'" . $Category ."', ";
+      $sql .= "'" . $task['Task'] ."', ";
+      $sql .= "'" . $task['Freq_ID_Default'] ."', ";
+      $sql .= "'" . $task['Time_Default'] ."' ";
+      $sql .= ")";
+      insert_db($sql);
+    }
+}
  ?>

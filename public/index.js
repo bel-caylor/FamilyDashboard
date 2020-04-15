@@ -1,5 +1,13 @@
 function clickExpandBtn(section) {
   document.getElementById(section).classList.toggle("hidden");
+  switch (section) {
+    case 'Step3':
+      document.getElementById('Step2').classList.toggle("hidden");
+      break;
+    case 'Step4':
+      document.getElementById('Step2').classList.toggle("hidden");
+      document.getElementById('Step3').classList.toggle("hidden");
+  }
 }
 
 document.addEventListener('submit', e => {
