@@ -103,7 +103,7 @@
     </div>
 
     <div id="Step3" class="<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>" >
-      <?php include(PUBLIC_PATH . '/familySetup/tblUsers.php') ?>
+      <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
 
     <!-- Step 4 - Add Tasks  -->
@@ -129,18 +129,15 @@
       </div>
     </div>
 
-    <!-- Step 4 - Import Default Tasks  -->
-    <div id="Step4" class="section inline">
-      <button onclick="clickExpandBtn('importTasks')">
-        <h2 class="inline">&#9660; Import Default Tasks</h2>
-      </button>
-    </div>
-
     <!-- Step 5 - Edit Frequency, Delete Unwanted, Add Additional -->
     <div id="Step5" class="section inline">
       <button onclick="clickExpandBtn('editTasks')">
         <h2 class="inline">&#9660; Edit Tasks</h2>
       </button>
+    </div>
+
+    <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+      <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
     </div>
 
   </main>

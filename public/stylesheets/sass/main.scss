@@ -57,6 +57,10 @@ button:hover {
   margin-top:10px;
 }
 
+.note {
+  text-align: left;
+}
+
 #assignTask {
   display: none;
 }
@@ -111,10 +115,23 @@ button:hover {
 }
 
 .category {
+  text-align: left;
   background-color: #d5d5d5;
   margin-top: 2px;
   padding: 2px 0 2px 10px;
 
+}
+
+.task {
+  text-align: left;
+}
+
+.assigned {
+  text-align: right;
+}
+
+.note {
+  text-align: left;
 }
 
 .table {

@@ -1,9 +1,9 @@
 <select id="category" name="category">
 <?php
-  $arrayType = sqlSelect("category", "ID");
+  $arrayType = sqlSelect("frequency", "ID");
   $html = "";
   while($type = mysqli_fetch_assoc($arrayType)) {
-    $html .= "<option value=" . $type['ID'] . ">" . $type['Description'] . "</option>";
+    $html .= "<option value=" . $type['ID'] . ">" . $type['Frequency'] . "</option>";
   }
   echo $html;
  ?>

@@ -1,22 +1,16 @@
 <?php
-function optionUsers($Family_ID, $Task_ID, $User_ID) {
-  $html = "<select id=`" . $Task_ID . "`>";
 
-  $arrayType = sqlSelect("users", $Family_ID);
-  //Blank Assignment
-  if ($User_ID == NULL) {
-    $html .= "<option value=`` selected>Assign to</option>";
-  }else {
-    $html .= "<option value=``>Assign to</option>";
-  }
-  while($user = mysqli_fetch_assoc($arrayType)) {
-    if ($user['ID'] = $User_ID) {
-      $html .= "<option value=" . $user['ID'] . " selected>" . $user['Name'] . "</option>";
-    }else {
-      $html .= "<option value=" . $user['ID'] . ">" . $user['Name'] . "</option>";
-    }
-  }
-  $html .= "</select>";
-  return $html;
-};
- ?>
+function optionUsers($userID) {
+  $html = "<select id=\"user' . $userID .'\" name=\"user\" class=\"assigned\">";
+      $html .= "<option value=\"Unassigned\">Unassigned</option>";
+      foreach($_SESSION['users'] as $user) {
+        $html .= "<option value=" . $user['ID'];
+        if ($user['ID'] == $userID) {
+          $html .= " selected";
+        }
+        $html .= ">" . $user['Name'] . "</option>";
+      }
+      $html .= '</select>';
+      echo $html;
+
+}?>

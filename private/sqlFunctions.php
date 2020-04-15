@@ -20,19 +20,19 @@ function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValu
   }
 }
 
-function sqlFamilyTasksCategories($familyID) {
-  $sql = "SELECT category_names.ID AS Cat_Name_ID, category_names.Name, category.Type  ";
+function sqlCategories($familyID) {
+  $sql = "SELECT category_names.ID AS Cat_Name_ID, category_names.Name, category.Description  ";
   $sql .= "FROM category_names, category ";
   $sql .= "WHERE Family_ID = " . $familyID . " AND category_names.Category_ID = category.ID";
   // echo $sql . "<br>";
   return query_db($sql);
 }
 
-function sqlTasks($familyID, $Cat_Name_ID) {
-  $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, users.ID AS User_ID, users.Name, frequency.Frequency, tasks.Time, tasks.Note ";
-  $sql .= "FROM tasks LEFT JOIN users ON tasks.Assigned_User_ID = users.ID ";
+function sqlTasks($familyID) {
+  $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
+  $sql .= "FROM tasks LEFT JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
   $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
-  $sql .= "WHERE tasks.Cat_Name_ID = " . $Cat_Name_ID .  " AND tasks.Family_ID = " . $familyID;
+  $sql .= "WHERE tasks.Family_ID = " . $familyID;
   // echo $sql . "<br>";
   return query_db($sql);
 }

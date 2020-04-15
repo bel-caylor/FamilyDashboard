@@ -1,6 +1,6 @@
-<select id="">
+<select id="freq" name="freq">
 <?php
-  $arrayType = query_Select("frequency", "ID");
+  $arrayType = sqlSelect("frequency", "ID");
   $html = "";
   while($frequency = mysqli_fetch_assoc($arrayType)) {
     $html .= "<option value=" . $frequency['ID'] . ">" . $frequency['Frequency'] . "</option>";
