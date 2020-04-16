@@ -29,7 +29,7 @@ function sqlCategories($familyID) {
 }
 
 function sqlTasks($familyID) {
-  $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
+  $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, `tasks`.Freq_ID, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
   $sql .= "FROM tasks LEFT JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
   $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
   $sql .= "WHERE tasks.Family_ID = " . $familyID;

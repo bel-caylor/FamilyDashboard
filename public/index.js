@@ -4,7 +4,7 @@ function clickExpandBtn(section) {
     case 'Step3':
       document.getElementById('Step2').classList.toggle("hidden");
       break;
-    case 'Step4':
+    case 'addTasks':
       document.getElementById('Step2').classList.toggle("hidden");
       document.getElementById('Step3').classList.toggle("hidden");
   }
@@ -204,4 +204,20 @@ function deleteUser(row, ID) {
 
 function deleteStatusMessage(id) {
   document.getElementById(id).innerHTML = '';
+}
+
+function editTask(taskID) {
+  //Show Rows & Hightlight
+    document.getElementById('freq' + taskID).classList.toggle("hidden");
+    document.getElementById('Note' + taskID).classList.toggle("hidden");
+    document.getElementById('freq' + taskID).classList.toggle("edit");
+    document.getElementById('Note' + taskID).classList.toggle("edit");
+    document.getElementById('task' + taskID).classList.toggle("edit");
+
+  //Make Task editable.
+    document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
+
+  //Change symbol and Edit action to Save Action
+    let html = `<button type=\"submit\"  onclick="saveTask(` + taskID + `)">&#128428;</button>`;
+    document.getElementById('Edt' + taskID).innerHTML = html;
 }

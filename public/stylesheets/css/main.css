@@ -144,7 +144,8 @@ input {
 
 button {
   background-color: transparent;
-  border-style: none; }
+  border-style: none;
+  font-weight: bold; }
 
 button:hover {
   opacity: 0.7;
@@ -214,6 +215,8 @@ button:hover {
 
 .task {
   text-align: left; }
+  .task input {
+    text-align: left; }
 
 .assigned {
   text-align: right; }
