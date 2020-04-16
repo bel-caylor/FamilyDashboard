@@ -200,4 +200,24 @@ function sqlAddDefaultTasks($Category) {
       insert_db($sql);
     }
 }
+
+function sqlEditTask($input) {
+  $sql = "UPDATE `tasks` SET ";
+  $sql .= "Task='" . $input['task'] . "', ";
+  $sql .= "Assigned_User_ID='" . $input['user'] . "', ";
+  $sql .= "Freq_ID='" . $input['freq'] . "', ";
+  $sql .= "Start='" . $input['start'] . "', ";
+  $sql .= "Time='" . $input['time'] . "', ";
+  $sql .= "Note='" . $input['note'] . "' ";
+  $sql .= "WHERE ID='" . $input['taskID'] . "' ";
+  $sql .= "LIMIT 1";
+  // echo $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["edit failed"];
+  }
+}
+
  ?>

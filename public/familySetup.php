@@ -66,7 +66,7 @@
       $email = $_SESSION['aryUser']['email'] ?? '';
       $admin = $_SESSION['aryUser']['admin'] ?? '';
      ?>
-    <div id="Step2" class="form"<?php if ($_SESSION['step'] < 2) {echo " hidden";}?>>
+    <div id="Step2" class="form"<?php if ($_SESSION['step'] > 3) {echo " hidden";}?>>
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -102,14 +102,14 @@
       <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
     </div>
 
-    <div id="Step3" class="<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>" >
+    <div id="Step3" class="<?php if ($_SESSION['step'] > 3) {echo " hidden";}?>" >
       <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
 
     <!-- Step 4 - Add Tasks  -->
     <div id="Step4" class="section inline">
       <button onclick="clickExpandBtn('addTasks')">
-        <h2 class="inline">&#9660; Add Tasks</h2>
+        <h2 class="inline">&#9660; Add Categories</h2>
       </button>
     </div>
 
@@ -137,6 +137,7 @@
     </div>
 
     <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+      <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
       <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
     </div>
 

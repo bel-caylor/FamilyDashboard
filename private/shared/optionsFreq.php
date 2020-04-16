@@ -1,7 +1,7 @@
 <?php
 
-function optionFreq($freqID) {
-  $html = "<select id='freq" . $freqID ."' name=\"freq\" class=\"assigned\">";
+function optionFreq($freqID, $taskID) {
+  $html = "<select id='freq" . $taskID ."' name=\"freq\" class=\"assigned\">";
       foreach($_SESSION['freq'] as $row) {
         $html .= "<option value=" . $row['ID'];
         if ($row['ID'] == $freqID) {

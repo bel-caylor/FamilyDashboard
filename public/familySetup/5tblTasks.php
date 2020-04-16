@@ -29,22 +29,22 @@
               <!-- Task Row -->
                 <tr id="task<?php echo $task['Task_ID'] ?>">
                 <!-- Assigned -->
-                  <th colspan="1" class="assigned"><?php echo optionUsers($task['User_ID']); ?></th>
+                  <th colspan="1" class="assigned"><?php echo optionUsers($task['User_ID'], $task['Task_ID']); ?></th>
                 <!-- Task -->
                   <th colspan="3" class="task"><input type="text" size="15" class="task trans" value="<?php echo $task['Task'] ?>" disabled></th>
                 <!-- Edit -->
-                  <th id="Edt<?php echo $task['Task_ID'] ?>"><button type="button" onclick="editTask(<?php echo $task['Task_ID'] ?>)">&#128393;</button></th>
+                  <th id="EdtTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Edit Task</span><button type="button" onclick="editTask(<?php echo $task['Task_ID'] ?>)">&#128393;</button></th>
                 <!-- Delete -->
-                  <th><button type="button" onclick="clickDeleteTask(<?php echo $task['Task_ID'] ?>')">&#128465;</button></th>
+                  <th id="DelTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Delete<br>Task</span><button type="button" onclick="clickDeleteTask(<?php echo $task['Task_ID'] ?>')">&#128465;</button></th>
                 </tr>
               <!-- Frequency Row -->
-                <tr id="freq<?php echo $task['Task_ID'] ?>" class="hidden">
+                <tr id="freqRow<?php echo $task['Task_ID'] ?>" class="hidden">
                 <!-- Freq -->
-                  <th colspan="1" class="assigned tooltip"><span class="tooltiptext">Frequency</span><?php echo optionFreq($task['Freq_ID']); ?></th>
+                  <th colspan="1" class="assigned tooltip"><span class="tooltiptext">Frequency</span><?php echo optionFreq($task['Freq_ID'], $task['Task_ID']); ?></th>
                 <!-- Start -->
                   <th colspan="3" class="tooltip"><span class="tooltiptext">Next Start Time</span><input type="date" size="6" class="name trans" value="<?php echo $task['Start'] ?>"></th>
                 <!-- Time -->
-                  <th colspan="2" class="tooltip"><span class="tooltiptext">Time Estimate<br>to Complete</span><input type="text" size="2" class="name trans" value="<?php echo $task['Time'] ?>"></th>
+                  <th colspan="2" class="tooltip"><span class="tooltiptext">Time Estimate<br>minutes<br>to Complete</span><input type="number" size="2" class="name trans" min="1" max="200" value="<?php echo $task['Time'] ?>"></th>
                 </tr>
               <!-- Note Row -->
                 <tr id="Note<?php echo $task['Task_ID'] ?>" class="hidden task">

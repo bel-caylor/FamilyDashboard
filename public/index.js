@@ -208,16 +208,64 @@ function deleteStatusMessage(id) {
 
 function editTask(taskID) {
   //Show Rows & Hightlight
-    document.getElementById('freq' + taskID).classList.toggle("hidden");
-    document.getElementById('Note' + taskID).classList.toggle("hidden");
-    document.getElementById('freq' + taskID).classList.toggle("edit");
-    document.getElementById('Note' + taskID).classList.toggle("edit");
-    document.getElementById('task' + taskID).classList.toggle("edit");
+    toggleTask(taskID);
 
   //Make Task editable.
     document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
 
   //Change symbol and Edit action to Save Action
-    let html = `<button type=\"submit\"  onclick="saveTask(` + taskID + `)">&#128428;</button>`;
-    document.getElementById('Edt' + taskID).innerHTML = html;
+    let html = `<span class="tooltiptext">Save Task</span><button type=\"submit\"  onclick="saveTask(` + taskID + `)">&#128428;</button>`;
+    document.getElementById('EdtTask' + taskID).innerHTML = html;
+}
+
+function toggleTask(taskID) {
+  document.getElementById('freqRow' + taskID).classList.toggle("hidden");
+  document.getElementById('Note' + taskID).classList.toggle("hidden");
+  document.getElementById('freqRow' + taskID).classList.toggle("edit");
+  document.getElementById('Note' + taskID).classList.toggle("edit");
+  document.getElementById('task' + taskID).classList.toggle("edit");
+}
+
+function taskSaved(taskID) {
+    document.getElementById('task' + taskID).classList.remove("edit");
+    document.getElementById('task' + taskID).classList.add("saved");
+    document.getElementById('freqRow' + taskID).classList.remove("edit");
+    document.getElementById('Note' + taskID).classList.remove("edit");
+    document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
+  }
+
+function saveTask(taskID) {
+  //Create data to send to server.
+    let data = {
+      taskID: taskID,
+      user: document.querySelector("#user" + taskID).value,
+      task: document.querySelector("#task" + taskID + " > th.task > input").value,
+      freq: document.getElementById("freq" + taskID).value,
+      start: document.querySelector("#freqRow" + taskID + " > th:nth-child(2) > input").value,
+      time: document.querySelector("#freqRow" + taskID + " > th:nth-child(3) > input").value,
+      note: document.querySelector("#Note" + taskID + " > th > input").value
+    };
+  console.log(data);
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/familySetup/5editTask.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          // document.getElementById('step5Msgs').innerHTML = status;
+        })
+
+    if (status = "Update Succeeded.") {
+
+    //Change symbol and Save action to Edit Action
+      let html = `<button onclick="editTask(` + taskID + `)">&#128393;</button>`;
+      document.getElementById('EdtTask' + taskID).innerHTML = html;
+
+    //Change highlight and disabled
+      taskSaved(taskID)
+  }
 }

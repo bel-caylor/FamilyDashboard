@@ -1,7 +1,7 @@
 <?php
 
-function optionUsers($userID) {
-  $html = "<select id=\"user' . $userID .'\" name=\"user\" class=\"assigned\">";
+function optionUsers($userID, $taskID) {
+  $html = "<select id=\"user$taskID\" name=\"user\" class=\"assigned\" onchange=\"saveTask($taskID)\">";
       $html .= "<option value=\"Unassigned\">Unassigned</option>";
       foreach($_SESSION['users'] as $user) {
         $html .= "<option value=" . $user['ID'];
