@@ -269,3 +269,24 @@ function saveTask(taskID) {
       taskSaved(taskID)
   }
 }
+
+function deleteTask(taskID) {
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/familySetup/5deleteTask.php?taskID=' + taskID, {
+    method: 'GET',
+    // body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('step5Msgs').innerHTML = status;
+          //Remove user row from tblUsers
+        })
+
+    if (status = "Delete Succeeded.") {
+      document.getElementById('task' + taskID).remove();
+      document.getElementById('freqRow' + taskID).remove();
+      document.getElementById('Note' + taskID).remove();
+    }
+}

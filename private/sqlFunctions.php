@@ -220,4 +220,16 @@ function sqlEditTask($input) {
   }
 }
 
+function sqlDeleteTask($taskID) {
+  $sql = "DELETE FROM `tasks` ";
+  $sql .= "WHERE ID='" . $taskID . "' ";
+  $sql .= "LIMIT 1";
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["delete failed"];
+  }
+}
+
  ?>

@@ -35,7 +35,7 @@
                 <!-- Edit -->
                   <th id="EdtTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Edit Task</span><button type="button" onclick="editTask(<?php echo $task['Task_ID'] ?>)">&#128393;</button></th>
                 <!-- Delete -->
-                  <th id="DelTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Delete<br>Task</span><button type="button" onclick="clickDeleteTask(<?php echo $task['Task_ID'] ?>')">&#128465;</button></th>
+                  <th id="DelTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Delete<br>Task</span><button type="button" onclick="deleteTask(<?php echo $task['Task_ID'] ?>)">&#128465;</button></th>
                 </tr>
               <!-- Frequency Row -->
                 <tr id="freqRow<?php echo $task['Task_ID'] ?>" class="hidden">
