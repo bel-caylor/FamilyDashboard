@@ -232,4 +232,12 @@ function sqlDeleteTask($taskID) {
   }
 }
 
+function sqlCatNames($familyID) {
+  $sql = "SELECT category.ID as cat_ID, category.type_ID, category.Description, category_names.ID as cat_Name_ID, category_names.Name ";
+  $sql .= "FROM category_names LEFT JOIN `category` ON category_names.Category_ID = category.ID ";
+  $sql .= "WHERE category_names.Family_ID = " . $familyID;
+  // echo $sql . "<br>";
+  return query_db($sql);
+}
+
  ?>

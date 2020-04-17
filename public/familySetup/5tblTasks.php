@@ -15,7 +15,7 @@
 <!-- Delete Task Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>
 
-<table id="tblTasks" class="table"<?php if ($_SESSION['step'] > 3) {echo " hidden";}?>>
+<table id="tblTasks" class="table"<?php if ($_SESSION['step'] > 4) {echo " hidden";}?>>
 
   <?php $Users = $_SESSION['users'];?>
   <!-- Category Rows -->

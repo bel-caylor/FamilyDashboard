@@ -290,3 +290,20 @@ function deleteTask(taskID) {
       document.getElementById('Note' + taskID).remove();
     }
 }
+
+function changeCatName() {
+  //If CatName is NEW unhide type and category_names input.
+  console.log(document.getElementById('formCategory').value);
+  if (document.getElementById('formCategory').value == 0) {
+    document.getElementById('typeRow').classList.remove('hidden');
+    document.getElementById('newCat').classList.remove('hidden');
+  }else {
+    document.getElementById('typeRow').classList.add('hidden');
+    document.getElementById('newCat').classList.add('hidden');
+  }
+
+}
+
+function onLoad() {
+  document.getElementById('start').valueAsDate = new Date();
+}

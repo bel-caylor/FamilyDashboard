@@ -8,6 +8,16 @@ body {
     font-color: red;
 }
 
+header {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+  top: 0;
+  padding: 5px;
+  text-align: right;
+  right: 0;
+}
 // p[role=alert] {
 //   text-align: center;
 //   color: red;
@@ -95,6 +105,28 @@ button:hover {
   }
 }
 
+.formTable {
+  border: 0;
+  margin-left: 10px;
+  table, th, td {
+    border: 0;
+    padding: 5px;
+  }
+}
+.formLabel {
+  text-align: right;
+  padding-right: 5px;
+}
+.formInput {
+  text-align: left;
+  input {
+    text-align: left;
+    border: 1px solid #bbb8b8;
+  }
+  input[type=text] {
+    border: 1px solid #bbb8b8;
+  }
+}
 .status-message {
   color: red;
   font-weight:bold;
