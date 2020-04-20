@@ -27,13 +27,17 @@
   if ($_POST['type'] == 2) {
     $userID = $_SESSION['currentUserID'];
   };
+  $formDate =strtotime($_POST['start']);
+  $date = date(DATE_ATOM, $formDate);
+  echo $date . "<br>";
+  echo $_POST['start'];
   $input = array (
     'familyID' => $_SESSION['familyID'],
     'catNameID' => $catID ,
     'task' => $_POST['taskDesc'],
     'userID' => $userID,
     'freqID' => $_POST['freq'],
-    'start' => $_POST['start'],
+    'start' => $date,
     'time' => $_POST['time'],
     'note' => $_POST['note']
   );
@@ -50,7 +54,7 @@
     echo "Update Failed. Please try again later.";
   }
 
-  header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT
+  // header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT
 
 
 ?>

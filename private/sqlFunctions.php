@@ -209,6 +209,7 @@ function sqlCategoryDubplicate($Category = 0, $Name) {
 }
 
 function sqlAddTask($input) {
+  // $date = date(DATE_ATOM, $input['start']);
   $sql = "INSERT INTO `tasks` ";
   $sql .= "(Family_ID, Cat_Name_ID, Task, Assigned_User_ID, Freq_ID, Start, Time, Note) ";
   $sql .= "VALUES (";
@@ -229,7 +230,8 @@ function sqlAddDefaultTasks($category, $catNameID) {
   //query Default tasks
     $defaultTasks = sqlSelect('default_tasks', 'ID', 'ASC', 'Category_ID', $category);
     // print_r($defaultTasks);
-    $time = time();
+    $date = date(DATE_ATOM);
+
   //Add tasks
     while($task = mysqli_fetch_assoc($defaultTasks)) {
     // foreach ($defaultTasks as $task) {
@@ -239,7 +241,7 @@ function sqlAddDefaultTasks($category, $catNameID) {
         'task' => $task['Task'],
         'userID' => '',
         'freqID' => $task['Freq_ID_Default'],
-        'start' => $time,
+        'start' => $date,
         'time' => $task['Time_Default'],
         'note' => ''
       );

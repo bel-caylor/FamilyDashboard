@@ -153,52 +153,57 @@
       <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
-          <table class="formTable">
-        <!-- Category Type -->
-            <tr>
-              <th class="formLabel">Category Name:</th>
-              <th class="formInput"><?php include(PRIVATE_PATH . '/shared/optionsCatName.php') ?></th>
-            </tr>
-        <!-- Type -->
-            <tr id="typeRow">
-              <th class="formLabel">Type:</th>
-              <th class="formInput"><?php include(PRIVATE_PATH . '/shared/optionsType.php') ?></th>
-            </tr>
-      <!-- Category Name -->
-            <tr id="newCat">
-              <th class="formLabel">Category Name:</th>
-              <th class="formInput"><input type="text" id="catName2" name="catName2" placeholder="description" maxlength="20" size="10" required></th>
-            </tr>
-      <!-- Description -->
-            <tr>
-              <th class="formLabel tooltip"><span class="tooltiptext">Details</span>Task:</th>
-              <th class="formInput"><input type="text" id="taskDesc" name="taskDesc" placeholder="description" maxlength="30" size="10" required></th>
-            </tr>
-      <!-- Frequency -->
-            <tr>
-              <th class="formLabel">Frequency:</th>
-              <th class="formInput"><?php echo optionFreq($task['Freq_ID'], $task['Task_ID']); ?></th>
-            </tr>
-      <!-- Start -->
-            <tr class="formInput">
-              <th class="formLabel tooltip"><span class="tooltiptext">Date to start task.</span>Start:</th>
-              <th class="formInput"><input id="start" name="start" type="date" size="4" class="name"></th>
-            </tr>
-      <!-- Time Estimate -->
-            <tr>
-              <th class="formLabel tooltip"><span class="tooltiptext">in minutes</span>Time Estimate:</th>
-              <th class="formInput"><input type="number" name="time" size="2" class="name" min="1" max="200" value="1"></th>
-            </tr>
-      <!-- Note -->
-            <tr>
-              <th class="formInput tooltip" colspan="2"><span class="tooltiptext">Don't forget to:</span>
-                <input type="text" name="note" size="28" placeholder="Note"></th>
-            </tr>
-      <!-- Submit -->
-            <tr>
-              <th colspan="2"><input type="submit" value="Add Task"></th>
-            </tr>
-          </table>
+          <fieldset>
+            <table class="formTable">
+          <!-- Category Type -->
+              <tr>
+                <th class="formLabel">Category Name:</th>
+                <th class="formInput"><?php include(PRIVATE_PATH . '/shared/optionsCatName.php') ?></th>
+              </tr>
+          <!-- Type -->
+              <tr id="typeRow">
+                <th class="formLabel">Type:</th>
+                <th class="formInput"><?php include(PRIVATE_PATH . '/shared/optionsType.php') ?></th>
+              </tr>
+        <!-- Category Name -->
+              <tr id="newCat">
+                <th class="formLabel">Category Name:</th>
+                <th class="formInput"><input type="text" id="catName2" name="catName2" placeholder="description" maxlength="20" size="10" required></th>
+              </tr>
+        <!-- Description -->
+              <tr>
+                <th class="formLabel tooltip"><span class="tooltiptext">Details</span>Task:</th>
+                <th class="formInput"><input type="text" id="taskDesc" name="taskDesc" placeholder="description" maxlength="30" size="10" required></th>
+              </tr>
+        <!-- Frequency -->
+              <tr>
+                <th class="formLabel">Frequency:</th>
+                <th class="formInput"><?php echo optionFreq($task['Freq_ID'], $task['Task_ID']); ?></th>
+              </tr>
+        <!-- Start -->
+              <tr class="formInput">
+                <th class="formLabel tooltip"><span class="tooltiptext">Date to start task.</span>Start:</th>
+                <th class="formInput"><input id="start" name="start" type="date" size="4" class="name"></th>
+              </tr>
+        <!-- Time Estimate -->
+              <tr>
+                <th class="formLabel tooltip"><span class="tooltiptext">in minutes</span>Time Estimate:</th>
+                <th class="formInput"><input type="number" name="time" size="2" class="name" min="1" max="200" value="1"></th>
+              </tr>
+        <!-- Note -->
+              <tr>
+                <th class="formInput tooltip" colspan="2"><span class="tooltiptext">Don't forget to:</span>
+                  <input type="text" name="note" size="28" placeholder="Note"></th>
+              </tr>
+        <!-- Submit -->
+              <tr>
+                <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
+                <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
+                <p role="alert" class="status-message" <?php if ($_SESSION['step6Msgs'] == []) {echo "hidden";} ?>>
+                <th colspan="2"><input type="submit" value="Add Task"></th>
+              </tr>
+            </table>
+          </fieldset>
         </form>
       </div>
     </div>
