@@ -216,6 +216,9 @@ function editTask(taskID) {
   //Change symbol and Edit action to Save Action
     let html = `<span class="tooltiptext">Save Task</span><button type=\"submit\"  onclick="saveTask(` + taskID + `)">&#128428;</button>`;
     document.getElementById('EdtTask' + taskID).innerHTML = html;
+
+  //Remove onchange for assign user.
+    document.getElementById('user' + taskID).setAttribute("onchange", "");
 }
 
 function toggleTask(taskID) {
@@ -231,7 +234,12 @@ function taskSaved(taskID) {
     document.getElementById('task' + taskID).classList.add("saved");
     document.getElementById('freqRow' + taskID).classList.remove("edit");
     document.getElementById('Note' + taskID).classList.remove("edit");
+    document.getElementById('freqRow' + taskID).classList.add("hidden");
+    document.getElementById('Note' + taskID).classList.add("hidden");
     document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
+    //Add onchange for assign user.
+    document.getElementById('user' + taskID).setAttribute("onchange", "saveTask(" + taskID + ")");
+
   }
 
 function saveTask(taskID) {

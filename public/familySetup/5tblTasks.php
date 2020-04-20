@@ -49,7 +49,7 @@
                   <!-- Freq -->
                     <th colspan="1" class="assigned tooltip"><span class="tooltiptext">Frequency</span><?php echo optionFreq($task['Freq_ID'], $task['Task_ID']); ?></th>
                   <!-- Next Time to Repeat -->
-                    <th colspan="3" class="tooltip"><span class="tooltiptext">Next Start Time</span><input type="date" size="6" class="name trans" value="<?php echo $task['Start'] ?>"></th>
+                    <th colspan="3" class="tooltip"><span class="tooltiptext">Next Start Time</span><input type="date" size="6" class="name trans" value="<?php echo substr($task['Start'], 0 ,10) ?>"></th>
                   <!-- Time to complete in Minutes -->
                     <th colspan="2" class="tooltip"><span class="tooltiptext">Time Estimate<br>minutes<br>to Complete</span><input type="number" size="2" class="name trans" min="1" max="200" value="<?php echo $task['Time'] ?>"></th>
                   </tr>
