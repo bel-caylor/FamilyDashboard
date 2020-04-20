@@ -21,18 +21,21 @@ function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValu
 }
 
 function sqlCategories($familyID) {
-  $sql = "SELECT category_names.ID AS Cat_Name_ID, category_names.Name, category.Description  ";
-  $sql .= "FROM category_names, category ";
-  $sql .= "WHERE Family_ID = " . $familyID . " AND category_names.Category_ID = category.ID";
+  $sql = "SELECT category_names.ID AS Cat_Name_ID, category_names.Name, category.Description, category_names.Type_ID, type.Type ";
+  $sql .= "FROM category_names ";
+  $sql .= "LEFT JOIN category ON category.ID = category_names.Category_ID ";
+  $sql .= "LEFT JOIN type ON type.ID = category_names.Type_ID ";
+  $sql .= "WHERE Family_ID = " . $familyID . " ";
+  $sql .= "ORDER BY Type.ID, Cat_Name_ID ASC";
   // echo $sql . "<br>";
   return query_db($sql);
 }
 
-function sqlTasks($familyID) {
+function sqlTasks($familyID, $catID) {
   $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, `tasks`.Freq_ID, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
   $sql .= "FROM tasks LEFT JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
   $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
-  $sql .= "WHERE tasks.Family_ID = " . $familyID;
+  $sql .= "WHERE tasks.Family_ID = " . $familyID . " AND tasks.Cat_Name_ID = " . $catID;
   // echo $sql . "<br>";
   return query_db($sql);
 }
@@ -169,35 +172,79 @@ function validateUser() {
     }
 }
 
-function sqlAddCategory($Category, $Name) {
+function sqlAddCategory($Category = 0, $Name, $Type = 1) {
+
+  $duplicateID = sqlCategoryDubplicate($Category, $Name, $Type);
+  // echo $duplicateID . "<br>";
+  if ($duplicateID > 0) {
+    return $duplicateID;
+  }
+
   $sql = "INSERT INTO `category_names` ";
-  $sql .= "(Family_ID, Category_ID, Name) ";
+  $sql .= "(Family_ID, Category_ID, Type_ID, Name) ";
   $sql .= "VALUES (";
   $sql .= "'" . $_SESSION['familyID'] ."', ";
   $sql .= "'" . $Category ."', ";
+  $sql .= "'" . $Type ."', ";
   $sql .= "'" . $Name ."' ";
   $sql .= ")";
   //return ID of new family
+  // echo $sql;
   $result = insert_db($sql);
   return $result;
 }
 
-function sqlAddDefaultTasks($Category) {
-  //query Default tasks
-    $defaultTasks = sqlSelect('default_tasks', 'ID', 'ASC', 'Category_ID', $Category);
+function sqlCategoryDubplicate($Category = 0, $Name) {
+  $sql = "SELECT * FROM `category_names` ";
+  $sql .= "WHERE Family_ID = " . $_SESSION['familyID'] . " AND ";
+  $sql .= "Category_ID = " . $Category . " AND ";
+  $sql .= "Name = '" . $Name . "' ";
+  // echo $sql . "<br>";
+  $result = query_db($sql);
+  // print_r($result);
+  if (mysqli_num_rows($result) == 1) {
+    return mysqli_fetch_assoc($result)['ID'];
+  }
+  return 0;
+}
 
+function sqlAddTask($input) {
+  $sql = "INSERT INTO `tasks` ";
+  $sql .= "(Family_ID, Cat_Name_ID, Task, Assigned_User_ID, Freq_ID, Start, Time, Note) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $input['familyID'] ."', ";
+  $sql .= "'" . $input['catNameID'] ."', ";
+  $sql .= "'" . $input['task'] ."', ";
+  $sql .= "'" . $input['userID'] ."', ";
+  $sql .= "'" . $input['freqID'] ."', ";
+  $sql .= "'" . $input['start'] ."', ";
+  $sql .= "'" . $input['time'] ."', ";
+  $sql .= "'" . $input['note'] ."' ";
+  $sql .= ")";
+  // echo $sql;
+  insert_db($sql);
+}
+
+function sqlAddDefaultTasks($category, $catNameID) {
+  //query Default tasks
+    $defaultTasks = sqlSelect('default_tasks', 'ID', 'ASC', 'Category_ID', $category);
+    // print_r($defaultTasks);
+    $time = time();
   //Add tasks
-    foreach ($defaultTasks as $task) {
-      $sql = "INSERT INTO `tasks` ";
-      $sql .= "(Family_ID, Cat_Name_ID, Task, Freq_ID, Time) ";
-      $sql .= "VALUES (";
-      $sql .= "'" . $_SESSION['familyID'] ."', ";
-      $sql .= "'" . $Category ."', ";
-      $sql .= "'" . $task['Task'] ."', ";
-      $sql .= "'" . $task['Freq_ID_Default'] ."', ";
-      $sql .= "'" . $task['Time_Default'] ."' ";
-      $sql .= ")";
-      insert_db($sql);
+    while($task = mysqli_fetch_assoc($defaultTasks)) {
+    // foreach ($defaultTasks as $task) {
+      $input = array (
+        'familyID' => $_SESSION['familyID'],
+        'catNameID' => $catNameID,
+        'task' => $task['Task'],
+        'userID' => '',
+        'freqID' => $task['Freq_ID_Default'],
+        'start' => $time,
+        'time' => $task['Time_Default'],
+        'note' => ''
+      );
+      // print_r($input);
+      sqlAddTask($input);
     }
 }
 

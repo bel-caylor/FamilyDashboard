@@ -138,7 +138,7 @@
     </div>
 
     <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
-      <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
+      <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step5Msgs'] !== []) {echo echoMsgArray($_SESSION['step5Msgs']);} ?></p>
       <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
     </div>
 
@@ -150,7 +150,7 @@
     </div>
 
     <div id="createTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
-      <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
+      <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
           <table class="formTable">
@@ -167,7 +167,7 @@
       <!-- Category Name -->
             <tr id="newCat">
               <th class="formLabel">Category Name:</th>
-              <th class="formInput"><input type="text" id="catName" name="catName" placeholder="description" maxlength="20" size="10" required></th>
+              <th class="formInput"><input type="text" id="catName2" name="catName2" placeholder="description" maxlength="20" size="10" required></th>
             </tr>
       <!-- Description -->
             <tr>
@@ -182,17 +182,17 @@
       <!-- Start -->
             <tr class="formInput">
               <th class="formLabel tooltip"><span class="tooltiptext">Date to start task.</span>Start:</th>
-              <th class="formInput"><input id="start" type="date" size="4" class="name"></th>
+              <th class="formInput"><input id="start" name="start" type="date" size="4" class="name"></th>
             </tr>
       <!-- Time Estimate -->
             <tr>
               <th class="formLabel tooltip"><span class="tooltiptext">in minutes</span>Time Estimate:</th>
-              <th class="formInput"><input type="number" size="2" class="name" min="1" max="200" value="1"></th>
+              <th class="formInput"><input type="number" name="time" size="2" class="name" min="1" max="200" value="1"></th>
             </tr>
       <!-- Note -->
             <tr>
               <th class="formInput tooltip" colspan="2"><span class="tooltiptext">Don't forget to:</span>
-                <input type="text" size="28" placeholder="Note"></th>
+                <input type="text" name="note" size="28" placeholder="Note"></th>
             </tr>
       <!-- Submit -->
             <tr>
