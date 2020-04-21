@@ -289,4 +289,32 @@ function sqlCatNames($familyID) {
   return query_db($sql);
 }
 
+function sqlAssignedTasks($userID) {
+  $sql = "SELECT * FROM `tasks` ";
+  $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
+  $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
+  $sql .= "WHERE `Assigned_User_ID` = " . $userID . " AND category_names.Type_ID = 1 ";
+  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  // echo $sql;
+  return query_db($sql);
+}
+
+function sqlHouseTasks($familyID) {
+  $sql = "SELECT * FROM `tasks` ";
+  $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
+  $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
+  $sql .= "WHERE tasks.`Family_ID` = " . $familyID . " AND category_names.Type_ID = 1 ";
+  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  // echo $sql;
+  return query_db($sql);
+}
+
+function sqlPersonalTasks($userID) {
+  $sql = "SELECT * FROM `tasks` ";
+  $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
+  $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
+  $sql .= "WHERE `category_names`.`Type_ID` = 2 ORDER BY `Freq_ID` ASC, `Start` ASC";
+  return query_db($sql);
+}
+
  ?>
