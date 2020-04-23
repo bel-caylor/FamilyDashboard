@@ -289,32 +289,125 @@ function sqlCatNames($familyID) {
   return query_db($sql);
 }
 
-function sqlAssignedTasks($userID) {
-  $sql = "SELECT * FROM `tasks` ";
+function sqlAssignedTasks($userID, $date) {
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `Assigned_User_ID` = " . $userID . " AND category_names.Type_ID = 1 ";
+  $sql .= "AND Start < '" . $date . "' ";
   $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
   // echo $sql;
   return query_db($sql);
 }
 
-function sqlHouseTasks($familyID) {
-  $sql = "SELECT * FROM `tasks` ";
+function sqlHouseTasks($familyID, $date) {
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE tasks.`Family_ID` = " . $familyID . " AND category_names.Type_ID = 1 ";
+  $sql .= "AND tasks.`Assigned_User_ID` = 0 ";
+  $sql .= "AND Start < '" . $date . "' ";
   $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
   // echo $sql;
   return query_db($sql);
 }
 
-function sqlPersonalTasks($userID) {
-  $sql = "SELECT * FROM `tasks` ";
+function sqlPersonalTasks($userID, $date) {
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
-  $sql .= "WHERE `category_names`.`Type_ID` = 2 ORDER BY `Freq_ID` ASC, `Start` ASC";
+  $sql .= "WHERE `category_names`.`Type_ID` = 2 ";
+  $sql .= "AND Start < '" . $date . "' ";
+  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
   return query_db($sql);
+}
+
+function sqlAddCompleteTask($input) {
+  $sql = "INSERT INTO `task_log` ";
+  $sql .= "(Tasks_ID, User_ID, Time) ";
+  $sql .= "VALUES (";
+  $sql .= "'" . $input['taskID'] ."', ";
+  $sql .= "'" . $input['userID'] ."', ";
+  $sql .= "'" . $input['time'] ."' ";
+  $sql .= ")";
+  // echo $sql . "<br>";
+  $result = insert_db($sql);
+  // echo $result . "<br>";
+  return $result;
+}
+
+function sqlUpdateNextStart($input) {
+  //And remove Assigned_User_ID.
+  //query for task freq.
+    $sql = "SELECT * FROM `tasks` ";
+    $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
+    $sql .= "WHERE tasks.ID = " . $input['taskID'];
+    $result = query_db($sql);
+    $row = mysqli_fetch_assoc($result);
+    $freq = $row['Hours_Between'];
+    $hrOffset = $freq - $input['tzOffset']/60 ;
+    // echo $sql . "<br>";
+    // echo $freq . "<br>";
+    // $date = substr(date(DATE_ATOM),0,16);
+    // $date = str_to_date(date(DATE_ATOM));
+    $date = date_create();
+    // $tzOffset =
+    // $date = time() + ($freq * 60 * 60);
+    // echo $date;
+    $gmtOffset = substr(date_format($date, "P"),1,2);
+    $gmtOffset = (int)$gmtOffset;
+    // echo $gmtOffset . "<br>";
+    $totalOffset = $hrOffset - $gmtOffset;
+    // echo $totalOffset . "<br>";
+    // echo date_format($date,"Y-m-d H:i:s P") . "<br>";
+    //Add frequency to $date.
+    date_modify($date,"+" . $totalOffset . " hours");
+    //Add timezone offset
+    // echo $hrOffset . "<br>";
+    // date_modify($date,"+" . $hrOffset . " hours");
+    $newStart = date_format($date,"Y-m-d H:i:s");
+  //update start time.
+    $sql = "UPDATE `tasks` SET ";
+    $sql .= "Start='" . $newStart . "', ";
+    $sql .= "Assigned_User_ID = 0 ";
+    $sql .= "WHERE ID='" . $input['taskID'] . "' ";
+    $sql .= "LIMIT 1";
+    // echo $sql;
+    $result = edit_db($sql);
+    echo $result;
+    if ($result == "update succeeded") {
+      return $newStart;
+    }else {
+      return "edit failed";
+    }
+}
+
+function deleteCompleteTask($taskLogID) {
+  $sql = "DELETE FROM `task_log` ";
+  $sql .= "WHERE ID='" . $taskLogID . "' ";
+  $sql .= "LIMIT 1";
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["delete failed"];
+  }
+}
+
+function editCompleteTasks($input) {
+  $sql = "UPDATE `task_log` SET ";
+  $sql .= "Time='" . $input['time'] . "', ";
+  $sql .= "Grade='" . $input['grade'] . "', ";
+  $sql .= "Note='" . $input['note'] . "' ";
+  $sql .= "WHERE ID='" . $input['taskLogID'] . "' ";
+  $sql .= "LIMIT 1";
+  // echo $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["edit failed"];
+  }
 }
 
  ?>

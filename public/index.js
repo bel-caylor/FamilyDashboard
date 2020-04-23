@@ -315,3 +315,64 @@ function changeCatName() {
 function onLoad() {
   document.getElementById('start').valueAsDate = new Date();
 }
+
+function toggleCompleteTask($taskID) {
+    //Is task completed or not?
+    $task = document.querySelector(`#task${$taskID}> th:nth-child(1) > input[type=checkbox]`);
+    console.log($task.checked);
+      if ($task.checked == true) {
+        //Completed task - add task to task_log Table
+        saveCompleteTask($taskID);
+      } else {
+        //Unchecked task - remove completed task from task_log table
+
+      }
+}
+
+function saveCompleteTask($taskID) {
+  //Create data to send to server.
+    let date = new Date();
+    let tzOffset = date.getTimezoneOffset();
+    let data = {
+      taskID: $taskID,
+      time: document.getElementById("time" + $taskID).value,
+      tzOffset: tzOffset
+    };
+  console.log(data);
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/dashboard/2completeTask.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('status').innerHTML = status;
+          let taskLogID = doc.getElementById('taskLogID').innerHTML;
+          let newStart = doc.getElementById('newStart').innerHTML;
+          console.log(taskLogID);
+          console.log(newStart);
+          if (taskLogID !== "insert failed") {
+            //change background color to green & add taskLogID
+            document.getElementById("task" + $taskID).classList.add('saved');
+            document.querySelector("#task353 > th:nth-child(1) > input[type=checkbox]").setAttribute("name", "taskLogID" + taskLogID);
+          }
+        })
+    .catch(err => {
+      console.log("error", err)
+      form.getElementsByTagName("fieldset")[0].disabled = false;  // Unlock form elements
+      lastActive.focus();  // Return focus to active element
+      statusBusy.hidden = true;  // Hide the busy state
+      statusFailure.hidden = false;  // Show error message
+
+    });
+}
+
+function changeTaskTime() {
+    //Is task complete?
+
+    //Completed task - edit task_log time
+
+}

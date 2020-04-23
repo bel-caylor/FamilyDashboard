@@ -23,7 +23,7 @@
         <h2 id="reports" class="inline">&#9660; Complete Tasks</h2>
       </button>
     </div>
-    <?php include(PUBLIC_PATH . '\dashboard\tblCompleteTasks.php') ?>
+    <?php include(PUBLIC_PATH . '\dashboard\2tblCompleteTasks.php') ?>
 
 
 <!-- Admin Grade Task Section -->
@@ -51,4 +51,4 @@
 
 
   </main>
-</body>
+<?php include(SHARED_PATH . '/footer.php') ?>
