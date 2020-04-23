@@ -269,12 +269,26 @@ function saveTask(taskID) {
 
     if (status = "Update Succeeded.") {
 
+      location.reload();
+
     //Change symbol and Save action to Edit Action
-      let html = `<button onclick="editTask(` + taskID + `)">&#128393;</button>`;
-      document.getElementById('EdtTask' + taskID).innerHTML = html;
+      // let html = `<button onclick="editTask(` + taskID + `)">&#128393;</button>`;
+      // document.getElementById('EdtTask' + taskID).innerHTML = html;
+
+      //Fetch new assigned Chart
+      // fetch('/FamilyDashboard/public/familySetup/5sumAssign.php', {
+      //   method: 'POST',
+      // })
+      //   .then(res => res.text())
+      //     .then(text => new DOMParser().parseFromString(text, 'text/html'))
+      //       .then(doc => {
+      //         let chart = doc.body.innerHTML;
+      //         document.getElementsById('assigedChart').innerHTML = chart;
+      //       })
+
 
     //Change highlight and disabled
-      taskSaved(taskID)
+      // taskSaved(taskID)
   }
 }
 
@@ -362,17 +376,20 @@ function saveCompleteTask($taskID) {
         })
     .catch(err => {
       console.log("error", err)
-      form.getElementsByTagName("fieldset")[0].disabled = false;  // Unlock form elements
-      lastActive.focus();  // Return focus to active element
-      statusBusy.hidden = true;  // Hide the busy state
-      statusFailure.hidden = false;  // Show error message
-
     });
 }
 
-function changeTaskTime() {
+function changeTaskTime($taskID) {
     //Is task complete?
-
-    //Completed task - edit task_log time
-
+      $task = document.querySelector(`#task${$taskID}> th:nth-child(1) > input[type=checkbox]`);
+      console.log($task.checked);
+        if ($task.checked == true) {
+        //Completed task - edit task_log time
+        let data = {
+          taskLogID: $taskID,
+          time: document.getElementById("time" + $taskID).value,
+          tzOffset: tzOffset
+        };
+      console.log(data);
+        }
 }

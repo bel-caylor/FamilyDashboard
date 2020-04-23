@@ -24,7 +24,7 @@
   </header>
 
   <main>
-      <br>
+      <br><br><br>
 <!-- Step 1 - Create/Edit Family  -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
@@ -138,6 +138,9 @@
     </div>
 
     <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+      <div id="assigedChart">
+        <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
+      </div>
       <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step5Msgs'] !== []) {echo echoMsgArray($_SESSION['step5Msgs']);} ?></p>
       <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
     </div>

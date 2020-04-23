@@ -14,9 +14,14 @@ header {
   background-color: white;
   width: 100%;
   top: 0;
-  padding: 5px;
+  // padding: 5px;
   text-align: right;
   right: 0;
+  margin: 0 10px 10px 10px;
+  padding-bottom: 5px;
+  border-width: 0 0 1px 0;
+  border-color: black;
+  border-style: groove;
 }
 // p[role=alert] {
 //   text-align: center;
@@ -26,6 +31,10 @@ header {
 
 h2 {
   margin: 5px 5px 1px 5px;
+}
+
+h3 {
+  margin: 0 10px 0 10px;
 }
 
 .inline {
@@ -78,6 +87,18 @@ button:hover {
 
 #editFamily {
   display: block;
+}
+
+#assigedChart {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+  top: 20px;
+  left: 0;
+  padding: 0 5px 0 5px;
+  text-align: left;
+  right: 0;
 }
 
 .hidden {
