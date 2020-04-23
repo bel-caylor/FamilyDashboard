@@ -42,6 +42,7 @@ function sqlTasks($familyID, $catID) {
 
 function sqlUsers($familyID) {
   $sql = "SELECT * FROM `users` ";
+  $sql = "WHERE Family_ID = " . $familyID;
   return query_db($sql);
 }
 
@@ -408,6 +409,36 @@ function editCompleteTasks($input) {
   }else {
     return ["edit failed"];
   }
+}
+
+function sqlSumUserLogTime($numDays) {
+  $date = date_create();
+  date_modify($date,"-" . $numDays . " days");
+  $sql = "SELECT User_ID, SUM(Time) FROM `task_log` ";
+  $sql .= "WHERE Timestamp > '" . $date . "' ";
+  $sql .= "GROUP BY User_ID";
+  $sql .= "ORDER BY SUM(Time) DESC";
+  return query_db($sql);
+}
+
+function sqlSumAssignTime() {
+  $sql = "SELECT Assigned_User_ID, `family-members`.Name, `family-members`.Color, `family-members`.Initial, SUM(Time) FROM `tasks` ";
+  $sql .= "JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
+  $sql .= "WHERE tasks.Family_ID = " . $_SESSION['familyID'] . " ";
+  $sql .= "AND Assigned_User_ID != 0 ";
+  $sql .= "GROUP BY Assigned_User_ID ";
+  $sql .= "ORDER BY SUM(Time) DESC";
+  // echo $sql;
+  return query_db($sql);
+}
+
+function sqlSumTotalAssign() {
+  $sql = "SELECT SUM(Time) FROM `tasks` ";
+  $sql .= "WHERE Family_ID = '" . $_SESSION['familyID'] . "' ";
+  $sql .= "AND Assigned_User_ID != 0 ";
+  $sql .= "ORDER BY SUM(Time) DESC";
+  // echo $sql;
+  return query_db($sql);
 }
 
  ?>
