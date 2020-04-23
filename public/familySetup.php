@@ -1,5 +1,10 @@
 <?php require_once('../private/initialize.php'); ?>
 <?php
+  //Check permissions.
+  if ($_SESSION['admin'] == 0) {
+    header("Location: " . WWW_ROOT . "/dashboard.php");
+  }
+
   //Session Parimeters
   if ($_SESSION['family'] !== "") {$_SESSION['step'] = 2;}
   if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 4;}
@@ -121,7 +126,7 @@
             <label class="tooltip" for="category"><span class="tooltiptext">Category Type</span>Type:
             <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
             <label class="tooltip" for="name"><span class="tooltiptext">Room name:</span>Name:
-            <input type="text" id="catName" name="catName" value="Master" maxlength="20" size="10" required></label><br>
+            <input type="text" id="catName" name="catName" value="Main" maxlength="20" size="10" required></label><br>
             <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Default Tasks:
             <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
             <input type="submit" value="Add Category">

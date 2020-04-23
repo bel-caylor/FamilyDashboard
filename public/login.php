@@ -38,6 +38,7 @@ $stepID = $_POST['StepID'] ?? '';
            $user = mysqli_fetch_assoc(sqlSelect("family-members", "ID", "ASC", "ID", $_SESSION['currentUserID']));
            $_SESSION['currentName'] = $_SESSION['users'][$_POST['User']]['Name'];
            $_SESSION['password'] = $_SESSION['users'][$_POST['User']]['hashed_password'];
+           $_SESSION['admin'] = $_SESSION['users'][$_POST['User']]['Admin'];
            $step = '4-password';
            break;
          case '4':

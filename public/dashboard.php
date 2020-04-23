@@ -27,23 +27,23 @@
 
 
 <!-- Admin Grade Task Section -->
-    <div class="section inline">
+    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
       <button onclick="clickExpandBtn('gradeTasks')">
         <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
       </button>
     </div>
 
 <!-- Admin Assign Task Section -->
-    <div class="section inline">
+    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
       <button onclick="clickExpandBtn('assignTasks')">
         <h2 id="reports" class="inline">&#9660; Assign Tasks</h2>
       </button>
     </div>
 
 <!-- Go to familySetup -->
-    <div class="section inline">
-      <button onclick="clickExpandBtn('familySetup')">
-        <h2 id="reports" class="inline">&#9660; Add/Remove Tasks, Categories, Users</h2>
+    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+      <button onclick="window.location='familySetup.php'">
+        <h2 id="reports" class="inline">&#9660; Setup Tasks & Users</h2>
       </button>
     </div>
 
