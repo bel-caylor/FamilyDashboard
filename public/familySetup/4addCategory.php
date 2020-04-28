@@ -16,7 +16,7 @@
 
     //Add Default Tasks to tasks.
     sqlAddDefaultTasks($_POST['category'], $catNameID);
-    $_SESSION['step'] = '4';
+    $_SESSION['step'] = '5';
   }
 
 

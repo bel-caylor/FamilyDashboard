@@ -72,7 +72,7 @@
       $email = $_SESSION['aryUser']['email'] ?? $_SESSION['email'] ?? '';
       $admin = $_SESSION['aryUser']['admin'] ?? '';
      ?>
-    <div id="Step2" class="form <?php if ($_SESSION['step'] > 4 OR $_SESSION['step'] < 2) {echo " hidden";}?>">
+    <div id="Step2" class="form <?php if ($_SESSION['step'] > 3 || $_SESSION['step'] < 2) {echo " hidden";}?>">
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -108,7 +108,7 @@
       <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
     </div>
 
-    <div id="Step3" class="<?php if ($_SESSION['step'] > 4) {echo " hidden";}?>" >
+    <div id="Step3" class="<?php if ($_SESSION['step'] > 3 || $_SESSION['step'] < 2) {echo " hidden";}?>" >
       <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
 
@@ -129,6 +129,9 @@
             <input type="text" id="catName" name="catName" value="Main" maxlength="20" size="10" required></label><br>
             <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Default Tasks:
             <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
+            <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
+            <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
+            <p role="alert" id="step4Msgs" class="status-message"><?php echo echoMsgArray($_SESSION['step4Msgs']); ?></p>
             <input type="submit" value="Add Category">
           </fieldset>
         </form>
@@ -142,7 +145,7 @@
       </button>
     </div>
 
-    <div id="editTasks" class="<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>" >
+    <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo "hidden";}?>" >
       <div id="assigedChart">
         <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
       </div>
@@ -157,7 +160,7 @@
       </button>
     </div>
 
-    <div id="createTasks" class="<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>" >
+    <div id="createTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
       <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">

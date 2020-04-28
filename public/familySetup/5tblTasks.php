@@ -9,6 +9,9 @@
 
   //Import Categories
     $categories = sqlCategories($_SESSION['familyID']);
+    if (mysqli_num_rows($categories) > 0) {
+      $_SESSION['step'] = 5;
+    }
   //Import type.
     $type = sqlSelect('type', 'ASC');
  ?>
@@ -16,7 +19,7 @@
 <!-- Delete Task Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>
 
-<table id="tblTasks" class="table"<?php if ($_SESSION['step'] > 4) {echo " hidden";}?>>
+<table id="tblTasks" class="table"<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>>
 
   <?php $Users = $_SESSION['users'];?>
   <!-- Category Rows -->

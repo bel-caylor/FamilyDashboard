@@ -19,6 +19,10 @@ $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
           margin-right: -4px;
           /* font-weight: bold; */
         }
+
+        .blank {
+          width: 2%;
+        }
         <?php
           while($row = mysqli_fetch_assoc($userSumAssign)) {
             $html = ".user" . $row['Assigned_User_ID'] . " {";
@@ -36,6 +40,9 @@ $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
 
     <div class="chart">
       <h3>User Percent Time of Assigned</h3>
+      <div class="user blank">
+
+      </div>
       <?php
         while($row = mysqli_fetch_assoc($userSumAssign)) {?>
           <div class="user user<?php echo $row['Assigned_User_ID'] ?>">

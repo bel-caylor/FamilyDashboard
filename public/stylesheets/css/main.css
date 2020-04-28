@@ -153,6 +153,9 @@ h2 {
   margin: 5px 5px 1px 5px; }
 
 h3 {
+  background-color: #d5d5d5;
+  text-align: center;
+  color: white;
   margin: 0 10px 0 10px; }
 
 .inline {
