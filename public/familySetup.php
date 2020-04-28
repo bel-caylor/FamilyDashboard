@@ -15,6 +15,13 @@
     $header = 'Welcome to Family Dashboard';
   }
 
+  //Create users array
+  $_SESSION['users'] = [];
+  $results = sqlSelect("family-members", "ID", "ASC", "Family_ID", $_SESSION['familyID']);
+  while($row = mysqli_fetch_assoc($results)) {
+    $_SESSION['users'][$row['ID']] = $row;
+  };
+
   //NEED TO ADD ERROR HANDLING!!!
   // echo $stepID;
   // echo $_SERVER['REQUEST_METHOD'];
@@ -160,7 +167,7 @@
       </button>
     </div>
 
-    <div id="createTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+    <div id="createTasks" class="hidden" >
       <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
@@ -219,5 +226,11 @@
       </div>
     </div>
 
+    <!-- Go to Dashboard -->
+        <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+          <button onclick="window.location='dashboard.php'">
+            <h2 id="reports" class="inline">&#9660; Goto Dashboard</h2>
+          </button>
+        </div>
   </main>
 <?php include(SHARED_PATH . '/footer.php') ?>

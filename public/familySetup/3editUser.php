@@ -12,7 +12,7 @@
       'name' => $input['name'],
       'initial' => $input['initial'],
       'color' => $input['color'],
-      'admin' => isset($input['admin']) ?? '',
+      'admin' => $input['admin'],
       'email' => $input['email']
     );
 
@@ -38,12 +38,13 @@
 
 function updateUsersArray($userID) {
   foreach ($_SESSION['users'] as $user) {
+    echo $user['ID'] . "-" . $_SESSION['aryUser']['id'];
     if ($user['ID'] == $_SESSION['aryUser']['id']) {
-      $user['Name'] = $_SESSION['aryUser']['name'];
-      $user['Initial'] = $_SESSION['aryUser']['initial'];
-      $user['Color'] = $_SESSION['aryUser']['color'];
-      $user['Admin'] = $_SESSION['aryUser']['admin'];
-      $user['Email'] = $_SESSION['aryUser']['email'];
+      $_SESSION['users'][$user['ID']]['Name'] = $_SESSION['aryUser']['name'];
+      $_SESSION['users'][$user['ID']]['Initial'] = $_SESSION['aryUser']['initial'];
+      $_SESSION['users'][$user['ID']]['Color'] = $_SESSION['aryUser']['color'];
+      $_SESSION['users'][$user['ID']]['Admin'] = $_SESSION['aryUser']['admin'];
+      $_SESSION['users'][$user['ID']]['Email'] = $_SESSION['aryUser']['email'];
       break;
     }
   }

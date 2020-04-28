@@ -45,7 +45,7 @@ $stepID = $_POST['StepID'] ?? '';
          case '4':
 ///NEED TO FIX!!
             if(password_verify($_POST['password'], $_SESSION['password'])) {
-              header("Location: " . WWW_ROOT . "/familySetup.php");
+              header("Location: " . WWW_ROOT . "/dashboard.php");
               exit;
             }else {  //Invalid Password
               $step = '5-invalid';

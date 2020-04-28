@@ -116,12 +116,17 @@ function editUser(userID) {
 
 function saveUser(userID) {
   //Create data to send to server.
+    let Admin = 0;
+    if (document.querySelector("#Hdn" + userID + " > th.admin.tooltip > input").checked == true) {
+      Admin = 1;
+    };
+    console.log(Admin);
     let data = {
       userID: userID,
       name: document.querySelector("#userID" + userID + " > th:nth-child(2) > input").value,
       initial: document.querySelector("#Hdn" + userID + " > th.initial > input").value,
       color: document.querySelector("#userID" + userID + "  > th:nth-child(3) > input").value,
-      admin: document.querySelector("#Hdn" + userID + " > th.admin > input").value,
+      admin: Admin,
       email: document.querySelector("#Hdn" + userID + " > th.email > input").value,
     };
   // console.log(data);

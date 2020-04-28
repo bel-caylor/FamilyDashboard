@@ -133,6 +133,7 @@ function sqlEditUser() {
   $sql .= "Name='" . sqlStrPrep($_SESSION['aryUser']['name']) . "', ";
   $sql .= "Initial='" . sqlStrPrep($_SESSION['aryUser']['initial']) . "', ";
   $sql .= "Color='" . sqlStrPrep($_SESSION['aryUser']['color']) . "', ";
+  $sql .= "Admin='" . sqlStrPrep($_SESSION['aryUser']['admin']) . "', ";
   $sql .= "Email='" . sqlStrPrep($_SESSION['aryUser']['email']) . "' ";
   $sql .= "WHERE ID='" . sqlStrPrep($_SESSION['aryUser']['id']) . "' ";
   $sql .= "LIMIT 1";

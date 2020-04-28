@@ -30,7 +30,7 @@
               <th class="initial tooltip"><span class="tooltiptext">Unique Initial</span>
                 <input type="text" size="1" class="trans" value="<?php echo $Users[$User]['Initial'] ?>"></th>
               <th colspan="1" class="admin tooltip"><span class="tooltiptext">Administrator</span>
-                <input type="checkbox" size="1" class="trans" value="<?php echo $Users[$User]['Admin'] ?>" "<?php if ($Users[$User]['Admin'] == 1) {echo "checked";} ?>"></th>
+                <input type="checkbox" size="1" class="trans" <?php if ($Users[$User]['Admin'] == 1) {echo "checked";} ?>></th>
             </tr>
     <?php } ?>
   <!-- </div> -->
