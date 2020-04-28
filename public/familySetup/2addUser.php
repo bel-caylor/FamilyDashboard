@@ -41,6 +41,11 @@
               'Admin' => $_SESSION['aryUser']['admin'],
               'Email' => $_SESSION['aryUser']['email'])
             );
+          //Main user.
+          if (count($_SESSION['users']) == 1) {
+            $_SESSION['currentName'] = $_SESSION['aryUser']['name'];
+          }
+
           //Reset form fields.
           $_SESSION['aryUser'] = [];
 

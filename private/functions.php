@@ -1,6 +1,12 @@
 <?php require_once('initialize.php'); ?>
 <?php
 
+//Prepare Strings for sql statements.
+function sqlStrPrep($string) {
+    global $db;
+    return mysqli_real_escape_string($db, $string);
+}
+
 function printValue($val) {
   if (is_array($_SESSION[$val])) {
     if ($_SESSION[$val] == []) {

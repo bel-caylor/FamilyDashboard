@@ -38,7 +38,7 @@
 
 function updateUsersArray($userID) {
   foreach ($_SESSION['users'] as $user) {
-    if ($user[ID] == $_SESSION['aryUser']['id']) {
+    if ($user['ID'] == $_SESSION['aryUser']['id']) {
       $user['Name'] = $_SESSION['aryUser']['name'];
       $user['Initial'] = $_SESSION['aryUser']['initial'];
       $user['Color'] = $_SESSION['aryUser']['color'];

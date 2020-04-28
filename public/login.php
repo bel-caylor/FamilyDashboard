@@ -11,6 +11,7 @@ $stepID = $_POST['StepID'] ?? '';
             $results = sqlSelect("family-members", "ID", "ASC", "Email", $_SESSION['email']);
           //No DATA
             if ($results == 'No data returned.') {
+              $_SESSION['admin'] = 1;
               $step = '2-createFamily';
               break;}
           //Set $_SESSION VALUES
@@ -43,7 +44,7 @@ $stepID = $_POST['StepID'] ?? '';
            break;
          case '4':
 ///NEED TO FIX!!
-            if(password_verify($_POST['password'], $_SESSION['password']) == 0) {
+            if(password_verify($_POST['password'], $_SESSION['password'])) {
               header("Location: " . WWW_ROOT . "/familySetup.php");
               exit;
             }else {  //Invalid Password
@@ -60,7 +61,7 @@ $stepID = $_POST['StepID'] ?? '';
 ?>
 <?php include(SHARED_PATH . '/header.php') ?>
 <body>
-  <header class="section">
+  <header>
     Family Dashboard LOGIN
   </header>
   <main>
@@ -74,7 +75,7 @@ $stepID = $_POST['StepID'] ?? '';
 
   <!-- CREATE FAMILY -->
     <div class="status-message" <?php if ($stepID != 2) {echo " hidden";} ?>>
-      <p>E-mail doesn't exist.  Do you want to create a NEW Family?</p>
+      <p>E-mail doesn't exist.<br>Do you want to create a NEW Family?</p>
       <p><a href="<?php echo WWW_ROOT ?>/familySetup.php">Create Family</a></p>
     </div>
 
@@ -116,8 +117,7 @@ $stepID = $_POST['StepID'] ?? '';
 
     <!-- CREATE FAMILY -->
       <div class="form status-message" <?php if ($stepID != 5) {echo " hidden";} ?>>
-        <p>Invalid Password</p>
-        <p><a href="<?php echo WWW_ROOT ?>/familySetup.php">Create Family</a></p>
+        <p>Login Failed</p>
       </div>
 
   </main>

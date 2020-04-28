@@ -126,21 +126,28 @@ tr:nth-of-child(even) {
 
 body {
   margin: 2px;
-  font-color: red; }
+  font-color: red;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto; }
 
 header {
-  position: fixed;
   z-index: 1000;
   background-color: white;
-  width: 100%;
+  width: 97%;
   top: 0;
   text-align: right;
-  right: 0;
+  right: 5px;
   margin: 0 10px 10px 10px;
   padding-bottom: 5px;
+  padding-right: 10px;
   border-width: 0 0 1px 0;
   border-color: black;
-  border-style: groove; }
+  border-style: groove;
+  left: 0; }
+
+main {
+  margin-top: 30px; }
 
 h2 {
   margin: 5px 5px 1px 5px; }
@@ -242,8 +249,7 @@ button:hover {
   color: red;
   font-weight: bold;
   text-align: left;
-  margin-block-start: 3px;
-  margin-block-end: 3px; }
+  margin: 10px; }
 
 .arrowUp {
   transform: rotate(180deg); }

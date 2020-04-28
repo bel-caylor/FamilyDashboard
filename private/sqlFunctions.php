@@ -2,21 +2,20 @@
 
 function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValue = '') {
   $errors = array();
-  $sql = "SELECT * FROM `" . $table . "` ";
+  $sql = "SELECT * FROM `" . sqlStrPrep($table) . "` ";
   if ($filter != 'NONE') {
-    $sql .= "WHERE " . $filter . "=\"" . $filterValue . "\" ";
+    $sql .= "WHERE " . sqlStrPrep($filter) . "=\"" . sqlStrPrep($filterValue) . "\" ";
   };
-  $sql .= "ORDER BY " . $orderBy . " " . $ord . " ";
+  $sql .= "ORDER BY " . sqlStrPrep($orderBy) . " " . sqlStrPrep($ord) . " ";
   // echo $sql;
   $results = query_db($sql);
   // echo "<pre>";
   // print_r($results);
   // echo '</pre>';
-  if ($results !== "No data") {
-    return query_db($sql);
-  }else {
-    // array_push($errors,"Passwords DON'T match.");}
+  if (mysqli_num_rows($results) === 0) {
     return "No data returned.";
+  }else {
+    return query_db($sql);
   }
 }
 

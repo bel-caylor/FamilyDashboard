@@ -1,7 +1,7 @@
 <?php require_once('../private/initialize.php'); ?>
 <?php
   //Check permissions.
-  if ($_SESSION['admin'] == 0) {
+  if ($_SESSION['step'] > 1 AND $_SESSION['admin'] == 0) {
     header("Location: " . WWW_ROOT . "/dashboard.php");
   }
 
@@ -25,11 +25,11 @@
 
 <body onload="onLoad()">
   <header>
-    <?php echo $header . '<br>';?>
+    <?php echo $header;?>
   </header>
 
   <main>
-      <br><br><br>
+      <!-- <br> -->
 <!-- Step 1 - Create/Edit Family  -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
@@ -64,15 +64,15 @@
       </button>
     </div>
 
-    <!-- CREATE Users Form -->
+    <!-- ADD Users Form -->
     <?php  //Form Values
       $name = $_SESSION['aryUser']['name'] ?? '';
       $initial = $_SESSION['aryUser']['initial'] ?? '';
       $color = $_SESSION['aryUser']['color'] ?? '';
-      $email = $_SESSION['aryUser']['email'] ?? '';
+      $email = $_SESSION['aryUser']['email'] ?? $_SESSION['email'] ?? '';
       $admin = $_SESSION['aryUser']['admin'] ?? '';
      ?>
-    <div id="Step2" class="form"<?php if ($_SESSION['step'] > 3) {echo " hidden";}?>>
+    <div id="Step2" class="form <?php if ($_SESSION['step'] > 4 OR $_SESSION['step'] < 2) {echo " hidden";}?>">
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -82,7 +82,7 @@
           <label class="tooltip" for="color"><span class="tooltiptext">Unique color<br>for reporting.</span>Color:
           <input type="color" id="color" name="color" value="<?php echo setValue($color, "#337AFF"); ?>"></label>
           <label class="tooltip" for="admin"><span class="tooltiptext">Able to create/assign<br>& grade tasks.</span> &nbsp;&nbsp;&nbsp;&nbsp;Admin:
-          <input type="checkbox" id="admin" name="admin" value="<?php echo setValue($admin, "1"); ?>"></label><br>
+          <input type="checkbox" id="admin" name="admin" value="<?php echo setValue($admin, "1"); ?>" checked></label><br>
           <label class="tooltip" for="email"><span class="tooltiptext">Email will be<br>used for login.</span>Email:  </label>
           <input type="text" id="email" name="email" placeholder="Email Address" value="<?php echo $email; ?>"maxlength="255" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter valide email." required><br>
           <div id="pwds"<?php if ($_SESSION['currentUserID'] !== '') {echo " hidden";}?>>
@@ -108,7 +108,7 @@
       <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
     </div>
 
-    <div id="Step3" class="<?php if ($_SESSION['step'] > 3) {echo " hidden";}?>" >
+    <div id="Step3" class="<?php if ($_SESSION['step'] > 4) {echo " hidden";}?>" >
       <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
 
@@ -142,7 +142,7 @@
       </button>
     </div>
 
-    <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+    <div id="editTasks" class="<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>" >
       <div id="assigedChart">
         <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
       </div>
@@ -157,7 +157,7 @@
       </button>
     </div>
 
-    <div id="createTasks" class="<?php if ($_SESSION['step'] < 4) {echo " hidden";}?>" >
+    <div id="createTasks" class="<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>" >
       <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
