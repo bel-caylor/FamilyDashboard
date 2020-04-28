@@ -14,7 +14,7 @@
   $_SESSION['userID'] = $_SESSION['userID'] ?? '';
   $_SESSION['currentUserID'] = $_SESSION['currentUserID'] ?? '';
   $_SESSION['currentName'] = $_SESSION['currentName'] ?? '';
-  $_SESSION['admin'] = 0;
+  $_SESSION['admin'] = $_SESSION['admin'] ?? 0;
   $_SESSION['step2Msgs'] = $_SESSION['step2Msgs'] ?? array();
   $_SESSION['users'] = $_SESSION['users'] ?? [];
   $_SESSION['user'] = $_SESSION['user'] ?? [];

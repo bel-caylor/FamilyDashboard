@@ -12,11 +12,17 @@ function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValu
   // echo "<pre>";
   // print_r($results);
   // echo '</pre>';
-  if (mysqli_num_rows($results) === 0) {
-    return "No data returned.";
-  }else {
+  // echo $results;
+  if ($results) {
     return query_db($sql);
+  }else {
+    return "No data returned.";
   }
+  // if (mysqli_num_rows($results) === 0) {
+  //   return "No data returned.";
+  // }else {
+  //   return query_db($sql);
+  // }
 }
 
 function sqlCategories($familyID) {
@@ -53,8 +59,8 @@ function sqlCreateFamily($familyName, $postalCode) {
   $sql = "INSERT INTO family ";
   $sql .= "(Family, Postal_Code) ";
   $sql .= "VALUES (";
-  $sql .= "'" . $familyName . "',";
-  $sql .= "'" . $postalCode . "'";
+  $sql .= "'" . sqlStrPrep($familyName) . "',";
+  $sql .= "'" . sqlStrPrep($postalCode) . "'";
   // $sql .= "'" . $familyID . "'";
   $sql .= ")";
   $result = insert_db($sql);
@@ -71,9 +77,9 @@ function sqlEditFamily($familyName, $postalCode, $familyID) {
   if (!empty($errors)) {return $errors;}
 
   $sql = "UPDATE family SET ";
-  $sql .= "Family='" . $familyName . "', ";
-  $sql .= "Postal_Code='" . $postalCode . "' ";
-  $sql .= "WHERE ID='" . $familyID . "' ";
+  $sql .= "Family='" . sqlStrPrep($familyName) . "', ";
+  $sql .= "Postal_Code='" . sqlStrPrep($postalCode) . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($familyID) . "' ";
   $sql .= "LIMIT 1";
   $result = edit_db($sql);
   if ($result == "update succeeded") {
@@ -99,16 +105,23 @@ function sqlAddUser() {
   $sql = "INSERT INTO `family-members` ";
   $sql .= "(Family_ID, Name, Initial, Color, Admin, Email, hashed_password) ";
   $sql .= "VALUES (";
-  $sql .= "'" . $_SESSION['familyID'] ."', ";
-  $sql .= "'" . $_SESSION['aryUser']['name'] ."', ";
-  $sql .= "'" . $_SESSION['aryUser']['initial'] ."', ";
-  $sql .= "'" . $_SESSION['aryUser']['color'] ."', ";
-  $sql .= "'" . $_SESSION['aryUser']['admin'] ."', ";
-  $sql .= "'" . $_SESSION['aryUser']['email'] ."', ";
-  $sql .= "'" . password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT) ."'";
+  $sql .= "'" . sqlStrPrep($_SESSION['familyID']) ."', ";
+  $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['name']) ."', ";
+  $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['initial']) ."', ";
+  $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['color']) ."', ";
+  $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['admin']) ."', ";
+  $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['email']) ."', ";
+  // $sql .= "'" . password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT) ."'";
+  if ($_SESSION['password'] == '') {
+    $sql .= "'" . sqlStrPrep(password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT)) ."'";
+  }else {
+    $sql .= "'" . $_SESSION['password'] ."'";
+  }
   $sql .= ")";
+  // echo $sql;
   //return ID of new family
   $result = insert_db($sql);
+  // echo $result;
   return $result;
 }
 
@@ -117,11 +130,11 @@ function sqlEditUser() {
   // if (!empty($errors)) {return $errors;}
 
   $sql = "UPDATE `family-members` SET ";
-  $sql .= "Name='" . $_SESSION['aryUser']['name'] . "', ";
-  $sql .= "Initial='" . $_SESSION['aryUser']['initial'] . "', ";
-  $sql .= "Color='" . $_SESSION['aryUser']['color'] . "', ";
-  $sql .= "Email='" . $_SESSION['aryUser']['email'] . "' ";
-  $sql .= "WHERE ID='" . $_SESSION['aryUser']['id'] . "' ";
+  $sql .= "Name='" . sqlStrPrep($_SESSION['aryUser']['name']) . "', ";
+  $sql .= "Initial='" . sqlStrPrep($_SESSION['aryUser']['initial']) . "', ";
+  $sql .= "Color='" . sqlStrPrep($_SESSION['aryUser']['color']) . "', ";
+  $sql .= "Email='" . sqlStrPrep($_SESSION['aryUser']['email']) . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($_SESSION['aryUser']['id']) . "' ";
   $sql .= "LIMIT 1";
   // echo $sql;
   $result = edit_db($sql);
@@ -133,7 +146,7 @@ function sqlEditUser() {
 
 function sqlDeleteUser($userID) {
   $sql = "DELETE FROM `family-members` ";
-  $sql .= "WHERE ID='" . $userID . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($userID) . "' ";
   $sql .= "LIMIT 1";
   $result = edit_db($sql);
   if ($result == "update succeeded") {
@@ -184,9 +197,9 @@ function sqlAddCategory($Category = 0, $Name, $Type = 1) {
   $sql .= "(Family_ID, Category_ID, Type_ID, Name) ";
   $sql .= "VALUES (";
   $sql .= "'" . $_SESSION['familyID'] ."', ";
-  $sql .= "'" . $Category ."', ";
-  $sql .= "'" . $Type ."', ";
-  $sql .= "'" . $Name ."' ";
+  $sql .= "'" . sqlStrPrep($Category) ."', ";
+  $sql .= "'" . sqlStrPrep($Type) ."', ";
+  $sql .= "'" . sqlStrPrep($Name) ."' ";
   $sql .= ")";
   //return ID of new family
   // echo $sql;
@@ -197,8 +210,8 @@ function sqlAddCategory($Category = 0, $Name, $Type = 1) {
 function sqlCategoryDubplicate($Category = 0, $Name) {
   $sql = "SELECT * FROM `category_names` ";
   $sql .= "WHERE Family_ID = " . $_SESSION['familyID'] . " AND ";
-  $sql .= "Category_ID = " . $Category . " AND ";
-  $sql .= "Name = '" . $Name . "' ";
+  $sql .= "Category_ID = " . sqlStrPrep($Category) . " AND ";
+  $sql .= "Name = '" . sqlStrPrep($Name) . "' ";
   // echo $sql . "<br>";
   $result = query_db($sql);
   // print_r($result);
@@ -213,14 +226,14 @@ function sqlAddTask($input) {
   $sql = "INSERT INTO `tasks` ";
   $sql .= "(Family_ID, Cat_Name_ID, Task, Assigned_User_ID, Freq_ID, Start, Time, Note) ";
   $sql .= "VALUES (";
-  $sql .= "'" . $input['familyID'] ."', ";
-  $sql .= "'" . $input['catNameID'] ."', ";
-  $sql .= "'" . $input['task'] ."', ";
-  $sql .= "'" . $input['userID'] ."', ";
-  $sql .= "'" . $input['freqID'] ."', ";
-  $sql .= "'" . $input['start'] ."', ";
-  $sql .= "'" . $input['time'] ."', ";
-  $sql .= "'" . $input['note'] ."' ";
+  $sql .= "'" . sqlStrPrep($input['familyID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['catNameID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['task']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['userID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['freqID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['start']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['time']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['note']) ."' ";
   $sql .= ")";
   // echo $sql;
   insert_db($sql);
@@ -252,13 +265,13 @@ function sqlAddDefaultTasks($category, $catNameID) {
 
 function sqlEditTask($input) {
   $sql = "UPDATE `tasks` SET ";
-  $sql .= "Task='" . $input['task'] . "', ";
-  $sql .= "Assigned_User_ID='" . $input['user'] . "', ";
-  $sql .= "Freq_ID='" . $input['freq'] . "', ";
-  $sql .= "Start='" . $input['start'] . "', ";
-  $sql .= "Time='" . $input['time'] . "', ";
-  $sql .= "Note='" . $input['note'] . "' ";
-  $sql .= "WHERE ID='" . $input['taskID'] . "' ";
+  $sql .= "Task='" . sqlStrPrep($input['task']) . "', ";
+  $sql .= "Assigned_User_ID='" . sqlStrPrep($input['user']) . "', ";
+  $sql .= "Freq_ID='" . sqlStrPrep($input['freq']) . "', ";
+  $sql .= "Start='" . sqlStrPrep($input['start']) . "', ";
+  $sql .= "Time='" . sqlStrPrep($input['time']) . "', ";
+  $sql .= "Note='" . sqlStrPrep($input['note']) . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($input['taskID']) . "' ";
   $sql .= "LIMIT 1";
   // echo $sql;
   $result = edit_db($sql);
@@ -326,9 +339,9 @@ function sqlAddCompleteTask($input) {
   $sql = "INSERT INTO `task_log` ";
   $sql .= "(Tasks_ID, User_ID, Time) ";
   $sql .= "VALUES (";
-  $sql .= "'" . $input['taskID'] ."', ";
-  $sql .= "'" . $input['userID'] ."', ";
-  $sql .= "'" . $input['time'] ."' ";
+  $sql .= "'" . sqlStrPrep($input['taskID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['userID']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['time']) ."' ";
   $sql .= ")";
   // echo $sql . "<br>";
   $result = insert_db($sql);
@@ -396,9 +409,9 @@ function deleteCompleteTask($taskLogID) {
 
 function editCompleteTasks($input) {
   $sql = "UPDATE `task_log` SET ";
-  $sql .= "Time='" . $input['time'] . "', ";
-  $sql .= "Grade='" . $input['grade'] . "', ";
-  $sql .= "Note='" . $input['note'] . "' ";
+  $sql .= "Time='" . sqlStrPrep($input['time']) . "', ";
+  $sql .= "Grade='" . sqlStrPrep($input['grade']) . "', ";
+  $sql .= "Note='" . sqlStrPrep($input['note']) . "' ";
   $sql .= "WHERE ID='" . $input['taskLogID'] . "' ";
   $sql .= "LIMIT 1";
   // echo $sql;
