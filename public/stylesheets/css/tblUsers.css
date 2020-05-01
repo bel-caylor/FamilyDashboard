@@ -1,0 +1,47 @@
+/* tblUsers container */
+.trans {
+  background: transparent;
+  border: none; }
+
+.edit {
+  background-color: #ffecf4; }
+
+.saved {
+  background-color: #e4fbe4; }
+
+#tblUsers button {
+  font-size: 20px;
+  font-weight: bold; }
+
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px; }
+  table input {
+    margin: 0;
+    text-align: center; }
+  table input[type=text] {
+    background: transparent;
+    border: none; }
+  table input[type=color] {
+    border-width: 0;
+    border-style: none;
+    width: 25px;
+    height: 25px;
+    padding: 0; }
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  margin: 0 auto 0 auto;
+  padding: 0; }
+
+tr:nth-of-child(odd) {
+  border: 1px solid #f3f3f3; }
+
+tr:nth-of-child(even) {
+  background-color: #f3f3f3;
+  border: 1px solid #dddddd; }
+
+/*# sourceMappingURL=tblUsers.css.map */
