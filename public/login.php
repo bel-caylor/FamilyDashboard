@@ -36,15 +36,15 @@ $stepID = $_POST['StepID'] ?? '';
 
          case '3':  //Select User
            $_SESSION['currentUserID'] = $_POST['User'];
-           $user = mysqli_fetch_assoc(sqlSelect("family-members", "ID", "ASC", "ID", $_SESSION['currentUserID']));
-           $_SESSION['currentName'] = $_SESSION['users'][$_POST['User']]['Name'];
-           $_SESSION['password'] = $_SESSION['users'][$_POST['User']]['hashed_password'];
-           $_SESSION['admin'] = $_SESSION['users'][$_POST['User']]['Admin'];
            $step = '4-password';
            break;
-         case '4':
-///NEED TO FIX!!
-            if(password_verify($_POST['password'], $_SESSION['password'])) {
+
+         case '4':  //Check password
+            $user = mysqli_fetch_assoc(sqlSelect("family-members", "ID", "ASC", "ID", $_SESSION['currentUserID']));
+            if(password_verify($_POST['password'], $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'])) {
+              $_SESSION['currentName'] = $_SESSION['users'][$_SESSION['currentUserID']]['Name'];
+              $_SESSION['password'] = $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'];
+              $_SESSION['admin'] = $_SESSION['users'][$_SESSION['currentUserID']]['Admin'];
               header("Location: " . WWW_ROOT . "/dashboard.php");
               exit;
             }else {  //Invalid Password

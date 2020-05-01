@@ -1,3 +1,6 @@
+<?php  if ($_SESSION['currentUserID'] === '') {
+  header("Location: " . WWW_ROOT . "/login.php");
+}?>
 
 <!-- Delete User Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>

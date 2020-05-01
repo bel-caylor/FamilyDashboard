@@ -1,5 +1,9 @@
 
 <?php
+  // Check for login
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
 $userSumAssign = sqlSumAssignTime();
 $aryAssignTotal = sqlSumTotalAssign();
 $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
