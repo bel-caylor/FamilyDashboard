@@ -1,6 +1,18 @@
 <?php require_once('../private/initialize.php'); ?>
 
-<?php ?>
+<!-- Check for login -->
+<?php
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
+
+  //Create users array
+  $_SESSION['users'] = [];
+  $results = sqlSelect("family-members", "ID", "ASC", "Family_ID", $_SESSION['familyID']);
+  while($row = mysqli_fetch_assoc($results)) {
+    $_SESSION['users'][$row['ID']] = $row;
+  };
+?>
 
 <?php include(SHARED_PATH . '/header.php') ?>
 <body>
@@ -11,11 +23,11 @@
   <main>
     <br>
 <!-- Challenge Report Section -->
-    <div class="section inline">
+    <!-- <div class="section inline">
       <button onclick="clickExpandBtn('reports')">
         <h2 id="reports" class="inline">&#9660; Challenge Reports</h2>
       </button>
-    </div>
+    </div> -->
 
 <!-- Complete Task Section -->
     <div class="section inline">

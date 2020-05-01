@@ -1,5 +1,9 @@
 
 <?php
+  // Check for login
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
 $userSumComplete = sqlSumCompleteByUser();
 $aryTotalComplete = sqlSumTotalComplete();
 $completeTotal = mysqli_fetch_assoc($aryTotalComplete)['SUM(Time)']

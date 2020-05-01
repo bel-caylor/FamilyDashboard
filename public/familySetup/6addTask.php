@@ -1,4 +1,7 @@
 <?php require_once('../../private/initialize.php');
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
   $userID = '';
   $duplicate = 0;
   $_SESSION['step2Msgs'] = array();

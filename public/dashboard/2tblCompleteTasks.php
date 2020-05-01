@@ -1,7 +1,10 @@
 <?php require_once('../private/shared/optionUsers.php'); ?>
 <?php require_once('../private/shared/optionsFreq.php'); ?>
 <?php
-
+  // Check for login
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
 $date = date_create();
 $date = date_format($date,"Y-m-d H:i:s");
 

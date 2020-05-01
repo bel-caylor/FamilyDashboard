@@ -1,6 +1,8 @@
 <?php require_once('../../private/initialize.php');
-  // $familyID = $_POST['familyID'] ?? $_SESSION['familyID'] ?? '';
-  // $step = $_GET['step'] ?? $_POST['step'] ?? $_SESSION['step'] ?? '';
+  // Check for login
+  if ($_SESSION['currentUserID'] === '') {
+    header("Location: " . WWW_ROOT . "/login.php");
+  }
   $_SESSION['step2Msgs'] = array();
   $errors = array();
 
