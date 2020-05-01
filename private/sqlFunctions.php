@@ -283,6 +283,20 @@ function sqlEditTask($input) {
   }
 }
 
+function sqlAssignTask($input) {
+  $sql = "UPDATE `tasks` SET ";
+  $sql .= "Assigned_User_ID='" . sqlStrPrep($input['user']) . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($input['taskID']) . "' ";
+  $sql .= "LIMIT 1";
+  // echo $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["edit failed"];
+  }
+}
+
 function sqlDeleteTask($taskID) {
   $sql = "DELETE FROM `tasks` ";
   $sql .= "WHERE ID='" . $taskID . "' ";
@@ -388,7 +402,7 @@ function sqlUpdateNextStart($input) {
     $sql .= "LIMIT 1";
     // echo $sql;
     $result = edit_db($sql);
-    echo $result;
+    // echo $result;
     if ($result == "update succeeded") {
       return $newStart;
     }else {
@@ -451,6 +465,24 @@ function sqlSumTotalAssign() {
   $sql .= "AND Assigned_User_ID != 0 ";
   $sql .= "ORDER BY SUM(Time) DESC";
   // echo $sql;
+  return query_db($sql);
+}
+
+function sqlSumCompleteByUser($numDays = 7) {
+  $sql = "SELECT User_ID, `family-members`.Name, `family-members`.Color, `family-members`.Initial, SUM(Time) FROM `task_log` ";
+  $sql .= "JOIN `family-members` ON task_log.User_ID = `family-members`.ID ";
+  $sql .= "WHERE task_log.Family_ID = " . $_SESSION['familyID'] . " ";
+  $sql .= "GROUP BY User_ID ";
+  $sql .= "ORDER BY SUM(Time) DESC";
+  // echo $sql . "<br>";
+  return query_db($sql);
+}
+
+function sqlSumTotalComplete($numDays = 7) {
+  $sql = "SELECT SUM(Time) FROM `task_log` ";
+  $sql .= "WHERE Family_ID = '" . $_SESSION['familyID'] . "' ";
+  $sql .= "ORDER BY SUM(Time) DESC";
+  // echo $sql . "<br>";
   return query_db($sql);
 }
 

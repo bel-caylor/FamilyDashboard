@@ -398,3 +398,29 @@ function changeTaskTime($taskID) {
       console.log(data);
         }
 }
+
+function assignTask($taskID) {
+  //Create data to send to server.
+    let data = {
+      taskID: taskID,
+      user: document.querySelector("#user" + taskID).value,
+      task: document.querySelector("#task" + taskID + " > th.task > input").value,
+    };
+  console.log(data);
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/dashboard/4assignTask.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          // document.getElementById('step5Msgs').innerHTML = status;
+        })
+
+    if (status = "Update Succeeded.") {
+
+      location.reload();
+}
