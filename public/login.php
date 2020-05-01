@@ -10,10 +10,12 @@ $stepID = $_POST['StepID'] ?? '';
          case '1':  //Enter Email
             $results = sqlSelect("family-members", "ID", "ASC", "Email", $_SESSION['email']);
           //No DATA
-            if ($results == 'No data returned.') {
+            if (mysqli_num_rows($results) === 0) {
               $_SESSION['admin'] = 1;
-              $step = '2-createFamily';
-              break;}
+              // $step = '2-createFamily';
+              header("Location: " . WWW_ROOT . "/familySetup.php");
+              break;
+            }
           //Set $_SESSION VALUES
             //Create users array
             while($row = mysqli_fetch_assoc($results)) {
