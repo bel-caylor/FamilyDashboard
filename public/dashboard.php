@@ -23,29 +23,44 @@
         <h2 id="reports" class="inline">&#9660; Complete Tasks</h2>
       </button>
     </div>
-    <?php include(PUBLIC_PATH . '\dashboard\2tblCompleteTasks.php') ?>
-
-
-<!-- Admin Grade Task Section -->
-    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
-      <button onclick="clickExpandBtn('gradeTasks')">
-        <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
-      </button>
+    <div id="completeTasks" class="">
+      <div id="assigedChart">
+        <?php include(PUBLIC_PATH . '/dashboard/2sumComplete.php') ?>
+      </div>
+      <?php include(PUBLIC_PATH . '\dashboard\2tblCompleteTasks.php') ?>
     </div>
 
-<!-- Admin Assign Task Section -->
-    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
-      <button onclick="clickExpandBtn('assignTasks')">
-        <h2 id="reports" class="inline">&#9660; Assign Tasks</h2>
-      </button>
-    </div>
+<!-- Admintration Access -->
+<?php if ($_SESSION['admin'] == 1) {?>
+  <!-- Admin Grade Task Section -->
+      <!-- <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+        <button onclick="clickExpandBtn('gradeTasks')">
+          <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
+        </button>
+      </div> -->
 
-<!-- Go to familySetup -->
-    <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
-      <button onclick="window.location='familySetup.php'">
-        <h2 id="reports" class="inline">&#9660; Setup Tasks & Users</h2>
-      </button>
-    </div>
+  <!-- Admin Assign Task Section -->
+      <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+        <button onclick="clickExpandBtn('assignTasks')">
+          <h2 id="reports" class="inline">&#9660; Assign Tasks</h2>
+        </button>
+      </div>
+
+      <div id="assignTasks" class=" <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+        <div id="assigedChart">
+          <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
+        </div>
+        <?php include(PUBLIC_PATH . '\dashboard\4tblAssign.php') ?>
+      </div>
+
+  <!-- Go to familySetup -->
+      <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+        <button onclick="window.location='familySetup.php'">
+          <h2 id="reports" class="inline">&#9660; Setup Tasks & Users</h2>
+        </button>
+      </div>
+
+<?php } ?>
 
 </section>
 

@@ -39,7 +39,7 @@ $date = date_format($date,"Y-m-d H:i:s");
 
 <!-- House Tasks -->
     <tr>
-      <th colspan="4" class="category">House Tasks</th>
+      <th colspan="3" class="category">House Tasks</th>
     </tr>
   <?php
       $tasks = sqlHouseTasks($_SESSION['familyID'], $date);
@@ -49,7 +49,7 @@ $date = date_format($date,"Y-m-d H:i:s");
 
   <!-- Personal Tasks -->
     <tr>
-      <th colspan="4" class="category">Personal Tasks</th>
+      <th colspan="3" class="category">Personal Tasks</th>
     </tr>
   <?php
       $tasks = sqlPersonalTasks($_SESSION['currentUserID'], $date);
@@ -75,6 +75,6 @@ $date = date_format($date,"Y-m-d H:i:s");
     <!-- Time Spent -->
       <th><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
     <!-- Task -->
-      <th class="task"><input type="text" size="45" value="<?php echo $task?>"></th>
+      <th class="task"><input type="text" size="30" value="<?php echo $task?>"></th>
   </tr>
 <?php } ?>
