@@ -1,10 +1,5 @@
 <?php require_once('../../private/initialize.php');
 
-// Check for login
-  if ($_SESSION['currentUserID'] === '') {
-    header("Location: " . WWW_ROOT . "/login.php");
-  }
-
   // $expires = time() + 60*60*24*14; //cookie expires in 2 weeks
   $familyID = $_POST['familyID'] ?? $_SESSION['familyID'] ?? '';
   $family = $_GET['family'] ?? $_POST['family'] ?? $_SESSION['family'] ?? '';

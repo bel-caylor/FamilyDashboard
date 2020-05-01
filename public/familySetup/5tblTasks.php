@@ -1,10 +1,7 @@
 <?php require_once('../private/shared/optionUsers.php'); ?>
 <?php require_once('../private/shared/optionsFreq.php'); ?>
 <?php
-  // Check for login
-  if ($_SESSION['currentUserID'] === '') {
-    header("Location: " . WWW_ROOT . "/login.php");
-  }
+
   //Frequency query
     $freq = sqlSelect("frequency", "ID");
     while($row = mysqli_fetch_assoc($freq)) {

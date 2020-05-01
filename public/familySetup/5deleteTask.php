@@ -1,7 +1,5 @@
 <?php require_once('../../private/initialize.php');
-  if ($_SESSION['currentUserID'] === '') {
-    header("Location: " . WWW_ROOT . "/login.php");
-  }
+
   $taskID = $_GET['taskID'];
   $result = sqlDeleteTask($taskID);
   $_SESSION['step2Msgs'] = array();

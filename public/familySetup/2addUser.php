@@ -1,8 +1,5 @@
 <?php require_once('../../private/initialize.php');
-  // Check for login
-  if ($_SESSION['currentUserID'] === '') {
-    header("Location: " . WWW_ROOT . "/login.php");
-  }
+
   $_SESSION['step2Msgs'] = array();
   $errors = array();
 

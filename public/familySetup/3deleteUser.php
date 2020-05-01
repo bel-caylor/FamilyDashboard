@@ -1,8 +1,5 @@
 <?php require_once('../../private/initialize.php');
-  // Check for login
-  if ($_SESSION['currentUserID'] === '') {
-    header("Location: " . WWW_ROOT . "/login.php");
-  }
+
   $ID = $_GET['id'];
   $row = $_GET['row'];
   $result = sqlDeleteUser($ID);
