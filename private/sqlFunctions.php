@@ -101,7 +101,7 @@ function validateFamily($familyName) {
 function sqlAddUser() {
   // $errors = validateUser();
   // if (count($errors) > 0) {return $errors;}
-
+  $password = sqlStrPrep(password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT));
   $sql = "INSERT INTO `family-members` ";
   $sql .= "(Family_ID, Name, Initial, Color, Admin, Email, hashed_password) ";
   $sql .= "VALUES (";
@@ -112,10 +112,12 @@ function sqlAddUser() {
   $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['admin']) ."', ";
   $sql .= "'" . sqlStrPrep($_SESSION['aryUser']['email']) ."', ";
   // $sql .= "'" . password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT) ."'";
-  if ($_SESSION['password'] == '') {
-    $sql .= "'" . sqlStrPrep(password_hash($_SESSION['aryUser']['password1'], PASSWORD_DEFAULT)) ."'";
+  echo $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'];
+  if ($_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'] != '') {
+    $sql .= "'" . $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'] ."'";
   }else {
-    $sql .= "'" . $_SESSION['password'] ."'";
+    $sql .= "'" . $password ."'";
+    $_SESSION['password'] = $password;
   }
   $sql .= ")";
   // echo $sql;

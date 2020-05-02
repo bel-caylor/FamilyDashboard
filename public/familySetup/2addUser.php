@@ -10,8 +10,8 @@
         'color' => $_POST['color'],
         'admin' => isset($_POST['admin']) ?? '',
         'email' => $_POST['email'],
-        'password1' => $_POST['password1'],
-        'password2' => $_POST['password2']
+        'password1' => $_POST['password1'] ?? $_SESSION['password'],
+        'password2' => $_POST['password2'] ?? $_SESSION['password']
       );
 
 
@@ -29,20 +29,21 @@
         }else {  //UPDATE PASSED
 
           //Add User to session['Users']
-            $_SESSION['currentUserID'] = $result;
-            array_push($_SESSION['step2Msgs'],"User Added");
-            array_push($_SESSION['users'],
-              array(
-              'ID' => $result,
-              'Name' => $_SESSION['aryUser']['name'],
-              'Initial' => $_SESSION['aryUser']['initial'],
-              'Color' => $_SESSION['aryUser']['color'],
-              'Admin' => $_SESSION['aryUser']['admin'],
-              'Email' => $_SESSION['aryUser']['email'])
-            );
+            // $_SESSION['currentUserID'] = $result;
+            // array_push($_SESSION['step2Msgs'],"User Added");
+            // array_push($_SESSION['users'],
+            //   array(
+            //   'ID' => $result,
+            //   'Name' => $_SESSION['aryUser']['name'],
+            //   'Initial' => $_SESSION['aryUser']['initial'],
+            //   'Color' => $_SESSION['aryUser']['color'],
+            //   'Admin' => $_SESSION['aryUser']['admin'],
+            //   'Email' => $_SESSION['aryUser']['email'])
+            // );
           //Main user.
-          if (count($_SESSION['users']) == 1) {
+          if (count($_SESSION['users']) == 0) {
             $_SESSION['currentName'] = $_SESSION['aryUser']['name'];
+            $_SESSION['currentUserID'] = $result;
           }
 
           //Reset form fields.
