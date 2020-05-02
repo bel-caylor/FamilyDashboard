@@ -196,7 +196,7 @@
         <!-- Frequency -->
               <tr>
                 <th class="formLabel">Frequency:</th>
-                <th class="formInput"><?php echo optionFreq($task['Freq_ID'], $task['Task_ID']); ?></th>
+                <th class="formInput"><?php echo optionFreq(); ?></th>
               </tr>
         <!-- Start -->
               <tr class="formInput">
