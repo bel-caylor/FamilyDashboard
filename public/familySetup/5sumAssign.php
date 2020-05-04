@@ -16,7 +16,10 @@ $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
           display: inline-block;
           text-align: center;
           padding: 0;
-          margin-right: -4px;
+          font-weight: bold;
+          color: white;
+          padding: 3px 0 3px 0;
+          margin-right: -5px;
           /* font-weight: bold; */
         }
 
@@ -27,7 +30,7 @@ $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
           while($row = mysqli_fetch_assoc($userSumAssign)) {
             $html = ".user" . $row['Assigned_User_ID'] . " {";
             $html .= "background-color: " . $row['Color'] . ";";
-            $percentTime = (int)((($row['SUM(Time)'] / $assignTotal) * 100)-1);
+            $percentTime = (int)((($row['SUM(Time)'] / $assignTotal) * 100)-2);
             $html .= "width: " . $percentTime . "%;";
             $html .= "}  ";
             echo $html;
@@ -47,7 +50,7 @@ $assignTotal = mysqli_fetch_assoc($aryAssignTotal)['SUM(Time)']
         while($row = mysqli_fetch_assoc($userSumAssign)) {?>
           <div class="user user<?php echo $row['Assigned_User_ID'] ?>">
             <?php $percentTime = (int)((($row['SUM(Time)'] / $assignTotal) * 100)-1); ?>
-            <?php echo $row['Initial'] . "-" . $percentTime . "%" ?>
+            <?php echo $row['Initial'] . "<br>" . $percentTime . "%" ?>
           </div>
 
       <?php }?>
