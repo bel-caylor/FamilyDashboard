@@ -21,7 +21,7 @@
   </header>
 
   <main>
-    <br>
+    <br><br><br>
 <!-- Challenge Report Section -->
     <!-- <div class="section inline">
       <button onclick="clickExpandBtn('reports')">
@@ -31,7 +31,7 @@
 
 <!-- Complete Task Section -->
     <div class="section inline">
-      <button onclick="clickExpandBtn('completeTasks')">
+      <button onclick="clickDashboardSection('completeTasks')">
         <h2 id="reports" class="inline">&#9660; Complete Tasks</h2>
       </button>
     </div>
@@ -45,20 +45,20 @@
 <!-- Admintration Access -->
 <?php if ($_SESSION['admin'] == 1) {?>
   <!-- Admin Grade Task Section -->
-      <!-- <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+      <!-- <div class="section inline">
         <button onclick="clickExpandBtn('gradeTasks')">
           <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
         </button>
       </div> -->
 
   <!-- Admin Assign Task Section -->
-      <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
-        <button onclick="clickExpandBtn('assignTasks')">
+      <div class="section inline">
+        <button onclick="clickDashboardSection('assignTasks')">
           <h2 id="reports" class="inline">&#9660; Assign Tasks</h2>
         </button>
       </div>
 
-      <div id="assignTasks" class=" <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+      <div id="assignTasks" class="hidden">
         <div id="assigedChart">
           <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
         </div>

@@ -227,11 +227,12 @@ function sqlCategoryDubplicate($Category = 0, $Name) {
 function sqlAddTask($input) {
   // $date = date(DATE_ATOM, $input['start']);
   $sql = "INSERT INTO `tasks` ";
-  $sql .= "(Family_ID, Cat_Name_ID, Task, Assigned_User_ID, Freq_ID, Start, Time, Note) ";
+  $sql .= "(Family_ID, Cat_Name_ID, Task, User_ID, Assigned_User_ID, Freq_ID, Start, Time, Note) ";
   $sql .= "VALUES (";
   $sql .= "'" . sqlStrPrep($input['familyID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['catNameID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['task']) ."', ";
+  $sql .= "'" . sqlStrPrep($input['userID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['userID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['freqID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['start']) ."', ";
@@ -268,6 +269,8 @@ function sqlAddDefaultTasks($category, $catNameID) {
 
 function sqlEditTask($input) {
   $sql = "UPDATE `tasks` SET ";
+  $sql .= "Task='" . sqlStrPrep($input['task']) . "', ";
+  $sql .= "User_ID='" . sqlStrPrep($input['user']) . "', ";
   $sql .= "Task='" . sqlStrPrep($input['task']) . "', ";
   $sql .= "Assigned_User_ID='" . sqlStrPrep($input['user']) . "', ";
   $sql .= "Freq_ID='" . sqlStrPrep($input['freq']) . "', ";
@@ -354,8 +357,9 @@ function sqlPersonalTasks($userID, $date) {
 
 function sqlAddCompleteTask($input) {
   $sql = "INSERT INTO `task_log` ";
-  $sql .= "(Tasks_ID, User_ID, Time) ";
+  $sql .= "(Family_ID, Tasks_ID, User_ID, Time) ";
   $sql .= "VALUES (";
+  $sql .= "'" . $_SESSION['familyID'] ."', ";
   $sql .= "'" . sqlStrPrep($input['taskID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['userID']) ."', ";
   $sql .= "'" . sqlStrPrep($input['time']) ."' ";
@@ -375,6 +379,7 @@ function sqlUpdateNextStart($input) {
     $result = query_db($sql);
     $row = mysqli_fetch_assoc($result);
     $freq = $row['Hours_Between'];
+    $UserID = $row['User_ID'];
     $hrOffset = $freq - $input['tzOffset']/60 ;
     // echo $sql . "<br>";
     // echo $freq . "<br>";
@@ -399,7 +404,7 @@ function sqlUpdateNextStart($input) {
   //update start time.
     $sql = "UPDATE `tasks` SET ";
     $sql .= "Start='" . $newStart . "', ";
-    $sql .= "Assigned_User_ID = 0 ";
+    $sql .= "Assigned_User_ID = " . $UserID . " ";
     $sql .= "WHERE ID='" . $input['taskID'] . "' ";
     $sql .= "LIMIT 1";
     // echo $sql;

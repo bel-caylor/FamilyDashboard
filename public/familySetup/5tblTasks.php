@@ -19,6 +19,7 @@
 
 <!-- Delete Task Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>
+<p class="center">Use Unassigned dropdown for tasks that are ALWAYS assigned to that user.</p>
 
 <table id="tblTasks" class="table"<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>>
 
@@ -40,7 +41,7 @@
                 <!-- Task Row -->
                   <tr id="task<?php echo $task['Task_ID'] ?>">
                   <!-- Assigned -->
-                    <th colspan="1" class="assigned"><?php echo optionUsers($task['User_ID'], $task['Task_ID']); ?></th>
+                    <th colspan="1" class="assigned"><?php echo optionUsers($task['User_ID'], $task['Task_ID'], "saveTask"); ?></th>
                   <!-- Task -->
                     <th colspan="3" class="task"><input type="text" size="15" class="task trans" value="<?php echo $task['Task'] ?>" disabled></th>
                   <!-- Edit -->

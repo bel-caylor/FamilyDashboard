@@ -183,7 +183,12 @@
                 <th class="formLabel">Type:</th>
                 <th class="formInput"><?php include(PRIVATE_PATH . '/shared/optionsType.php') ?></th>
               </tr>
-        <!-- Category Name -->
+          <!-- UserID -->
+              <tr id="typeRow">
+                <th class="formLabel">Always Assigned to:</th>
+                <th class="formInput"><?php echo optionUsers(); ?></th>
+              </tr>
+          <!-- Category Name -->
               <tr id="newCat">
                 <th class="formLabel">Category Name:</th>
                 <th class="formInput"><input type="text" id="catName2" name="catName2" placeholder="description" maxlength="20" size="10" required></th>

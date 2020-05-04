@@ -22,6 +22,8 @@
     if ($duplicate == 0) {
       $catID = sqlAddCategory($_POST['formCategory'], $_POST['catName2'], $_POST['type']);
     }
+  }else {
+    $catID = $_POST['formCategory'];
   }
 
   //Add Room name to category-names.
