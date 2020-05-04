@@ -20,7 +20,7 @@
 <!-- Delete Task Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>
 
-<table id="tblTasks" class="table"<?php if ($_SESSION['step'] > 4) {echo " hidden";}?>>
+<table id="tblTasks" class="table">
 
   <?php $Users = $_SESSION['users'];?>
   <!-- Category Rows -->
@@ -40,7 +40,7 @@
                 <!-- Task Row -->
                   <tr id="task<?php echo $task['Task_ID'] ?>">
                   <!-- Assigned -->
-                    <th colspan="1" class="assigned" onchange="assignTask(<?php echo $task['Task_ID'] ?>)"><?php echo optionUsers($task['User_ID'], $task['Task_ID']); ?></th>
+                    <th colspan="1" class="assigned" onchange="assignTask(<?php echo $task['Task_ID'] ?>)"><?php echo optionUsers($task['User_ID'], $task['Task_ID'], "assignTask"); ?></th>
                   <!-- Task -->
                     <th colspan="3" class="task"><input type="text" size="15" class="task trans" value="<?php echo $task['Task'] ?>" disabled></th>
                   </tr>

@@ -10,8 +10,16 @@ function clickExpandBtn(section) {
   }
 }
 
-document.addEventListener('submit', e => {
+function clickDashboardSection(section) {
+  //Hide all sections.
+  document.getElementById("completeTasks").classList.add("hidden");
+  document.getElementById("assignTasks").classList.add("hidden");
+  //Unhide clicked section.
+  document.getElementById(section).classList.remove("hidden");
+}
 
+document.addEventListener('submit', e => {
+  console.log("test");
   // Store reference to form to make later code easier to read
   const form = e.target;
 
@@ -324,9 +332,11 @@ function changeCatName() {
   if (document.getElementById('formCategory').value == 0) {
     document.getElementById('typeRow').classList.remove('hidden');
     document.getElementById('newCat').classList.remove('hidden');
+    document.getElementById('catName2').required = true;
   }else {
     document.getElementById('typeRow').classList.add('hidden');
     document.getElementById('newCat').classList.add('hidden');
+    document.getElementById('catName2').required = false;
   }
 
 }
@@ -399,7 +409,7 @@ function changeTaskTime($taskID) {
         }
 }
 
-function assignTask($taskID) {
+function assignTask(taskID) {
   //Create data to send to server.
     let data = {
       taskID: taskID,
