@@ -343,7 +343,9 @@ function changeCatName() {
 }
 
 function onLoad() {
-  document.getElementById('start').valueAsDate = new Date();
+  if (document.getElementById('start') != null) {
+    document.getElementById('start').valueAsDate = new Date();
+  }
 }
 
 function toggleCompleteTask($taskID) {

@@ -64,6 +64,7 @@
       </form>
     </div>
 
+<?php if ($_SESSION['step']>1) { ?>
     <!-- Step 2 - Add Family Members -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step2')">
@@ -106,7 +107,9 @@
         </fieldset>
       </form>
     </div>
+<?php } ?>
 
+<?php if ($_SESSION['step']>2) { ?>
     <!-- Step 3 - Edit Users -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step3')">
@@ -118,7 +121,9 @@
     <div id="Step3" class="<?php if ($_SESSION['step'] > 3 || $_SESSION['step'] < 2) {echo " hidden";}?>" >
       <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
+<?php } ?>
 
+<?php if ($_SESSION['step']>3) { ?>
     <!-- Step 4 - Add Tasks  -->
     <div id="Step4" class="section inline">
       <button onclick="clickExpandBtn('addTasks')">
@@ -144,7 +149,9 @@
         </form>
       </div>
     </div>
+<?php } ?>
 
+<?php if ($_SESSION['step']>4) { ?>
     <!-- Step 5 - Edit Frequency, Delete Unwanted, Add Additional -->
     <div id="Step5" class="section inline">
       <button onclick="clickExpandBtn('editTasks')">
@@ -238,4 +245,6 @@
           </button>
         </div>
   </main>
+
+<?php } ?>
 <?php include(SHARED_PATH . '/footer.php') ?>
