@@ -182,7 +182,9 @@ input {
 button {
   background-color: transparent;
   border-style: none;
-  font-weight: bold; }
+  font-weight: bold;
+  font-size: large;
+  color: #212192; }
 
 button:hover {
   opacity: 0.7;
@@ -257,6 +259,12 @@ button:hover {
     border: 1px solid #bbb8b8; }
   .formInput input[type=text] {
     border: 1px solid #bbb8b8; }
+
+.tblNumber {
+  text-align: center; }
+
+.tblInput {
+  background: #fff1f1; }
 
 .status-message {
   color: red;

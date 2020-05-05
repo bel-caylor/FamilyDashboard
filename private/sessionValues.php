@@ -27,6 +27,8 @@
   $_SESSION['step4Msgs']  = $_SESSION['step4Msgs'] ?? array();
   $_SESSION['step5Msgs']  = $_SESSION['step5Msgs'] ?? array();
   $_SESSION['step6Msgs']  = $_SESSION['step6Msgs'] ?? array();
+  //dashboard
+  $_SESSION['sql'] = $_SESSION['sql'] ?? '';
 ?>
 
 

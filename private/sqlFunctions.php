@@ -493,4 +493,32 @@ function sqlSumTotalComplete($numDays = 7) {
   return query_db($sql);
 }
 
+function sqlGradeTasks() {
+  $sql = "SELECT task_log.ID, `family-members`.`Name` AS User, category.Description, category_names.Name, tasks.Task, task_log.Time, Grade, task_log.Note ";
+  $sql .= "FROM `task_log` LEFT JOIN tasks ON tasks.ID = task_log.Tasks_ID ";
+  $sql .= "LEFT JOIN `family-members` ON `family-members`.ID = task_log.User_ID ";
+  $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID ";
+  $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
+  $sql .= "WHERE task_log.Family_ID = " . $_SESSION['familyID'] . " AND Grade = '' AND category.type_ID = 1 ";
+  $sql .= "ORDER BY task_log.User_ID ASC";
+  // echo $sql . "<br>";
+  return query_db($sql);
+}
+
+function sqlSaveGrade($input) {
+  $sql = "UPDATE `task_log` SET ";
+  $sql .= "Time='" . sqlStrPrep($input['time']) . "', ";
+  $sql .= "Grade='" . sqlStrPrep($input['grade']) . "', ";
+  $sql .= "Note='" . sqlStrPrep($input['note']) . "' ";
+  $sql .= "WHERE ID='" . $input['taskID'] . "' ";
+  $sql .= "LIMIT 1";
+  $_SESSION['sql'] = $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["edit failed"];
+  }
+}
+
  ?>

@@ -14,6 +14,7 @@ function clickDashboardSection(section) {
   //Hide all sections.
   document.getElementById("completeTasks").classList.add("hidden");
   document.getElementById("assignTasks").classList.add("hidden");
+  document.getElementById("gradeTasks").classList.add("hidden");
   //Unhide clicked section.
   document.getElementById(section).classList.remove("hidden");
 }
@@ -434,4 +435,31 @@ function assignTask(taskID) {
 
       location.reload();
   }
+}
+
+function saveGrade(taskLogID) {
+  //Create data to send to server.
+    let data = {
+      taskID: taskLogID,
+      grade: document.getElementById("grade" + taskLogID).value,
+      time: document.getElementById("time" + taskLogID).value,
+      note: document.getElementById("note" + taskLogID).value,
+    };
+    console.log(data);
+
+    fetch('/FamilyDashboard/public/dashboard/3saveGrade.php', {
+      method: 'post',
+      body: JSON.stringify(data)
+    })
+      .then(res => res.text())
+        .then(text => new DOMParser().parseFromString(text, 'text/html'))
+          .then(doc => {
+            let status = doc.body.innerHTML;
+            // document.getElementById('step5Msgs').innerHTML = status;
+          })
+
+      if (status = "Update Succeeded.") {
+        document.getElementById("taskLog" + taskLogID).remove();
+        document.getElementById("taskLogNote" + taskLogID).remove();
+      }
 }
