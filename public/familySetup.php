@@ -135,37 +135,27 @@
       <div class="form">
         <form id="form4" action="<?php echo WWW_ROOT?>/familySetup/4addCategory.php" method="POST">
           <fieldset>
-            <label class="tooltip" for="category"><span class="tooltiptext">Category Type</span>Type:
-            <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
-            <label class="tooltip" for="name"><span class="tooltiptext">Room name:</span>Name:
+            <label for="name">Room Name:
             <input type="text" id="catName" name="catName" value="Main" maxlength="20" size="10" required></label><br>
+            <label for="category">Room Type:
+            <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
             <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Default Tasks:
             <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
             <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
             <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
             <p role="alert" id="step4Msgs" class="status-message"><?php echo echoMsgArray($_SESSION['step4Msgs']); ?></p>
-            <input type="submit" value="Add Category">
+            <input type="submit" value="ENTER">
           </fieldset>
         </form>
       </div>
     </div>
 <?php } ?>
 
-<?php if ($_SESSION['step']>4) { ?>
-    <!-- Step 5 - Edit Frequency, Delete Unwanted, Add Additional -->
-    <div id="Step5" class="section inline">
-      <button onclick="clickExpandBtn('editTasks')">
-        <h2 class="inline">&#9660; Edit Tasks</h2>
-      </button>
-    </div>
+<?php if ($_SESSION['step']>3) { ?>
+  <!-- Step 5 - Edit Frequency, Delete Unwanted, Add Additional -->
+  <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
 
-    <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo "hidden";}?>" >
-      <div id="assigedChart">
-        <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
-      </div>
-      <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step5Msgs'] !== []) {echo echoMsgArray($_SESSION['step5Msgs']);} ?></p>
-      <?php include(PUBLIC_PATH . '/familySetup/5tblTasks.php') ?>
-    </div>
+
 
 <!-- Step 6 Create New Task -->
     <div id="Step6" class="section inline">
