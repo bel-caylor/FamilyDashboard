@@ -45,6 +45,12 @@
 <!-- Admintration Access -->
 <?php if ($_SESSION['admin'] == 1) {?>
   <!-- Admin Grade Task Section -->
+    <div class="section inline">
+      <button onclick="clickDashboardSection('gradeTasks')">
+        <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
+      </button>
+    </div>
+    
     <?php include(PUBLIC_PATH . '\dashboard\3tblGradeTasks.php') ?>
 
 
