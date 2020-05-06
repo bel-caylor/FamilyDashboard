@@ -7,6 +7,7 @@
   }
 $date = date_create();
 $date = date_format($date,"Y-m-d H:i:s");
+$taskTbl = '';
 
 
   //Import Categories
@@ -28,7 +29,7 @@ $date = date_format($date,"Y-m-d H:i:s");
 
     <?php
       $tasks = sqlAssignedTasks($_SESSION['currentUserID'], $date);
-      if ($tasks->num_rows > 0) {
+      if ($tasks->num_rows > 0) { $taskTbl = 1;
     ?>
         <tr>
           <th colspan="3" class="category">Assigned Tasks</th>
@@ -41,24 +42,33 @@ $date = date_format($date,"Y-m-d H:i:s");
     ?>
 
 <!-- House Tasks -->
-    <tr>
-      <th colspan="3" class="category">House Tasks</th>
-    </tr>
   <?php
-      $tasks = sqlHouseTasks($_SESSION['familyID'], $date);
-        while($row = mysqli_fetch_assoc($tasks)) {
-          createTableRow($row);}
-          ?>
+    $tasks = sqlHouseTasks($_SESSION['familyID'], $date);
+    if ($tasks->num_rows > 0) { $taskTbl = 1;
+    ?>
+      <tr>
+        <th colspan="3" class="category">House Tasks</th>
+      </tr>
+      <?php
+          while($row = mysqli_fetch_assoc($tasks)) {
+            createTableRow($row);}
+    }?>
 
   <!-- Personal Tasks -->
+  <?php
+  $tasks = sqlPersonalTasks($_SESSION['currentUserID'], $date);
+    if ($tasks->num_rows > 0) { $taskTbl = 1;
+    ?>
     <tr>
       <th colspan="3" class="category">Personal Tasks</th>
     </tr>
-  <?php
-      $tasks = sqlPersonalTasks($_SESSION['currentUserID'], $date);
+    <?php
         while($row = mysqli_fetch_assoc($tasks)) {
           createTableRow($row);}
-  ?>
+    }
+
+    if ($taskTbl != 1) {echo "<p class=center>No tasks to display.</p>";}
+    ?>
 
 </table>
 
@@ -67,14 +77,11 @@ $date = date_format($date,"Y-m-d H:i:s");
 <!-- Create Table Function -->
 <?php function createTableRow($row) {
     $task = $row['Description'] . "-" . $row['Task'];
-     if ($row['Name'] !== "Main") {
-       $task .= "-" . $row['Name'];
-     }
+
   ?>
   <tr id="task<?php echo $row['taskID'] ?>">
     <!-- Checkbox -->
       <th><input type="checkbox" onchange="toggleCompleteTask(<?php echo $row['taskID'] ?>)"></th>
-      <!-- <th><input type="checkbox" onchange="/dashboard/2completeTask.php?taskID=<?php echo $row['taskID'] ?>&time=<?php echo $row['Time'] ?>"></th> -->
     <!-- Time Spent -->
       <th><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
     <!-- Task -->

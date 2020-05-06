@@ -5,9 +5,13 @@
   }
 
   $tasks = sqlGradeTasks();
+?>
+
+<div id="gradeTasks">
+
+<?php
   if ($tasks->num_rows > 0) {?>
 
-     <div id="gradeTasks">
        <table id="tblGradeTasks" class="table">
 
          <!-- Name Section -->
@@ -50,9 +54,9 @@
 
          <!-- </div> -->
        </table>
-     </div>
-     
+
    <?php
       }else {
         echo "<p class=center>No tasks to grade.</p>";
       } ?>
+</div>

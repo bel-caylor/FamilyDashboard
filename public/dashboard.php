@@ -30,7 +30,8 @@
     </div> -->
 
 <!-- Complete Task Section -->
-    <div class="section inline">
+    <div class="section">
+      <br><br>
       <button onclick="clickDashboardSection('completeTasks')">
         <h2 id="reports" class="inline">&#9660; Complete Tasks</h2>
       </button>
@@ -45,17 +46,19 @@
 <!-- Admintration Access -->
 <?php if ($_SESSION['admin'] == 1) {?>
   <!-- Admin Grade Task Section -->
-    <div class="section inline">
+    <div class="section">
+      <br><br>
       <button onclick="clickDashboardSection('gradeTasks')">
         <h2 id="reports" class="inline">&#9660; Grade Tasks</h2>
       </button>
     </div>
-    
+
     <?php include(PUBLIC_PATH . '\dashboard\3tblGradeTasks.php') ?>
 
 
   <!-- Admin Assign Task Section -->
-      <div class="section inline">
+      <div class="section">
+        <br><br>
         <button onclick="clickDashboardSection('assignTasks')">
           <h2 id="reports" class="inline">&#9660; Assign Tasks</h2>
         </button>
@@ -70,8 +73,9 @@
 
   <!-- Go to familySetup -->
       <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+        <br><br>
         <button onclick="window.location='familySetup.php'">
-          <h2 id="reports" class="inline">&#9660; Setup Tasks & Users</h2>
+          <h2 id="reports" class="inline">&#9660; Edit Family</h2>
         </button>
       </div>
 
