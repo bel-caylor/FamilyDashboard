@@ -17,13 +17,14 @@
     $type = sqlSelect('type', 'ASC');
  ?>
 
- <div id="Step5" class="section inline">
+ <div id="Step5" class="section">
+   <br><br>
    <button onclick="clickExpandBtn('editTasks')">
      <h2 class="inline">&#9660; Edit Tasks</h2>
    </button>
  </div>
 
- <div id="editTasks" class="<?php if ($_SESSION['step'] < 4) {echo "hidden";}?>" >
+ <div id="editTasks" >
    <div id="assigedChart">
      <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
    </div>

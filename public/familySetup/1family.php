@@ -5,6 +5,12 @@
   $family = $_GET['family'] ?? $_POST['family'] ?? $_SESSION['family'] ?? '';
   $postalCode = $_GET['postalCode'] ?? $_POST['postalCode'] ?? $_SESSION['postalCode'] ?? '';
   $step = $_GET['step'] ?? $_POST['step'] ?? $_SESSION['step'] ?? '';
+  $_SESSION['step1Msgs'] = array();
+  $_SESSION['step2Msgs'] = array();
+  $_SESSION['step3Msgs'] = array();
+  $_SESSION['step4Msgs'] = array();
+  $_SESSION['step5Msgs'] = array();
+  $_SESSION['step6Msgs'] = array();
 
   if ($familyID == '') {
   //Create Family
@@ -21,6 +27,8 @@
     $_SESSION['postalCode'] = $_POST['postalCode'] ?? '';
     $_SESSION['step'] = '2';
     $_SESSION['step1Msgs'][] = "Family Created.";
+    header("Location: " . WWW_ROOT . "/familySetup.php#Step2");  //REDIRECT
+
     // exit;
 
   } else {
@@ -38,6 +46,7 @@
       $_SESSION['step1Msgs'][] = "Update succeeded.";
       $_SESSION['family'] = $family;
       $_SESSION['postalCode'] = $postalCode;
+      header("Location: " . WWW_ROOT . "/familySetup#Step1.php");  //REDIRECT
     }
   }
  ?>
@@ -52,6 +61,5 @@
    }else {
   // ELSE redirect to familySetup.php
     echoMsgArray($_SESSION['step1Msgs']);
-     // header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT
    }
  ?>

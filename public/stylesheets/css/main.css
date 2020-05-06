@@ -94,6 +94,7 @@ tr:nth-of-child(even) {
   cursor: pointer;
   position: fixed;
   text-align: center;
+  bottom: 80px;
   width: 100%;
   z-index: 100; }
   .popUp button {
@@ -113,9 +114,7 @@ tr:nth-of-child(even) {
   height: auto;
   max-width: 300px;
   min-height: 100px;
-  vertical-align: middle;
   width: 60%;
-  position: relative;
   border-radius: 3px;
   padding: 10px 5%; }
 
@@ -133,27 +132,20 @@ body {
 header {
   position: fixed;
   z-index: 1000;
-  background-color: white;
-  width: 97%;
+  background-color: #c2d9fc;
+  width: 100%;
   top: 0;
-  text-align: right;
-  right: 5px;
-  margin: 0 10px 10px 10px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  border-width: 0 0 1px 0;
-  border-color: black;
-  border-style: groove;
-  left: 0; }
-
-main {
-  margin-top: 30px; }
+  text-align: center;
+  padding: 5px 0 5px 0;
+  left: 0;
+  font-weight: bold;
+  box-shadow: 0 2px 2px #66666678; }
 
 h2 {
   margin: 5px 5px 1px 5px; }
 
 h3 {
-  background-color: #d5d5d5;
+  background-color: #ffeaea;
   text-align: center;
   color: black;
   margin: 0 10px 5px 10px; }
@@ -166,7 +158,8 @@ p {
   text-align: center; }
 
 .page_footer {
-  margin-top: 5px; }
+  margin: 5px 0 80px 0;
+  text-align: center; }
 
 .inline {
   display: inline; }
@@ -195,11 +188,10 @@ button:hover {
   max-width: 15px; }
 
 .section {
-  display: flex;
+  display: block;
   border-width: 0 0 1px 0;
   border-color: black;
-  border-style: groove;
-  margin-top: 10px; }
+  border-style: groove; }
 
 .note {
   text-align: left; }
@@ -213,9 +205,9 @@ button:hover {
 #assigedChart {
   position: fixed;
   z-index: 1000;
-  background-color: #d5d5d5;
+  background-color: #ffeaea;
   width: 100%;
-  top: 20px;
+  bottom: 0px;
   left: 0;
   padding: 5px;
   text-align: left;

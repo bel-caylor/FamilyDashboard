@@ -1,13 +1,15 @@
 <?php require_once('../private/initialize.php'); ?>
 <?php
   //Check permissions.
-  if ($_SESSION['step'] > 1 AND $_SESSION['admin'] == 0) {
+  if ($_SESSION['step'] > 2 AND $_SESSION['admin'] == 0) {
     header("Location: " . WWW_ROOT . "/dashboard.php");
   }
 
   //Session Parimeters
-  if ($_SESSION['family'] !== "") {$_SESSION['step'] = 2;}
-  if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 4;}
+  if ($_SESSION['step'] == '') {
+    if ($_SESSION['family'] !== "") {$_SESSION['step'] = 2;}
+    if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 4;}
+  }
 
   if ($_SESSION['family'] !== "") {
     $header = $_SESSION['family'] . " Dashboard";
@@ -21,11 +23,6 @@
   while($row = mysqli_fetch_assoc($results)) {
     $_SESSION['users'][$row['ID']] = $row;
   };
-
-  //NEED TO ADD ERROR HANDLING!!!
-  // echo $stepID;
-  // echo $_SERVER['REQUEST_METHOD'];
-
  ?>
 
  <?php include(SHARED_PATH . '/header.php') ?>
@@ -36,7 +33,7 @@
   </header>
 
   <main>
-      <!-- <br> -->
+      <br><br>
 <!-- Step 1 - Create/Edit Family  -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">
@@ -46,9 +43,8 @@
       </button>
     </div>
 
-    <!-- CREATE Family Form -->
-    <!-- Hide section if moving onto Step 2. -->
-    <div id="Step1" class="form<?php if ($_SESSION['step'] > 2) {echo " hidden";} ?>">
+  <!-- CREATE Family Form -->
+    <div id="Step1" class="form">
       <form id="form1" action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
         <fieldset>
           <label  for="family" class="tooltip"><span class="tooltiptext">Last name</span>Family Name:  </label>
@@ -60,13 +56,15 @@
           <p role="alert" class="status-message" <?php if ($_SESSION['step1Msgs'] == []) {echo "hidden";} ?>>
             <?php if ($_SESSION['step1Msgs'] !== []) {echo echoMsgArray($_SESSION['step1Msgs']);} ?></p>
           <input id="btn1" type="submit" <?php if ($_SESSION['step'] == '1') {echo 'value="Submit">';} else {echo 'value="Save Changes">';}?>
+          <input type="hidden" id="step" value="Step2">
         </fieldset>
       </form>
     </div>
 
 <?php if ($_SESSION['step']>1) { ?>
     <!-- Step 2 - Add Family Members -->
-    <div class="section inline">
+    <div id="Step2" class="section">
+      <br><br>
       <button onclick="clickExpandBtn('Step2')">
         <h2 class="inline">&#9660; Add Users</h2>
       </button>
@@ -80,7 +78,7 @@
       $email = $_SESSION['aryUser']['email'] ?? $_SESSION['email'] ?? '';
       $admin = $_SESSION['aryUser']['admin'] ?? '';
      ?>
-    <div id="Step2" class="form <?php if ($_SESSION['step'] > 3 || $_SESSION['step'] < 2) {echo " hidden";}?>">
+    <div class="form">
       <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
         <fieldset>
           <!-- <label for="name">Name:  </label> -->
@@ -103,6 +101,7 @@
           <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
           <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
           <p role="alert" id="step2Msgs" class="status-message"><?php echo echoMsgArray($_SESSION['step2Msgs']); ?></p>
+          <input type="hidden" id="step" value="Step2">
           <input type="submit" value="Add">
         </fieldset>
       </form>
@@ -111,39 +110,48 @@
 
 <?php if ($_SESSION['step']>2) { ?>
     <!-- Step 3 - Edit Users -->
-    <div class="section inline">
+    <div id="Step3" class="section">
+      <br><br>
       <button onclick="clickExpandBtn('Step3')">
         <h2 class="inline">&#9660; Edit Users</h2>
       </button>
-      <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
     </div>
 
-    <div id="Step3" class="<?php if ($_SESSION['step'] > 3 || $_SESSION['step'] < 2) {echo " hidden";}?>" >
+    <p role="alert" id="step3Msgs" class="status-message"><?php if ($_SESSION['step3Msgs'] !== []) {echo echoMsgArray($_SESSION['step3Msgs']);} ?></p>
+
+    <div>
       <?php include(PUBLIC_PATH . '/familySetup/3tblUsers.php') ?>
     </div>
 <?php } ?>
 
-<?php if ($_SESSION['step']>3) { ?>
+<?php if ($_SESSION['step']>3) {?>
     <!-- Step 4 - Add Tasks  -->
-    <div id="Step4" class="section inline">
+    <div id="Step4" class="section">
+      <br><br>
       <button onclick="clickExpandBtn('addTasks')">
-        <h2 class="inline">&#9660; Add Categories</h2>
+        <h2 class="inline">&#9660; Add Category</h2>
       </button>
     </div>
-
-    <div id="addTasks" class="<?php if ($_SESSION['step'] < 3) {echo " hidden";}?>">
+    <p class="center <?php if ($_SESSION['step'] > 4) {echo "hidden";}?>">
+      Use this section to add task categories.<br>
+      For example 'Master Bath' or 'Kitchen'.<br>
+      Select a Type to import<br>
+      standard tasks for that category.
+    </p>
+    <div id="addTasks">
       <div class="form">
         <form id="form4" action="<?php echo WWW_ROOT?>/familySetup/4addCategory.php" method="POST">
           <fieldset>
-            <label for="name">Room Name:
-            <input type="text" id="catName" name="catName" value="Main" maxlength="20" size="10" required></label><br>
-            <label for="category">Room Type:
-            <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
-            <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Default Tasks:
+            <label for="name">Name:
+            <input type="text" id="catName" name="catName" placeholder="e.g. Master Bedroom" maxlength="20" size="20" required></label><br>
+            <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Add Default Tasks:
             <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
+            <label for="category">Type:
+            <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
             <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
             <p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
             <p role="alert" id="step4Msgs" class="status-message"><?php echo echoMsgArray($_SESSION['step4Msgs']); ?></p>
+            <input type="hidden" id="step" value="Step3">
             <input type="submit" value="ENTER">
           </fieldset>
         </form>
@@ -158,7 +166,8 @@
 
 
 <!-- Step 6 Create New Task -->
-    <div id="Step6" class="section inline">
+    <div id="Step6" class="section">
+      <br><br>
       <button onclick="clickExpandBtn('createTasks')">
         <h2 class="inline">&#9660; Create Tasks</h2>
       </button>
@@ -168,6 +177,7 @@
       <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
       <div class="form">
         <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
+          <input type="hidden" id="step" value="Step5">
           <fieldset>
             <table class="formTable">
           <!-- Category Type -->
@@ -230,6 +240,7 @@
 
     <!-- Go to Dashboard -->
         <div class="section inline <?php if ($_SESSION['admin'] == 0) {echo "hidden";} ?>">
+          <br><br>
           <button onclick="window.location='dashboard.php'">
             <h2 id="reports" class="inline">&#9660; Goto Dashboard</h2>
           </button>

@@ -6,7 +6,7 @@
   cursor: pointer;
   position: fixed;
   text-align: center;
-  // top: 0;
+  bottom: 80px;
   width: 100%;
   z-index: 100;
   button{
@@ -16,8 +16,6 @@
     border-color: black;
     box-shadow: 1px 1px 1px #b1b1b1;
     margin-top: 20px;
-    // position: relative;
-    // bottom: 0px;
   }
   p {
     color: black;
@@ -31,9 +29,8 @@
     height: auto;
     max-width: 300px;
     min-height: 100px;
-    vertical-align: middle;
     width: 60%;
-    position: relative;
+    // position: relative;
     border-radius: 3px;
     padding: 10px 5%;
 }

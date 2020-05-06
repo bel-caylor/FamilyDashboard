@@ -1,15 +1,9 @@
+//Toggle visible sections on familySetup.
 function clickExpandBtn(section) {
   document.getElementById(section).classList.toggle("hidden");
-  switch (section) {
-    case 'Step3':
-      document.getElementById('Step2').classList.toggle("hidden");
-      break;
-    case 'addTasks':
-      document.getElementById('Step2').classList.toggle("hidden");
-      document.getElementById('Step3').classList.toggle("hidden");
-  }
 }
 
+//Toggle visible sections on dashboard.
 function clickDashboardSection(section) {
   //Hide all sections.
   document.getElementById("completeTasks").classList.add("hidden");
@@ -19,66 +13,72 @@ function clickDashboardSection(section) {
   document.getElementById(section).classList.remove("hidden");
 }
 
-document.addEventListener('submit', e => {
-  console.log("test");
-  // Store reference to form to make later code easier to read
-  const form = e.target;
-
-  // get status message references
-  const statusBusy = form.querySelector('.status-busy');
-  const statusFailure = form.querySelector('.status-failure');
-  const statusMessage = form.querySelector('.status-message');
-  // const doc = document;
-  // const step = form.querySelector('Step').innerHTML;
-
-  // Post data using the Fetch API
-  fetch(form.action, {
-      method: form.method,
-      body: new FormData(form)
-    })
-    // Convert response to text
-    .then(res => res.text())
-
-    // Convert to HTML document
-    .then(text => new DOMParser().parseFromString(text, 'text/html'))
-
-    // Add status message to DOM
-    .then(doc => {
-      statusBusy.hidden = true;
-      statusMessage.hidden = false;
-      form.getElementsByTagName("fieldset")[0].disabled = false;
-      location.reload();
-
-
-    })
-    .catch(err => {
-      console.log("error", err)
-      form.getElementsByTagName("fieldset")[0].disabled = false;  // Unlock form elements
-      lastActive.focus();  // Return focus to active element
-      statusBusy.hidden = true;  // Hide the busy state
-      statusFailure.hidden = false;  // Show error message
-
-    });
-
-  // Remember the last active field
-  const lastActive = document.activeElement;
-
-  // Show busy state and move focus to it
-  statusBusy.hidden = false;
-  statusBusy.tabIndex = -1;
-  statusBusy.focus();
-
-  // Disable all form elements to prevent further input
-  form.getElementsByTagName("fieldset")[0].disabled = true;
-
-  // Make sure connection failure message is hidden
-  statusFailure.hidden = true;
-  statusBusy.hidden = true;
-
-  // Prevent the default form submit
-  e.preventDefault();
-
-});
+//Submit Forms - Add Family, Add User, Add Category, Add Task
+// document.addEventListener('submit', e => {
+//   // Store reference to form to make later code easier to read
+//   const form = e.target;
+//
+//   // get status message references
+//   const statusBusy = form.querySelector('.status-busy');
+//   const statusFailure = form.querySelector('.status-failure');
+//   const statusMessage = form.querySelector('.status-message');
+//   const step = form.querySelector('#step').value;
+//   // document.querySelector("#step")
+//   // const doc = document;
+//   // const step = form.querySelector('Step').innerHTML;
+//
+//   // Post data using the Fetch API
+//   fetch(form.action, {
+//       method: form.method,
+//       body: new FormData(form)
+//     })
+//     // Convert response to text
+//     .then(res => res.text())
+//
+//     // Convert to HTML document
+//     .then(text => new DOMParser().parseFromString(text, 'text/html'))
+//
+//     // Add status message to DOM
+//     .then(doc => {
+//       statusBusy.hidden = true;
+//       statusMessage.hidden = false;
+//       form.getElementsByTagName("fieldset")[0].disabled = false;
+//       let url = window.location.href;
+//       let position = url.search("#");
+//       url = url.substring(0, position);
+//       window.location.replace(url + "#" + step);
+//       // location.reload();
+//
+//
+//     })
+//     .catch(err => {
+//       console.log("error", err)
+//       form.getElementsByTagName("fieldset")[0].disabled = false;  // Unlock form elements
+//       lastActive.focus();  // Return focus to active element
+//       statusBusy.hidden = true;  // Hide the busy state
+//       statusFailure.hidden = false;  // Show error message
+//
+//     });
+//
+//   // Remember the last active field
+//   const lastActive = document.activeElement;
+//
+//   // Show busy state and move focus to it
+//   statusBusy.hidden = false;
+//   statusBusy.tabIndex = -1;
+//   statusBusy.focus();
+//
+//   // Disable all form elements to prevent further input
+//   form.getElementsByTagName("fieldset")[0].disabled = true;
+//
+//   // Make sure connection failure message is hidden
+//   statusFailure.hidden = true;
+//   statusBusy.hidden = true;
+//
+//   // Prevent the default form submit
+//   e.preventDefault();
+//
+// });
 
 function appUpdate(step, doc) {
   switch (step) {

@@ -2,10 +2,12 @@
 
   $userID = '';
   $duplicate = 0;
+  $_SESSION['step1Msgs'] = array();
   $_SESSION['step2Msgs'] = array();
   $_SESSION['step3Msgs'] = array();
   $_SESSION['step4Msgs'] = array();
   $_SESSION['step5Msgs'] = array();
+  $_SESSION['step6Msgs'] = array();
 
   //NEW Category
   if ($_POST['formCategory'] == 0) {
@@ -52,9 +54,11 @@
   if ($result[0] !== "edit failed") {
     //Edit complete.
     echo "Update Succeeded.";
+    header("Location: " . WWW_ROOT . "/familySetup.php#Step5");  //REDIRECT
   }else {
     //Edit failed.
-    echo "Update Failed. Please try again later.";
+    array_push($_SESSION['step6Msgs'],"Insert failed.  Please try again.");
+    header("Location: " . WWW_ROOT . "/familySetup.php#Step6");  //REDIRECT
   }
 
   // header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT

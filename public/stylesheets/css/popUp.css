@@ -5,6 +5,7 @@
   cursor: pointer;
   position: fixed;
   text-align: center;
+  bottom: 80px;
   width: 100%;
   z-index: 100; }
   .popUp button {
@@ -24,9 +25,7 @@
   height: auto;
   max-width: 300px;
   min-height: 100px;
-  vertical-align: middle;
   width: 60%;
-  position: relative;
   border-radius: 3px;
   padding: 10px 5%; }
 

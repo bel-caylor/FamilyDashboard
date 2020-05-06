@@ -1,7 +1,11 @@
 <?php require_once('../../private/initialize.php');
 
-  $_SESSION['step2Msgs'] = array();
-  $errors = array();
+$_SESSION['step1Msgs'] = array();
+$_SESSION['step2Msgs'] = array();
+$_SESSION['step3Msgs'] = array();
+$_SESSION['step4Msgs'] = array();
+$_SESSION['step5Msgs'] = array();
+$_SESSION['step6Msgs'] = array();
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['aryUser'] = array(
@@ -14,55 +18,44 @@
         'password2' => $_POST['password2'] ?? $_SESSION['password']
       );
 
-
   validateUser();
-  // $_SESSION['step2Msgs'] = validateUser();
-
-  // echo count($errors) . '<br>';
 
   //Add data to Database & session['Users']
     if (count($_SESSION['step2Msgs']) == 0) {
         $result = sqlAddUser();
         if ($result == 1) {  //UPDATE FAILED
           array_push($_SESSION['step2Msgs'],"Update failed.  Please try again.");
+          header("Location: " . WWW_ROOT . "/familySetup.php#Step2");  //REDIRECT
 
         }else {  //UPDATE PASSED
-
-          //Add User to session['Users']
-            // $_SESSION['currentUserID'] = $result;
-            // array_push($_SESSION['step2Msgs'],"User Added");
-            // array_push($_SESSION['users'],
-            //   array(
-            //   'ID' => $result,
-            //   'Name' => $_SESSION['aryUser']['name'],
-            //   'Initial' => $_SESSION['aryUser']['initial'],
-            //   'Color' => $_SESSION['aryUser']['color'],
-            //   'Admin' => $_SESSION['aryUser']['admin'],
-            //   'Email' => $_SESSION['aryUser']['email'])
-            // );
           //Main user.
           if (count($_SESSION['users']) == 0) {
             $_SESSION['currentName'] = $_SESSION['aryUser']['name'];
             $_SESSION['currentUserID'] = $result;
+            $_SESSION['admin'] = $_SESSION['aryUser']['admin'];
           }
 
           //Reset form fields.
           $_SESSION['aryUser'] = [];
+          $_SESSION['step'] = '4';
+          header("Location: " . WWW_ROOT . "/familySetup.php#Step3");  //REDIRECT
 
         }
+    }else {
+      header("Location: " . WWW_ROOT . "/familySetup.php#Step2");  //REDIRECT
     }
     };
+
   //IF POST Create transition page.
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $html = '';
     foreach ($_SESSION['step2Msgs'] as $msg) {
-      echo $msg . "<br>";
+      echo "<b>" . $msg . "</b><br>";
     }
      $html .= '<p><a href="' . WWW_ROOT . '/familySetup.php">Continue with Setup.</a></p>';
      echo $html;
     }else {
      // ELSE redirect to familySetup.php
-        // header("Location: " . WWW_ROOT . "/familySetup.php");  //REDIRECT
     }
 
   ?>
