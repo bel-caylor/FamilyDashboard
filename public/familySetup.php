@@ -84,7 +84,7 @@
           <!-- <label for="name">Name:  </label> -->
           <input type="text" id="name" name="name" value="<?php echo $name; ?>" placeholder="User Name" maxlength="10" size="10" pattern="[A-Za-z]{2,10}" title="Must be 2-10 letters." required>&nbsp;&nbsp;
           <label class="tooltip" for="initial"><span class="tooltiptext">Unique for each family member</span>Initial:
-          <input type="text" id="initial" name="initial" value="<?php echo $initial; ?>" maxlength="1" size="1" required></label><br>
+          <input type="text" id="initial" name="initial" value="<?php echo $initial; ?>" maxlength="2" size="1" required></label><br>
           <label class="tooltip" for="color"><span class="tooltiptext">Unique color<br>for reporting.</span>Color:
           <input type="color" id="color" name="color" value="<?php echo setValue($color, "#337AFF"); ?>"></label>
           <label class="tooltip" for="admin"><span class="tooltiptext">Able to create/assign<br>& grade tasks.</span> &nbsp;&nbsp;&nbsp;&nbsp;Admin:

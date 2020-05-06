@@ -31,7 +31,15 @@ $stepID = $_POST['StepID'] ?? '';
           //Multipule Users
             if (mysqli_num_rows($results) > 1) {
               $step = '3-selectUser';
-              break;}
+              break;
+            }else {
+              //Set current user.
+              $results = sqlSelect("family-members", "ID", "ASC", "Email", $_SESSION['email']);
+              $row = mysqli_fetch_assoc($results);
+              $_SESSION['currentUserID'] = $row['ID'];
+              $_SESSION['password'] = $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'];
+              $_SESSION['admin'] = $_SESSION['users'][$_SESSION['currentUserID']]['Admin'];
+            }
           //One User
             $step = '4-password';
             break;
@@ -40,7 +48,6 @@ $stepID = $_POST['StepID'] ?? '';
            $_SESSION['currentUserID'] = $_POST['User'];
            $step = '4-password';
            break;
-
          case '4':  //Check password
             $user = mysqli_fetch_assoc(sqlSelect("family-members", "ID", "ASC", "ID", $_SESSION['currentUserID']));
             if(password_verify($_POST['password'], $_SESSION['users'][$_SESSION['currentUserID']]['hashed_password'])) {
@@ -67,6 +74,7 @@ $stepID = $_POST['StepID'] ?? '';
     Family Dashboard LOGIN
   </header>
   <main>
+    <br><br>
   <!-- EMAIL -->
     <h2 class="section"><span <?php if ($stepID>2) {echo " class='hidden'";} ?>>Enter&nbsp;</span>E-mail</h2>
     <form class="form" action="<?php echo WWW_ROOT?>/login.php" method="post">
