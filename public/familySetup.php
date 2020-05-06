@@ -6,7 +6,7 @@
   }
 
   //Session Parimeters
-  if ($_SESSION['step'] == '') {
+  if ($_SESSION['step'] == 1) {
     if ($_SESSION['family'] !== "") {$_SESSION['step'] = 2;}
     if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 4;}
   }
