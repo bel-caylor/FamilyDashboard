@@ -107,7 +107,7 @@ function editUser(userID) {
     document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Save User</span>Sav";
 
   //Change symbol and Edit action to Save Action
-    let html = `<button type=\"submit\"  onclick="saveUser(` + userID + `)">&#128428;</button>`;
+    let html = `<button type=\"submit\"  onclick="saveUser(` + userID + `)"><i class="far fa-save"></i>`;
     document.getElementById('Edt' + userID).innerHTML = html;
 
   //Unhide second row
@@ -228,7 +228,7 @@ function editTask(taskID) {
     document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
 
   //Change symbol and Edit action to Save Action
-    let html = `<span class="tooltiptext">Save Task</span><button type=\"submit\"  onclick="saveTask(` + taskID + `)">&#128428;</button>`;
+    let html = `<span class="tooltiptext">Save Task</span><button type=\"submit\"  onclick="saveTask(` + taskID + `)"><i class="far fa-save"></i>`;
     document.getElementById('EdtTask' + taskID).innerHTML = html;
 
   //Remove onchange for assign user.

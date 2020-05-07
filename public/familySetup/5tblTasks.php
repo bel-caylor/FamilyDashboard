@@ -57,9 +57,9 @@
                      <!-- Task -->
                        <th colspan="3" class="task"><input type="text" size="15" class="task trans" value="<?php echo $task['Task'] ?>" disabled></th>
                      <!-- Edit -->
-                       <th id="EdtTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Edit Task</span><button type="button" onclick="editTask(<?php echo $task['Task_ID'] ?>)">&#128393;</button></th>
+                       <th id="EdtTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Edit Task</span><button type="button" onclick="editTask(<?php echo $task['Task_ID'] ?>)"><i class="fas fa-pencil-alt"></i></th>
                      <!-- Delete -->
-                       <th id="DelTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Delete<br>Task</span><button type="button" onclick="deleteTask(<?php echo $task['Task_ID'] ?>)">&#128465;</button></th>
+                       <th id="DelTask<?php echo $task['Task_ID'] ?>" class="tooltip"><span class="tooltiptext">Delete<br>Task</span><button type="button" onclick="deleteTask(<?php echo $task['Task_ID'] ?>)"><i class="far fa-trash-alt"></i></th>
                      </tr>
                    <!-- Frequency Row -->
                      <tr id="freqRow<?php echo $task['Task_ID'] ?>" class="hidden">
