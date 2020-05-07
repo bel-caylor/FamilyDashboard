@@ -44,7 +44,7 @@
                  </tr>
                  <tr id="taskLogNote<?php echo $task['ID'] ?>">
                    <!-- Save -->
-                     <th colspan="1" class="tooltip"><span class="tooltiptext">Save<br>Grade</span><button type="button" onclick="saveGrade(<?php echo $task['ID'] ?>)">&#128428;</button></th>
+                     <th colspan="1" class="tooltip"><span class="tooltiptext">Save<br>Grade</span><button type="button" onclick="saveGrade(<?php echo $task['ID'] ?>)"><i class="far fa-save"></i></th>
                    <!-- Note -->
                      <th colspan="1" style="text-align: right;">Note:</th>
                      <th colspan="8" class="tblInput task"><input id="note<?php echo $task['ID'] ?>" type="text" size="30" class="task trans" value="<?php echo $task['Note'] ?>" placeholder="What is expected?"></th>

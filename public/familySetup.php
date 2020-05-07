@@ -129,7 +129,7 @@
     <div id="Step4" class="section">
       <br><br>
       <button onclick="clickExpandBtn('addTasks')">
-        <h2 class="inline">&#9660; Add Category</h2>
+        <h2 class="inline">&#9660; Add Room</h2>
       </button>
     </div>
     <p class="center <?php if ($_SESSION['step'] > 4) {echo "hidden";}?>">
@@ -144,8 +144,7 @@
           <fieldset>
             <label for="name">Name:
             <input type="text" id="catName" name="catName" placeholder="e.g. Master Bedroom" maxlength="20" size="20" required></label><br>
-            <label class="tooltip" for="defaultTasks"><span class="tooltiptext">Import default tasks for category type.</span>Add Default Tasks:
-            <input type="checkbox" id="defaultTasks" name="defaultTasks" checked></label><br>
+            <label>Select room type to add default tasks.</label>
             <label for="category">Type:
             <?php include(PRIVATE_PATH . '/shared/optionsCategory.php') ?></label><br>
             <p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>

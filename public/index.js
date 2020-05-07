@@ -158,7 +158,7 @@ function saveUser(userID) {
       document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Edit User</span>Edit";
 
     //Change symbol and Save action to Edit Action
-      let html = `<button onclick="editUser(` + userID + `)">&#128393;</button>`;
+      let html = `<button onclick="editUser(` + userID + `)"><i class="fas fa-pencil-alt"></i>`;
       document.getElementById('Edt' + userID).innerHTML = html;
 
     //HIDE second row
@@ -284,25 +284,6 @@ function saveTask(taskID) {
     if (status = "Update Succeeded.") {
 
       location.reload();
-
-    //Change symbol and Save action to Edit Action
-      // let html = `<button onclick="editTask(` + taskID + `)">&#128393;</button>`;
-      // document.getElementById('EdtTask' + taskID).innerHTML = html;
-
-      //Fetch new assigned Chart
-      // fetch('/FamilyDashboard/public/familySetup/5sumAssign.php', {
-      //   method: 'POST',
-      // })
-      //   .then(res => res.text())
-      //     .then(text => new DOMParser().parseFromString(text, 'text/html'))
-      //       .then(doc => {
-      //         let chart = doc.body.innerHTML;
-      //         document.getElementsById('assigedChart').innerHTML = chart;
-      //       })
-
-
-    //Change highlight and disabled
-      // taskSaved(taskID)
   }
 }
 
