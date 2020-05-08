@@ -1,19 +1,22 @@
 
 <!-- Delete User Alert -->
 <?php include(SHARED_PATH . '/alertPopUp.php') ?>
+<p role="alert" class="status-failure" hidden>Connection failure, please try again.</p>
+<p role="alert" class="status-busy" hidden>Busy sending data, please wait.</p>
+<p role="alert" id="step3Msgs" class="status-message"><?php echo echoMsgArray($_SESSION['step4Msgs']); ?></p>
 
 <table id="tblUsers" class="table"<?php if ($_SESSION['step'] !== '2' and $_SESSION['currentUserID'] == '') {echo " hidden";}?>>
   <!-- Column Names-->
     <tr>
       <th colspan="2">Name</th>
-      <th class="tooltip"><span class="tooltiptext">Unique Color</span>Color</th>
-      <th id="EditSave" class="tooltip"><span class="tooltiptext">Edit User</span>Edit</th>
-      <th class="tooltip"><span class="tooltiptext">Delete User</span>Delete</th>
+      <th>Color</th>
+      <th id="EditSave">Edit</th>
+      <th>Delete</th>
     </tr>
     <tr class="hidden">
       <th colspan="3">Email</th>
-      <th class="tooltip" colspan="1"><span class="tooltiptext">Unique Initial</span>Int</th>
-      <th class="tooltip" colspan="1"><span class="tooltiptext">Add/Assign/Grade Tasks</span>Adm</th>
+      <th colspan="1">Int</th>
+      <th colspan="1">Adm</th>
     </tr>
   <?php $Users = $_SESSION['users'];?>
   <!-- User Rows -->
@@ -26,7 +29,7 @@
               <th><button type="button" onclick="clickDeleteUser(<?php echo $User ?>, <?php echo $Users[$User]['ID'] ?>, '<?php echo $Users[$User]['Name'] ?>')"><i class="far fa-trash-alt"></i></th>
             </tr>
               <tr id="Hdn<?php echo $Users[$User]['ID'] ?>" class="hidden">
-              <th colspan="3" class="email"><input type="text" size="15" class="trans" value="<?php echo $Users[$User]['Email'] ?>"></th>
+              <th colspan="3" class="email"><input type="text" size="25" class="trans" value="<?php echo $Users[$User]['Email'] ?>"></th>
               <th class="initial tooltip"><span class="tooltiptext">Unique Initial</span>
                 <input type="text" size="1" class="trans" value="<?php echo $Users[$User]['Initial'] ?>"></th>
               <th colspan="1" class="admin tooltip"><span class="tooltiptext">Administrator</span>

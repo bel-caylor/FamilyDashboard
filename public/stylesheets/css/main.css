@@ -78,7 +78,7 @@ td, th {
   border: 1px solid #dddddd;
   text-align: center;
   margin: 0 auto 0 auto;
-  padding: 0; }
+  padding: 0 2px 0 2px; }
 
 tr:nth-of-child(odd) {
   border: 1px solid #f3f3f3; }
@@ -94,8 +94,13 @@ tr:nth-of-child(even) {
   cursor: pointer;
   position: fixed;
   text-align: center;
-  bottom: 80px;
-  width: 100%;
+  top: 80px;
+  max-width: 325px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
   z-index: 100; }
   .popUp button {
     background-color: white;
@@ -105,22 +110,28 @@ tr:nth-of-child(even) {
     box-shadow: 1px 1px 1px #b1b1b1;
     margin-top: 20px; }
   .popUp p {
-    color: black; }
+    color: black;
+    font-size: 0.8em;
+    font-weight: 400;
+    text-align: left;
+    margin-block-end: 0.5em;
+    margin-block-start: 0.5em; }
 
 .popUp .alert {
   display: inline-block;
+  border-radius: 10px;
   background-color: #ffebea;
-  box-shadow: 3px 3px 10px #b1b1b1;
+  box-shadow: 1px 1px 5px #929191;
   height: auto;
-  max-width: 300px;
   min-height: 100px;
-  width: 60%;
-  border-radius: 3px;
-  padding: 10px 5%; }
+  padding: 10px 5%;
+  right: auto;
+  left: auto; }
 
 .alert {
-  color: red;
-  font-weight: bold; }
+  color: #61057f;
+  font-weight: bold;
+  font-size: 1.3em; }
 
 body {
   margin: 2px;
@@ -142,7 +153,9 @@ header {
   box-shadow: 0 2px 2px #66666678; }
 
 h2 {
-  margin: 5px 5px 1px 5px; }
+  margin: 30px 5px 1px 5px;
+  width: 300px;
+  text-align: left; }
 
 h3 {
   background-color: #ffeaea;
@@ -159,11 +172,8 @@ p {
   text-align: center; }
 
 .page_footer {
-  margin: 5px 0 80px 0;
+  margin: 30px 0 80px 0;
   text-align: center; }
-
-.inline {
-  display: inline; }
 
 fieldset {
   border-style: none;
@@ -189,10 +199,19 @@ button:hover {
   max-width: 15px; }
 
 .section {
-  display: block;
+  display: flex;
   border-width: 0 0 1px 0;
   border-color: black;
-  border-style: groove; }
+  border-style: groove;
+  margin-top: 30px; }
+
+.sectionName {
+  width: 350px; }
+
+.btnRight {
+  text-align: right;
+  padding-top: 35px;
+  padding-right: 5px; }
 
 .note {
   text-align: left; }

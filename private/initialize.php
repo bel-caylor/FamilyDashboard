@@ -16,6 +16,8 @@
   require_once('functions.php');
   require_once('validationFunctions.php');
   require_once('sessionValues.php');
+  require_once('shared/infoPopUp.php');
+  require_once('shared/section.php');
 
   $db = dbConnect();
  ?>

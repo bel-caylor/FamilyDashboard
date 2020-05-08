@@ -46,7 +46,8 @@
       $_SESSION['step1Msgs'][] = "Update succeeded.";
       $_SESSION['family'] = $family;
       $_SESSION['postalCode'] = $postalCode;
-      header("Location: " . WWW_ROOT . "/familySetup#Step1.php");  //REDIRECT
+      header("Location: ../familySetup#Step1.php");  //REDIRECT
+      // header("Location: #Step1.php");  //REDIRECT
     }
   }
  ?>

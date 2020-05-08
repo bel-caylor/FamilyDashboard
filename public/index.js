@@ -13,6 +13,10 @@ function clickDashboardSection(section) {
   document.getElementById(section).classList.remove("hidden");
 }
 
+function toggleInfo(section) {
+  document.getElementById(section).classList.toggle("hidden");
+}
+
 //Submit Forms - Add Family, Add User, Add Category, Add Task
 // document.addEventListener('submit', e => {
 //   // Store reference to form to make later code easier to read
@@ -104,7 +108,7 @@ function togglePwdVisible() {
 function editUser(userID) {
 
   //Change column name
-    document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Save User</span>Sav";
+    document.getElementById("EditSave").innerHTML = "Save";
 
   //Change symbol and Edit action to Save Action
     let html = `<button type=\"submit\"  onclick="saveUser(` + userID + `)"><i class="far fa-save"></i>`;
@@ -155,7 +159,7 @@ function saveUser(userID) {
     if (status = "Update Succeeded.") {
 
     //Change column name
-      document.getElementById("EditSave").innerHTML = "<span class=\"tooltiptext\">Edit User</span>Edit";
+      document.getElementById("EditSave").innerHTML = "Edit";
 
     //Change symbol and Save action to Edit Action
       let html = `<button onclick="editUser(` + userID + `)"><i class="fas fa-pencil-alt"></i>`;
@@ -185,14 +189,14 @@ function toggleClass(ID, className) {
 
 function clickDeleteUser(row, ID, userName) {
   //Change alert message
-  let divMsg = document.getElementById('delUserMsg');
-  divMsg.innerHTML = "<p>Are you sure you want to delete user - " + userName + "?</p>";
+    let divMsg = document.getElementById('delUserMsg');
+    divMsg.innerHTML = "<p>Are you sure you want to delete user - " + userName + "?</p>";
   //Change OK button click function.
-  let btn = document.getElementById('btnOK');
-  btn.setAttribute("onclick", "deleteUser(" + row + ", '" + ID + "')");
-  btn.innerHTML = "Yes";
+    let btn = document.getElementById('btnOK');
+    btn.setAttribute("onclick", "deleteUser(" + row + ", '" + ID + "')");
+    btn.innerHTML = "Yes";
   //make message visible
-  toggleClass("delUser", "hidden");
+    toggleClass("delUser", "hidden");
 }
 
 function deleteUser(row, ID) {

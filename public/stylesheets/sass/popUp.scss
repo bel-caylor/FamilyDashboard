@@ -6,8 +6,14 @@
   cursor: pointer;
   position: fixed;
   text-align: center;
-  bottom: 80px;
-  width: 100%;
+  top: 80px;
+  // width: 100%;
+  max-width: 325px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
   z-index: 100;
   button{
     background-color: white;
@@ -19,23 +25,30 @@
   }
   p {
     color: black;
+    font-size: 0.8em;
+    font-weight: 400;
+    text-align: left;
+    margin-block-end: 0.5em;
+    margin-block-start: 0.5em;
   }
 }
 
 .popUp .alert {
     display: inline-block;
+    border-radius: 10px;
     background-color: #ffebea;
-    box-shadow: 3px 3px 10px #b1b1b1;
+    box-shadow: 1px 1px 5px #929191;
     height: auto;
-    max-width: 300px;
     min-height: 100px;
-    width: 60%;
+    // width: 60%;
     // position: relative;
-    border-radius: 3px;
     padding: 10px 5%;
+    right:auto;
+    left:auto;
 }
 
 .alert {
-  color: red;
+  color: #61057f;
   font-weight: bold;
+  font-size: 1.3em;
 }

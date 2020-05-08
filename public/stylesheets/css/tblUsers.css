@@ -35,7 +35,7 @@ td, th {
   border: 1px solid #dddddd;
   text-align: center;
   margin: 0 auto 0 auto;
-  padding: 0; }
+  padding: 0 2px 0 2px; }
 
 tr:nth-of-child(odd) {
   border: 1px solid #f3f3f3; }

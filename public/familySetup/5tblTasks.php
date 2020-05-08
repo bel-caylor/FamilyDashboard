@@ -1,5 +1,3 @@
-<?php require_once('../private/shared/optionUsers.php'); ?>
-<?php require_once('../private/shared/optionsFreq.php'); ?>
 <?php
 
   //Frequency query
@@ -17,13 +15,6 @@
     $type = sqlSelect('type', 'ASC');
  ?>
 
- <div id="Step5" class="section">
-   <br><br>
-   <button onclick="clickExpandBtn('editTasks')">
-     <h2 class="inline">&#9660; Edit Tasks</h2>
-   </button>
- </div>
-
  <div id="editTasks" >
    <div id="assigedChart">
      <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
@@ -31,7 +22,6 @@
    <p role="alert" id="step5Msgs" class="status-message"><?php if ($_SESSION['step5Msgs'] !== []) {echo echoMsgArray($_SESSION['step5Msgs']);} ?></p>
    <!-- Delete Task Alert -->
    <?php include(SHARED_PATH . '/alertPopUp.php') ?>
-   <p class="center">Use Unassigned dropdown for tasks that are ALWAYS assigned to that user.</p>
 
    <table id="tblTasks" class="table"<?php if ($_SESSION['step'] < 5) {echo " hidden";}?>>
 
