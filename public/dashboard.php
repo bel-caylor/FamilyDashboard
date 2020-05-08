@@ -12,6 +12,9 @@
   while($row = mysqli_fetch_assoc($results)) {
     $_SESSION['users'][$row['ID']] = $row;
   };
+
+  //header
+  $header = $_SESSION['currentName'] . "`s Dashboard<br>";
 ?>
 
 <?php include(SHARED_PATH . '/header.php') ?>

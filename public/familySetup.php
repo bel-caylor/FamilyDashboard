@@ -11,6 +11,7 @@
     if ($_SESSION['currentUserID'] !== "") {$_SESSION['step'] = 4;}
   }
 
+  //header 
   if ($_SESSION['family'] !== "") {
     $header = $_SESSION['family'] . " Dashboard";
   }else{
@@ -27,13 +28,6 @@
 
  <?php include(SHARED_PATH . '/header.php') ?>
 
-<body onload="onLoad()">
-  <header>
-    <?php echo $header;?>
-  </header>
-
-  <main>
-      <br><br>
 <!-- Step 1 - Create/Edit Family  -->
     <div class="section inline">
       <button onclick="clickExpandBtn('Step1')">

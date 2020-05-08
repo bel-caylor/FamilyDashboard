@@ -11,4 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="<?php echo WWW_ROOT?>/stylesheets/css/main.css">
     <script src="https://kit.fontawesome.com/b95b14ad08.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   </head>
+  
+  <body onload="onLoad()">
+    <header>
+      <?php echo $header;?>
+    </header>
+
+    <main>
