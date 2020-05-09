@@ -20,7 +20,7 @@
 
 //HEADER
   if ($_SESSION['family'] !== "") {
-    $header = $_SESSION['family'] . " Dashboard";
+    $header = $_SESSION['family'] . " Family Setup";
   }else{
     $header = 'Welcome to Family Dashboard';
   }

@@ -18,8 +18,8 @@
   require_once('sessionValues.php');
   require_once('shared/infoPopUp.php');
   require_once('shared/section.php');
-  require_once('../private/shared/optionUsers.php');
-  require_once('../private/shared/optionsFreq.php');
+  require_once('shared/optionUsers.php');
+  require_once('shared/optionsFreq.php');
 
   $db = dbConnect();
  ?>

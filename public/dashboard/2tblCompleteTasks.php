@@ -1,5 +1,3 @@
-<?php require_once('../private/shared/optionUsers.php'); ?>
-<?php require_once('../private/shared/optionsFreq.php'); ?>
 <?php
   // Check for login
   if ($_SESSION['currentUserID'] === '') {
@@ -15,63 +13,67 @@ $taskTbl = '';
   //Import type.
 
  ?>
-<div id="status"></div>
-<table id="tblTasks" class="table">
+<div id="contentStep2" class="">
+ <div id="assigedChart">
+   <?php include(PUBLIC_PATH . '/dashboard/2sumComplete.php') ?>
+ </div>
+    <div id="status"></div>
+    <table id="tblTasks" class="table">
 
-  <!-- Heading Row -->
-    <tr>
-      <th class="tooltip"><span class="tooltiptext">Done</span>Chk</th>
-      <th class="tooltip"><span class="tooltiptext">Minutes to<br>Complete</span>Time</th>
-      <th class="task">Task</th>
-    </tr>
-
-  <!-- Assigned Tasks -->
-
-    <?php
-      $tasks = sqlAssignedTasks($_SESSION['currentUserID'], $date);
-      if ($tasks->num_rows > 0) { $taskTbl = 1;
-    ?>
+      <!-- Heading Row -->
         <tr>
-          <th colspan="3" class="category">Assigned Tasks</th>
+          <th class="tooltip"><span class="tooltiptext">Done</span>Chk</th>
+          <th class="tooltip"><span class="tooltiptext">Minutes to<br>Complete</span>Time</th>
+          <th class="task">Task</th>
         </tr>
 
-    <?php
-      }
-      while($row = mysqli_fetch_assoc($tasks)) {
-          createTableRow($row);}
-    ?>
+      <!-- Assigned Tasks -->
 
-<!-- House Tasks -->
-  <?php
-    $tasks = sqlHouseTasks($_SESSION['familyID'], $date);
-    if ($tasks->num_rows > 0) { $taskTbl = 1;
-    ?>
-      <tr>
-        <th colspan="3" class="category">House Tasks</th>
-      </tr>
-      <?php
+        <?php
+          $tasks = sqlAssignedTasks($_SESSION['currentUserID'], $date);
+          if ($tasks->num_rows > 0) { $taskTbl = 1;
+        ?>
+            <tr>
+              <th colspan="3" class="category">Assigned Tasks</th>
+            </tr>
+
+        <?php
+          }
           while($row = mysqli_fetch_assoc($tasks)) {
-            createTableRow($row);}
-    }?>
+              createTableRow($row);}
+        ?>
 
-  <!-- Personal Tasks -->
-  <?php
-  $tasks = sqlPersonalTasks($_SESSION['currentUserID'], $date);
-    if ($tasks->num_rows > 0) { $taskTbl = 1;
-    ?>
-    <tr>
-      <th colspan="3" class="category">Personal Tasks</th>
-    </tr>
-    <?php
-        while($row = mysqli_fetch_assoc($tasks)) {
-          createTableRow($row);}
-    }
+    <!-- House Tasks -->
+      <?php
+        $tasks = sqlHouseTasks($_SESSION['familyID'], $date);
+        if ($tasks->num_rows > 0) { $taskTbl = 1;
+        ?>
+          <tr>
+            <th colspan="3" class="category">House Tasks</th>
+          </tr>
+          <?php
+              while($row = mysqli_fetch_assoc($tasks)) {
+                createTableRow($row);}
+        }?>
 
-    if ($taskTbl != 1) {echo "<p class=center>No tasks to display.</p>";}
-    ?>
+      <!-- Personal Tasks -->
+      <?php
+      $tasks = sqlPersonalTasks($_SESSION['currentUserID'], $date);
+        if ($tasks->num_rows > 0) { $taskTbl = 1;
+        ?>
+        <tr>
+          <th colspan="3" class="category">Personal Tasks</th>
+        </tr>
+        <?php
+            while($row = mysqli_fetch_assoc($tasks)) {
+              createTableRow($row);}
+        }
 
-</table>
+        if ($taskTbl != 1) {echo "<p class=center>No tasks to display.</p>";}
+        ?>
 
+    </table>
+</div>
 
 
 <!-- Create Table Function -->

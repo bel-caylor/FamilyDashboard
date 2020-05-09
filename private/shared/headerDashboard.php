@@ -19,13 +19,10 @@
       <div class="navHover">
         <button onclick="toggleNav()"><i class="fas fa-bars"></i>
           <div id="navContent" class="hidden">
-            <a href="#Step1">Edit Family</a><br>
-            <a href="#Step2">Add Users</a><br>
-            <a href="#Step3">Edit Users</a><br>
-            <a href="#Step4">Add Room Tasks</a><br>
-            <a href="#Step6">Add Custom Tasks</a><br>
-            <a href="#Step5">Edit Tasks</a><br>
-            <a href="dashboar.php">Go To <?php echo $_SESSION['currentName'] ?>'s Dashboard</a><br>
+            <a href="#Step2">Complete Tasks</a><br>
+            <a href="#Step3">Grade Tasks</a><br>
+            <a href="#Step4">Assign Tasks</a><br>
+            <a href="familySetup.php#Step4">Setup Users & Tasks</a><br>
           </div>
       </div>
 

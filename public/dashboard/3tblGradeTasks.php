@@ -7,7 +7,7 @@
   $tasks = sqlGradeTasks();
 ?>
 
-<div id="gradeTasks">
+<div id="contentStep3">
 
 <?php
   if ($tasks->num_rows > 0) {?>
