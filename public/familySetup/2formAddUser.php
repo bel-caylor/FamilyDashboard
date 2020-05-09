@@ -5,7 +5,7 @@
   $email = $_SESSION['aryUser']['email'] ?? $_SESSION['email'] ?? '';
   $admin = $_SESSION['aryUser']['admin'] ?? '';
  ?>
-<div class="form">
+<div id="contentStep2" class="form">
   <form id="form2" action="<?php echo WWW_ROOT?>/familySetup/2addUser.php" method="POST">
     <fieldset>
       <!-- <label for="name">Name:  </label> -->

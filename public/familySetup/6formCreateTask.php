@@ -1,6 +1,4 @@
-<?php require_once('../private/shared/optionUsers.php'); ?>
-<?php require_once('../private/shared/optionsFreq.php'); ?>
-<div id="createTasks">
+<div id="contentStep6">
   <p role="alert" id="step6Msgs" class="status-message"><?php if ($_SESSION['step6Msgs'] !== []) {echo echoMsgArray($_SESSION['step6Msgs']);} ?></p>
     <form id="form6" action="<?php echo WWW_ROOT?>/familySetup/6addTask.php" method="POST">
       <input type="hidden" id="step" value="Step5">

@@ -15,7 +15,7 @@
     $type = sqlSelect('type', 'ASC');
  ?>
 
- <div id="editTasks" >
+ <div id="contentStep5" >
    <div id="assigedChart">
      <?php include(PUBLIC_PATH . '/familySetup/5sumAssign.php') ?>
    </div>

@@ -1,4 +1,4 @@
-<div id="Step1" class="form">
+<div id="contentStep1" class="form">
   <form id="form1" action="<?php echo WWW_ROOT?>/familySetup/1family.php" method="POST">
     <fieldset>
       <label  for="family">Family Name:  </label>

@@ -2,7 +2,7 @@
 
 function section($id, $name) {?>
   <div id='<?php echo $id ?>' class="section">
-      <button onclick="clickExpandBtn('Step1')">
+      <button onclick="clickExpandBtn('<?php echo $id ?>')">
         <h2 id="head1">&#9660; <?php echo $name ?></h2>
       </button>
     <div class="btnRight">

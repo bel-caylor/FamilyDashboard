@@ -1,6 +1,6 @@
 //Toggle visible sections on familySetup.
 function clickExpandBtn(section) {
-  document.getElementById(section).classList.toggle("hidden");
+  document.getElementById("content" + section).classList.toggle("hidden");
 }
 
 //Toggle visible sections on dashboard.

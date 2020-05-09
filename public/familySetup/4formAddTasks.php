@@ -1,4 +1,4 @@
-<div id="addTasks">
+<div id="contentStep4">
   <div class="form">
     <form id="form4" action="<?php echo WWW_ROOT?>/familySetup/4addCategory.php" method="POST">
       <fieldset>
