@@ -45,6 +45,20 @@
    //CREATE Family Form
     include(PUBLIC_PATH . '/familySetup/1form.php');
 
+// STEP 3 - Edit Users
+if ($_SESSION['step']>2) {
+  echo section("Step3", "Edit Users");
+  // Info Message
+    echo infoPopUp(3,
+      "Edit Users Info",
+      "Click on PENCIL icon to edit user.<p>
+      Don't forget to save user <br>
+      by clicking on DISK icon.");
+
+  // ADD Users Form
+    include(PUBLIC_PATH . '/familySetup/3tblUsers.php');
+}
+
 //STEP 2 - Add Family Members
 if ($_SESSION['step']>1) {
     echo section("Step2", "Add Users");
@@ -64,20 +78,6 @@ if ($_SESSION['step']>1) {
 
     // ADD Users Form
       include(PUBLIC_PATH . '/familySetup/2formAddUser.php');
-}
-
-// STEP 3 - Edit Users
-if ($_SESSION['step']>2) {
-  echo section("Step3", "Edit Users");
-  // Info Message
-    echo infoPopUp(3,
-      "Edit Users Info",
-      "Click on PENCIL icon to edit user.<p>
-      Don't forget to save user <br>
-      by clicking on DISK icon.");
-
-  // ADD Users Form
-    include(PUBLIC_PATH . '/familySetup/3tblUsers.php');
 }
 
 // STEP 4 - Add Tasks

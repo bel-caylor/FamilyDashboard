@@ -13,6 +13,10 @@
     }
   //Import type.
     $type = sqlSelect('type', 'ASC');
+
+  //Are there tasks to display?
+  $tasks = sqlCategories($_SESSION['familyID']);
+  if ($tasks->num_rows > 0) {
  ?>
 
  <div id="contentStep5" >
@@ -70,3 +74,4 @@
      <!-- </div> -->
    </table>
  </div>
+<?php } ?>
