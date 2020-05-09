@@ -95,7 +95,7 @@ if ($_SESSION['step']>3) {
     include(PUBLIC_PATH . '/familySetup/4formAddTasks.php');
 
   // STEP 6 - Create Tasks
-    echo section("Step6", "Create Tasks");
+    echo section("Step6", "Add Custom Tasks");
     // Info Message
       echo infoPopUp(6,
         "Create Tasks Info",
@@ -124,9 +124,7 @@ if ($_SESSION['step']>3) {
     // Create Task Form
       include(PUBLIC_PATH . '/familySetup/5tblTasks.php');
 
-}
-  ?>
-
+?>
 <!-- Go to Dashboard -->
         <div class="section">
           <button onclick="window.location='dashboard.php'">
@@ -134,5 +132,7 @@ if ($_SESSION['step']>3) {
           </button>
         </div>
   </main>
+
+<?php } ?>
 
 <?php include(SHARED_PATH . '/footer.php') ?>

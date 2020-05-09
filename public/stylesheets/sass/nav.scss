@@ -1,0 +1,21 @@
+.navHover:hover {
+  .navContent {
+    display: block;
+  }
+  button:hover {
+    opacity: 1.0
+  }
+}
+
+#navContent {
+  // display: none;
+  position: fixed;
+  left: 10px;
+  top: 35px;
+  background-color: #c2d9fc;
+  // opacity: 1.0;
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 2px #66666678;
+
+}

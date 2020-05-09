@@ -17,6 +17,10 @@ function toggleInfo(section) {
   document.getElementById(section).classList.toggle("hidden");
 }
 
+function  toggleNav( ) {
+  document.getElementById("navContent").classList.toggle("hidden");
+}
+
 //Submit Forms - Add Family, Add User, Add Category, Add Task
 // document.addEventListener('submit', e => {
 //   // Store reference to form to make later code easier to read

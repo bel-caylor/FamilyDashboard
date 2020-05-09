@@ -1,10 +1,11 @@
 @import "toolTip.scss";
 @import "tblUsers.scss";
 @import "popUp.scss";
+@import "nav.scss";
 
 //Main Sections
 body {
-    margin: 2px;
+    margin: 0px;
     font-color: red;
     max-width: 350px;
     margin-left: auto;
@@ -13,15 +14,13 @@ body {
 
 header {
   position: fixed;
+  display: flex;
   z-index: 1000;
   background-color: #c2d9fc;
   width: 100%;
   top: 0;
   text-align: center;
-  padding: 5px 0 5px 0;
-  // border-width: 0 0 2px 0;
-  // border-color: black;
-  // border-style: groove;
+  padding: 10px 0 5px 10px;
   left: 0;
   font-weight: bold;
   box-shadow: 0 2px 2px #66666678;
@@ -34,7 +33,7 @@ h2 {
 }
 
 h3 {
-  background-color: #ffeaea;
+  // background-color: #ffeaea;
   text-align: center;
   color: black;
   margin: 0 10px 5px 10px;
@@ -128,11 +127,12 @@ button:hover {
 #assigedChart {
   position: fixed;
   z-index: 1000;
-  background-color: #ffeaea;
+  background-color: #c2d9fc;
+  box-shadow: 0 -2px 2px #66666678;
   width: 100%;
   bottom: 0px;
   left: 0;
-  padding: 5px;
+  padding: 7px 15px 7px 15px;
   text-align: left;
   right: 0;
 }

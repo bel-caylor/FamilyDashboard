@@ -1,0 +1,15 @@
+.navHover:hover .navContent {
+  display: block; }
+.navHover:hover button:hover {
+  opacity: 1; }
+
+#navContent {
+  position: fixed;
+  left: 10px;
+  top: 35px;
+  background-color: #c2d9fc;
+  text-align: left;
+  padding: 10px;
+  box-shadow: 0 2px 2px #66666678; }
+
+/*# sourceMappingURL=nav.css.map */
