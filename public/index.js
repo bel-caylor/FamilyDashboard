@@ -158,6 +158,48 @@ function deleteStatusMessage(id) {
   document.getElementById(id).innerHTML = '';
 }
 
+function editCat(id) {
+  document.getElementById('cat' + id).disabled = false;
+  toggleCat(id);
+  document.getElementById('btncat' + id).setAttribute("onclick", "saveCat(" + id + ")");
+}
+
+function saveCat(id) {
+  //Create data to send to server.
+    let data = {
+      catID: id,
+      Name: document.querySelector("#cat" + id).value,
+    };
+  console.log(data);
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/familySetup/5editCat.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('step5Msgs').innerHTML = status;
+        })
+
+    if (status = "Update Succeeded.") {
+      document.getElementById('cat' + id).disabled = true;
+      toggleCat(id);
+      document.getElementById('btncat' + id).setAttribute("onclick", "editCat(" + id + ")");
+  }
+}
+
+function toggleCat(id) {
+  document.getElementById('rowCat' + id).classList.toggle("edit");
+  document.getElementById('rowCat' + id).classList.toggle("category");
+  document.querySelector('#btncat' + id +' > i').classList.toggle("fas");
+  document.querySelector('#btncat' + id +' > i').classList.toggle("fa-pencil-alt");
+  document.querySelector('#btncat' + id +' > i').classList.toggle("far");
+  document.querySelector('#btncat' + id +' > i').classList.toggle("fa-save");
+}
+
 function editTask(taskID) {
   //Show Rows & Hightlight
     toggleTask(taskID);
@@ -166,7 +208,7 @@ function editTask(taskID) {
     document.querySelector("#task" + taskID + " > th.task > input").disabled = false;
 
   //Change symbol and Edit action to Save Action
-    let html = `<span class="tooltiptext">Save Task</span><button type=\"submit\"  onclick="saveTask(` + taskID + `)"><i class="far fa-save"></i>`;
+    let html = `<button type=\"submit\"  onclick="saveTask(` + taskID + `)"><i class="far fa-save"></i>`;
     document.getElementById('EdtTask' + taskID).innerHTML = html;
 
   //Remove onchange for assign user.

@@ -39,7 +39,7 @@ function sqlCategories($familyID) {
 function sqlTasks($familyID, $catID) {
   $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, `tasks`.Freq_ID, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
   $sql .= "FROM tasks LEFT JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
-  $sql .= "JOIN frequency ON tasks.Freq_ID = frequency.ID ";
+  $sql .= "LEFT JOIN frequency ON tasks.Freq_ID = frequency.ID ";
   $sql .= "WHERE tasks.Family_ID = " . $familyID . " AND tasks.Cat_Name_ID = " . $catID;
   // echo $sql . "<br>";
   return query_db($sql);
@@ -265,6 +265,20 @@ function sqlAddDefaultTasks($category, $catNameID) {
       // print_r($input);
       sqlAddTask($input);
     }
+}
+
+function sqlEditCat($input) {
+  $sql = "UPDATE `category_names` SET ";
+  $sql .= "Name='" . sqlStrPrep($input['Name']) . "' ";
+  $sql .= "WHERE ID='" . sqlStrPrep($input['catID']) . "' ";
+  $sql .= "LIMIT 1";
+  // echo $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return ["edit failed"];
+  }
 }
 
 function sqlEditTask($input) {

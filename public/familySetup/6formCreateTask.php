@@ -41,7 +41,7 @@
           </tr>
     <!-- Time Estimate -->
           <tr>
-            <th class="formLabel">Time Estimate:</th>
+            <th class="formLabel tooltip"><span class="tooltiptext">Minutes<br>to Complete</span>Time Estimate:</th>
             <th class="formInput"><input type="number" name="time" size="2" class="name" min="1" max="200" value="1"></th>
           </tr>
     <!-- Note -->

@@ -4,7 +4,8 @@
   border: none; }
 
 .edit {
-  background-color: #ffecf4; }
+  background-color: #ffecf4;
+  text-align: left; }
 
 .saved {
   background-color: #e4fbe4; }
