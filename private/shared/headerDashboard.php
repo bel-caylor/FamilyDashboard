@@ -28,6 +28,7 @@
       </div>
 
       <div>
+        <?php echo "&nbsp;&nbsp;&nbsp;" . $header . "<button class='tooltip' onclick=\"window.location='dashboard.php'\"><span class='tooltiptext'>Refresh Page</span><i class='fas fa-redo-alt'></i>";?>
         <?php echo "&nbsp;&nbsp;&nbsp;" . $header;?>
       </div>
     </header>

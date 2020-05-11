@@ -69,10 +69,7 @@ $stepID = $_POST['StepID'] ?? '';
    $stepID = substr($step, 0, 1)
 ?>
 <?php include(SHARED_PATH . '/header.php') ?>
-<body>
-  <header>
-    Family Dashboard LOGIN
-  </header>
+
   <main>
     <br><br>
   <!-- EMAIL -->

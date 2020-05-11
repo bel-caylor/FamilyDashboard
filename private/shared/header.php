@@ -37,7 +37,14 @@
         </div>
       <?php } ?>
       <div>
-        <?php echo "&nbsp;&nbsp;&nbsp;" . $header;?>
+        <?php
+          $html = "&nbsp;&nbsp;&nbsp;" . $header;
+          if ($header != "Family Dashboard Login") {
+            $html .= "<button class='tooltip' onclick=\"window.location='familySetup.php'\">";
+            $html .= "<span class='tooltiptext'>Refresh Page</span><i class='fas fa-redo-alt'></i>";
+          }
+          echo $html;
+        ?>
       </div>
     </header>
 
