@@ -317,14 +317,14 @@ function toggleCompleteTask($taskID) {
         saveCompleteTask($taskID);
       } else {
         //Unchecked task - remove completed task from task_log table
-        deleteCompleteTask($taskID);
+        // deleteCompleteTask($taskID);
 
       }
 }
 
-function deleteCompleteTask() {
-
-}
+// function deleteCompleteTask() {
+//
+// }
 
 function saveCompleteTask($taskID) {
   //Create data to send to server.

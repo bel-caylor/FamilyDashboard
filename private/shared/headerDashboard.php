@@ -23,6 +23,7 @@
             <a href="#Step3">Grade Tasks</a><br>
             <a href="#Step4">Assign Tasks</a><br>
             <a href="familySetup.php#Step4">Setup Users & Tasks</a><br>
+            <a href="logout.php">Log Out</a><br>
           </div>
       </div>
 
