@@ -21,73 +21,6 @@ function  toggleNav( ) {
   document.getElementById("navContent").classList.toggle("hidden");
 }
 
-//Submit Forms - Add Family, Add User, Add Category, Add Task
-// document.addEventListener('submit', e => {
-//   // Store reference to form to make later code easier to read
-//   const form = e.target;
-//
-//   // get status message references
-//   const statusBusy = form.querySelector('.status-busy');
-//   const statusFailure = form.querySelector('.status-failure');
-//   const statusMessage = form.querySelector('.status-message');
-//   const step = form.querySelector('#step').value;
-//   // document.querySelector("#step")
-//   // const doc = document;
-//   // const step = form.querySelector('Step').innerHTML;
-//
-//   // Post data using the Fetch API
-//   fetch(form.action, {
-//       method: form.method,
-//       body: new FormData(form)
-//     })
-//     // Convert response to text
-//     .then(res => res.text())
-//
-//     // Convert to HTML document
-//     .then(text => new DOMParser().parseFromString(text, 'text/html'))
-//
-//     // Add status message to DOM
-//     .then(doc => {
-//       statusBusy.hidden = true;
-//       statusMessage.hidden = false;
-//       form.getElementsByTagName("fieldset")[0].disabled = false;
-//       let url = window.location.href;
-//       let position = url.search("#");
-//       url = url.substring(0, position);
-//       window.location.replace(url + "#" + step);
-//       // location.reload();
-//
-//
-//     })
-//     .catch(err => {
-//       console.log("error", err)
-//       form.getElementsByTagName("fieldset")[0].disabled = false;  // Unlock form elements
-//       lastActive.focus();  // Return focus to active element
-//       statusBusy.hidden = true;  // Hide the busy state
-//       statusFailure.hidden = false;  // Show error message
-//
-//     });
-//
-//   // Remember the last active field
-//   const lastActive = document.activeElement;
-//
-//   // Show busy state and move focus to it
-//   statusBusy.hidden = false;
-//   statusBusy.tabIndex = -1;
-//   statusBusy.focus();
-//
-//   // Disable all form elements to prevent further input
-//   form.getElementsByTagName("fieldset")[0].disabled = true;
-//
-//   // Make sure connection failure message is hidden
-//   statusFailure.hidden = true;
-//   statusBusy.hidden = true;
-//
-//   // Prevent the default form submit
-//   e.preventDefault();
-//
-// });
-
 function appUpdate(step, doc) {
   switch (step) {
     case '1':
@@ -137,7 +70,6 @@ function saveUser(userID) {
     if (document.querySelector("#Hdn" + userID + " > th.admin.tooltip > input").checked == true) {
       Admin = 1;
     };
-    console.log(Admin);
     let data = {
       userID: userID,
       name: document.querySelector("#userID" + userID + " > th:nth-child(2) > input").value,
@@ -146,7 +78,6 @@ function saveUser(userID) {
       admin: Admin,
       email: document.querySelector("#Hdn" + userID + " > th.email > input").value,
     };
-  // console.log(data);
 
   //call 3editUser.php
   fetch('/FamilyDashboard/public/familySetup/3editUser.php', {
@@ -207,7 +138,6 @@ function deleteUser(row, ID) {
   //call 3editUser.php
   fetch('/FamilyDashboard/public/familySetup/3deleteUser.php?row=' + row + '&id=' + ID, {
     method: 'GET',
-    // body: JSON.stringify(data)
   })
     .then(res => res.text())
       .then(text => new DOMParser().parseFromString(text, 'text/html'))
@@ -299,7 +229,6 @@ function deleteTask(taskID) {
   //call 3editUser.php
   fetch('/FamilyDashboard/public/familySetup/5deleteTask.php?taskID=' + taskID, {
     method: 'GET',
-    // body: JSON.stringify(data)
   })
     .then(res => res.text())
       .then(text => new DOMParser().parseFromString(text, 'text/html'))

@@ -47,7 +47,7 @@
     <!-- Note -->
           <tr>
             <th class="formInput" colspan="2">
-              <input type="text" name="note" size="28" placeholder="Note"></th>
+              <input type="text" name="note" size="40" placeholder="Note"></th>
           </tr>
     <!-- Submit -->
           <tr>

@@ -53,8 +53,9 @@
 
   if ($result[0] !== "edit failed") {
     //Edit complete.
-    echo "Update Succeeded.";
-    header("Location: " . WWW_ROOT . "/familySetup.php#Step5");  //REDIRECT
+    array_push($_SESSION['step6Msgs'],"Task created.");
+    // echo "Update Succeeded.";
+    header("Location: " . WWW_ROOT . "/familySetup.php#Step6");  //REDIRECT
   }else {
     //Edit failed.
     array_push($_SESSION['step6Msgs'],"Insert failed.  Please try again.");

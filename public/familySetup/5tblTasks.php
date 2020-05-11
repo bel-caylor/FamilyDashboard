@@ -1,11 +1,5 @@
 <?php
 
-  //Frequency query
-    $freq = sqlSelect("frequency", "ID");
-    while($row = mysqli_fetch_assoc($freq)) {
-      $_SESSION['freq'][$row['ID']] = $row;
-    }
-
   //Import Categories
     $categories = sqlCategories($_SESSION['familyID']);
     if (mysqli_num_rows($categories) > 0) {

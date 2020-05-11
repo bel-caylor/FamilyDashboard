@@ -35,10 +35,10 @@
         if ($_SESSION['step'] == '1') {$hidden = '';}
         echo infoPopUp(1,
           "Family Dashboard Info",
-          "Use this tool to help you<br>keep your family on task.<p>
-            Setup tasks by room and assign<br>them to family members.<p>
-            Family Members can login<br>and complete tasks.<p>
-            Dashboard will calculate how many<br>minutes they have completed.<p>
+          "Use this tool to help you keep your family on task.<p>
+            Setup tasks by room and assign them to family members.<p>
+            Family Members can login and complete tasks.<p>
+            Dashboard will calculate how many minutes they have completed.<p>
             Parents can grade completed tasks.<p>
             Thanks for visiting!<p>",
            $hidden);
@@ -51,9 +51,10 @@ if ($_SESSION['step']>2) {
   // Info Message
     echo infoPopUp(3,
       "Edit Users Info",
-      "Click on PENCIL icon to edit user.<p>
-      Don't forget to save user <br>
-      by clicking on DISK icon.");
+      "Click on PENCIL <i class='fas fa-pencil-alt'></i> icon to edit user.<p>
+      Don't forget to SAVE <i class='far fa-save'></i> user
+      by clicking on DISK icon.<p>
+      <i class='far fa-trash-alt'></i> is DELETE task button.");
 
   // ADD Users Form
     include(PUBLIC_PATH . '/familySetup/3tblUsers.php');
@@ -66,14 +67,14 @@ if ($_SESSION['step']>1) {
       echo infoPopUp(2,
         "Add Users Info",
         "Add each member of your family.<p>
-          Select unique INITIAL and COLOR<br>
-          for each member these will <br>
+          Select unique INITIAL and COLOR
+          for each member these will
           be used for reporting charts.<p>
-          E-Mails will be used for login and<br>
-          can be the same for family <br>
+          E-Mails will be used for login and
+          can be the same for family
           members without e-mails.<p>
-          ADMINISTRATORS will be able to<br>
-          - create/edit/delete family members<br>
+          ADMINISTRATORS will be able to
+          - create/edit/delete family members
           - add/assign/grade tasks");
 
     // ADD Users Form
@@ -88,7 +89,7 @@ if ($_SESSION['step']>3) {
       "Add Room Tasks Info",
       "Use this section to add task categories.<p>
         For example 'Master Bath' or 'Kitchen'.<p>
-        Select a Type to import<br>
+        Select a Type to import
         default tasks for that category.");
 
   // ADD Room Tasks Form
@@ -99,13 +100,13 @@ if ($_SESSION['step']>3) {
     // Info Message
       echo infoPopUp(6,
         "Create Tasks Info",
-        "Use this section to create <br>
+        "Use this section to create
           CUSTOM task categories and tasks.<p>
-          FREQUENCY dropdown determines <br>
+          FREQUENCY dropdown determines
           how often task is added to list.<p>
-          Start DATE is recalculated every time<br>
+          Start DATE is recalculated every time
           a task is completed based on frequency.<p>
-          Time Estimate NUMBER is based on <br>
+          Time Estimate NUMBER is based on
           number of minutes to complete the task.");
 
     // Create Task Form
@@ -116,9 +117,13 @@ if ($_SESSION['step']>3) {
     // Info Message
       echo infoPopUp(5,
         "Edit Tasks Info",
-        "Use Unassigned DROPDOWN for tasks  <br>
+        "Use Unassigned DROPDOWN for tasks
           that are ALWAYS assigned to that user.<p>
-
+          Date is start date.
+          Number is time in minutes.<p>
+          <i class='fas fa-pencil-alt'></i> is EDIT task button.<p>
+          <i class='far fa-trash-alt'></i> is DELETE task button.<p>
+          <i class='far fa-save'></i> is SAVE task button.
           ");
 
     // Create Task Form
