@@ -85,8 +85,8 @@ $taskTbl = '';
     <!-- Checkbox -->
       <th><input type="checkbox" onchange="toggleCompleteTask(<?php echo $row['taskID'] ?>)"></th>
     <!-- Time Spent -->
-      <th><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
+      <th class="tblInput"><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
     <!-- Task -->
-      <th class="task"><input type="text" size="30" value="<?php echo $task?>"></th>
+      <th class="task"><?php echo $task?></th>
   </tr>
 <?php } ?>

@@ -12,9 +12,8 @@
     }
 
   //Import Categories
-    $categories = sqlCategories($_SESSION['familyID']);
-  //Import type.
-    $type = sqlSelect('type', 'ASC');
+    $categories = sqlCategories($_SESSION['familyID'], 1);
+
  ?>
 
 
@@ -39,7 +38,7 @@
               if ($tasks->num_rows > 0) {?>
               <!-- Category Row -->
                 <tr id="cat<?php echo $category['Cat_Name_ID'] ?>" class="tblRow">
-                  <th  colspan="6" class="category"><?php echo $category['Type'] . "-" . $category['Description'] . "-" . $category['Name']?></th>
+                  <th  colspan="6" class="category"><?php echo $category['Name']?></th>
                 </tr>
             <?php } ?>
 

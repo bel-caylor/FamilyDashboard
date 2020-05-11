@@ -25,12 +25,15 @@ function sqlSelect($table, $orderBy, $ord = 'ASC', $filter = 'NONE', $filterValu
   // }
 }
 
-function sqlCategories($familyID) {
+function sqlCategories($familyID, $type = 0) {
   $sql = "SELECT category_names.ID AS Cat_Name_ID, category_names.Name, category.Description, category_names.Type_ID, type.Type ";
   $sql .= "FROM category_names ";
   $sql .= "LEFT JOIN category ON category.ID = category_names.Category_ID ";
   $sql .= "LEFT JOIN type ON type.ID = category_names.Type_ID ";
   $sql .= "WHERE Family_ID = " . $familyID . " ";
+  if ($type != 0 ) {
+    $sql .= "AND type.ID = " . $type . " ";    
+  }
   $sql .= "ORDER BY Type.ID, Cat_Name_ID ASC";
   // echo $sql . "<br>";
   return query_db($sql);

@@ -25,7 +25,7 @@
             <a href="#Step4">Add Room Tasks</a><br>
             <a href="#Step6">Add Custom Tasks</a><br>
             <a href="#Step5">Edit Tasks</a><br>
-            <a href="dashboar.php">Go To <?php echo $_SESSION['currentName'] ?>'s Dashboard</a><br>
+            <a href="dashboard.php">Go To <?php echo $_SESSION['currentName'] ?>'s Dashboard</a><br>
           </div>
       </div>
 

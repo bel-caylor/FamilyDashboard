@@ -317,8 +317,13 @@ function toggleCompleteTask($taskID) {
         saveCompleteTask($taskID);
       } else {
         //Unchecked task - remove completed task from task_log table
+        deleteCompleteTask($taskID);
 
       }
+}
+
+function deleteCompleteTask() {
+
 }
 
 function saveCompleteTask($taskID) {
@@ -340,16 +345,20 @@ function saveCompleteTask($taskID) {
     .then(res => res.text())
       .then(text => new DOMParser().parseFromString(text, 'text/html'))
         .then(doc => {
-          let status = doc.body.innerHTML;
-          document.getElementById('status').innerHTML = status;
+          // let status = doc.body.innerHTML;
+          // document.getElementById('status').innerHTML = status;
           let taskLogID = doc.getElementById('taskLogID').innerHTML;
           let newStart = doc.getElementById('newStart').innerHTML;
-          console.log(taskLogID);
-          console.log(newStart);
-          if (taskLogID !== "insert failed") {
+          // console.log(taskLogID);
+          // console.log(newStart);
+          if (taskLogID != "insert failed") {
             //change background color to green & add taskLogID
-            document.getElementById("task" + $taskID).classList.add('saved');
-            document.querySelector("#task353 > th:nth-child(1) > input[type=checkbox]").setAttribute("name", "taskLogID" + taskLogID);
+            document.querySelector("#task" + $taskID + " > th.tblInput").classList.remove("tblInput");
+            document.getElementById("time" + $taskID).disabled = true;
+            document.querySelector("#task" + $taskID + " > th:nth-child(1) > input[type=checkbox]").disabled = true;
+            document.getElementById("task" + $taskID).classList.add("saved");
+
+            // document.querySelector("#task353 > th:nth-child(1) > input[type=checkbox]").setAttribute("name", "taskLogID" + taskLogID);
           }
         })
     .catch(err => {

@@ -18,8 +18,8 @@
   if ($taskLogID !== "insert failed") {
   // Edit Start on tasks table to reflect next time for the task.
     $result = sqlUpdateNextStart($input);
-    // echo "<div id=newStart>" . $result . "</div>";
+    echo "<div id=newStart>" . $result . "</div>";
   }
-  // echo "<div id=taskLogID>" . $taskLogID . "</div>";
+  echo "<div id=taskLogID>" . $taskLogID . "</div>";
 
 ?>
