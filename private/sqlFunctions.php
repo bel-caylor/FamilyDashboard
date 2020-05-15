@@ -348,10 +348,26 @@ function sqlRedoTask($userID) {
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `task_log`.User_ID = " . $userID . " AND category_names.Type_ID = 1 ";
+  $sql .= "AND Redo = 0 ";
+  $sql .= "AND Grade < 100 ";
   $sql .= "AND Timestamp > '" . $date . "' ";
-  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  $sql .= "ORDER BY `Grade` ASC";
   // echo $sql;
   return query_db($sql);
+}
+
+function sqlSaveRedoTask($taskLogID) {
+  $sql = "UPDATE `task_log` SET ";
+  $sql .= "Redo= 1 ";
+  $sql .= "WHERE ID='" . $taskLogID . "' ";
+  $sql .= "LIMIT 1";
+  // echo $sql;
+  $result = edit_db($sql);
+  if ($result == "update succeeded") {
+    return $result;
+  }else {
+    return "edit failed";
+  }
 }
 
 function sqlAssignedTasks($userID, $date) {

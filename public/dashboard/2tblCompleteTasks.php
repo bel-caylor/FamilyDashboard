@@ -17,7 +17,7 @@ $taskTbl = '';
  <div id="assigedChart">
    <?php include(PUBLIC_PATH . '/dashboard/2sumComplete.php') ?>
  </div>
-    <div id="status"></div>
+    <div id="completeTaskStatus"></div>
     <table id="tblTasks" class="table">
 
       <!-- Heading Row -->

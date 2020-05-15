@@ -381,6 +381,39 @@ function changeTaskTime($taskID) {
         }
 }
 
+function toggleRedoTask(taskLogID) {
+  //Is task completed or not?
+  $task = document.querySelector(`#task${taskLogID}> th:nth-child(1) > input[type=checkbox]`);
+    if ($task.checked == true) {
+      //Completed task - add task to task_log Table
+      saveRedoTask(taskLogID);
+    } else {
+      //Unchecked task - remove completed task from task_log table
+      // deleteCompleteTask($taskID);
+
+    }
+}
+
+function saveRedoTask(taskLogID) {
+  //Create data to send to server.
+    let data = {taskLogID: taskLogID };
+
+  //call 3editUser.php
+  fetch('/FamilyDashboard/public/dashboard/2completeRedoTask.php', {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.text())
+      .then(text => new DOMParser().parseFromString(text, 'text/html'))
+        .then(doc => {
+          let status = doc.body.innerHTML;
+          document.getElementById('completeTaskStatus').innerHTML = status;
+        })
+    .catch(err => {
+      console.log("error", err)
+    });
+}
+
 function assignTask(taskID) {
   //Create data to send to server.
     let data = {
