@@ -119,7 +119,7 @@ if ($_SESSION['step']>3) {
         "Edit Tasks Info",
         "Use Unassigned DROPDOWN for tasks
           that are ALWAYS assigned to that user.<p>
-          Date is start date.
+          Date is start date.<p>
           Number is time in minutes.<p>
           <i class='fas fa-pencil-alt'></i> is EDIT task button.<p>
           <i class='far fa-trash-alt'></i> is DELETE task button.<p>

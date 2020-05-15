@@ -404,7 +404,7 @@ function assignTask(taskID) {
 
     if (status = "Update Succeeded.") {
 
-      location.reload();
+      // location.reload();
   }
 }
 

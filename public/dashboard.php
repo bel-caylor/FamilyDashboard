@@ -13,7 +13,7 @@
   };
 
   //header
-  $header = $_SESSION['currentName'] . "`s Dashboard<br>";
+  $header = $_SESSION['currentName'] . "`s Dashboard";
   include(SHARED_PATH . '/headerDashboard.php');
 
 // Complete Task Section
