@@ -339,37 +339,52 @@ function sqlCatNames($familyID) {
   return query_db($sql);
 }
 
+function sqlRedoTask($userID) {
+  $date = date_create();
+  date_modify($date,"-3 days");
+  $date = date_format($date,"Y-m-d H:i:s");
+  $sql = "SELECT task_log.ID as taskLogID, task_log.Grade, tasks.Task, task_log.Note, category.Description, category_names.Name FROM `task_log` ";
+  $sql .= "LEFT JOIN `tasks` ON task_log.Tasks_ID = `tasks`.ID  ";
+  $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
+  $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
+  $sql .= "WHERE `task_log`.User_ID = " . $userID . " AND category_names.Type_ID = 1 ";
+  $sql .= "AND Timestamp > '" . $date . "' ";
+  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  // echo $sql;
+  return query_db($sql);
+}
+
 function sqlAssignedTasks($userID, $date) {
-  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, tasks.Note, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `Assigned_User_ID` = " . $userID . " AND category_names.Type_ID = 1 ";
   $sql .= "AND Start < '" . $date . "' ";
-  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   // echo $sql;
   return query_db($sql);
 }
 
 function sqlHouseTasks($familyID, $date) {
-  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, tasks.Note, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE tasks.`Family_ID` = " . $familyID . " AND category_names.Type_ID = 1 ";
   $sql .= "AND tasks.`Assigned_User_ID` = 0 ";
   $sql .= "AND Start < '" . $date . "' ";
-  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   // echo $sql;
   return query_db($sql);
 }
 
 function sqlPersonalTasks($userID, $date) {
-  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, category.Description, category_names.Name FROM `tasks` ";
+  $sql = "SELECT tasks.ID as taskID, tasks.Time, tasks.Task, tasks.Note, category.Description, category_names.Name FROM `tasks` ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `category_names`.`Type_ID` = 2 ";
   $sql .= "AND tasks.`Assigned_User_ID` = " . $userID . " ";
   $sql .= "AND Start < '" . $date . "' ";
-  $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
+  $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   return query_db($sql);
 }
 
@@ -524,8 +539,10 @@ function sqlGradeTasks() {
 }
 
 function sqlSaveGrade($input) {
+  //Factor grade in time.
+  $time = $input['grade'] * $input['time'];
   $sql = "UPDATE `task_log` SET ";
-  $sql .= "Time='" . sqlStrPrep($input['time']) . "', ";
+  $sql .= "Time='" . $time . "', ";
   $sql .= "Grade='" . sqlStrPrep($input['grade']) . "', ";
   $sql .= "Note='" . sqlStrPrep($input['note']) . "' ";
   $sql .= "WHERE ID='" . $input['taskID'] . "' ";

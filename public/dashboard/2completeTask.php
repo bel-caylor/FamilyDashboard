@@ -7,9 +7,9 @@
 
 //Add task to task_log table.
   $input = array (
-    'taskID' => $input['taskID'] ?? $_POST['taskID'] ?? 353,
+    'taskID' => $input['taskID'] ?? $_POST['taskID'],
     'userID' => $_SESSION['currentUserID'],
-    'time' => $input['time'] ?? $_POST['time'] ?? 30,
+    'time' => $input['time'] ?? $_POST['time'],
     'tzOffset' => $input['tzOffset'] ?? 0
   );
   $taskLogID = sqlAddCompleteTask($input);

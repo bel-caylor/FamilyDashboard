@@ -16,18 +16,18 @@
 
   <body onload="onLoad()">
     <header>
-      <?php if ($_SESSION['admin'] == 1) {?>
       <div class="navHover">
         <button onclick="toggleNav()"><i class="fas fa-bars"></i>
           <div id="navContent" class="hidden">
             <a href="#Step2">Complete Tasks</a><br>
-            <a href="#Step3">Grade Tasks</a><br>
-            <a href="#Step4">Assign Tasks</a><br>
-            <a href="familySetup.php#Step4">Setup Users & Tasks</a><br>
+            <?php if ($_SESSION['admin'] == 1) {?>
+              <a href="#Step3">Grade Tasks</a><br>
+              <a href="#Step4">Assign Tasks</a><br>
+              <a href="familySetup.php#Step4">Setup Users & Tasks</a><br>
+            <?php } ?>
             <a href="logout.php">Log Out</a><br>
           </div>
       </div>
-    <?php } ?>
       <div>
         <?php echo "&nbsp;&nbsp;&nbsp;" . $header . "<button class='tooltip' onclick=\"window.location='dashboard.php'\"><span class='tooltiptext'>Refresh Page</span><i class='fas fa-redo-alt'></i>";?>
       </div>

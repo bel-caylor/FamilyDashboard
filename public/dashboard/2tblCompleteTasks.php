@@ -27,6 +27,21 @@ $taskTbl = '';
           <th class="task">Task</th>
         </tr>
 
+      <!-- REDO Tasks -->
+        <?php
+          $tasks = sqlRedoTask($_SESSION['currentUserID']);
+          if ($tasks->num_rows > 0) { $taskTbl = 1;
+        ?>
+            <tr>
+              <th colspan="3" class="category">REDO Tasks</th>
+            </tr>
+
+        <?php
+          }
+          while($row = mysqli_fetch_assoc($tasks)) {
+              createRedoTableRow($row);}
+        ?>
+
       <!-- Assigned Tasks -->
 
         <?php
@@ -75,18 +90,49 @@ $taskTbl = '';
     </table>
 </div>
 
+<!-- Create REDO Table Function -->
+<?php function createRedoTableRow($row) {
+    $task = $row['Description'] . "-" . $row['Task'];
+
+  ?>
+    <tr id="task<?php echo $row['taskLogID'] ?>">
+      <!-- Checkbox -->
+        <th><input type="checkbox" onchange="toggleRedoTask(<?php echo $row['taskLogID'] ?>)"></th>
+      <!-- Grade -->
+        <th class="tblInput"><?php echo $row['Grade']?>%</th>
+      <!-- Task -->
+        <th class="tblText"><?php echo $task?></th>
+    </tr>
+    <!-- Add Note if not BLANK -->
+      <?php if($row['Note'] != "") {?>
+        <tr>
+          <th colspan="2" class="formLabel">Note:</th>
+          <th class="tblAlert"><?php echo $row['Note'] ?></th>
+        </tr>
+      <?php } ?>
+
+<?php } ?>
+
 
 <!-- Create Table Function -->
 <?php function createTableRow($row) {
     $task = $row['Description'] . "-" . $row['Task'];
 
   ?>
-  <tr id="task<?php echo $row['taskID'] ?>">
-    <!-- Checkbox -->
-      <th><input type="checkbox" onchange="toggleCompleteTask(<?php echo $row['taskID'] ?>)"></th>
-    <!-- Time Spent -->
-      <th class="tblInput"><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
-    <!-- Task -->
-      <th class="task"><?php echo $task?></th>
-  </tr>
+    <tr id="task<?php echo $row['taskID'] ?>">
+      <!-- Checkbox -->
+        <th><input type="checkbox" onchange="toggleCompleteTask(<?php echo $row['taskID'] ?>)"></th>
+      <!-- Time Spent -->
+        <th class="tblInput"><input type="text" id="time<?php echo $row['taskID'] ?>" value="<?php echo $row['Time'] ?>" size="1" onchange="changeTaskTime(<?php echo $row['taskID'] ?>)"></th>
+      <!-- Task -->
+        <th class="tblText"><?php echo $task?></th>
+    </tr>
+    <!-- Add Note if not BLANK -->
+      <?php if($row['Note'] != "") {?>
+        <tr>
+          <th colspan="2" class="formLabel">Note:</th>
+          <th class="tblAlert"><?php echo $row['Note'] ?></th>
+        </tr>
+      <?php } ?>
+
 <?php } ?>
