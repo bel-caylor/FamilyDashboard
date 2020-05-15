@@ -1,31 +1,23 @@
 #Family Dashboard
+This app will help your family keep track of regular tasks and who completes them.  When a family member completes a task the total minutes are calculated and complared to other family members.  Administrators/Parents can also assign task to family members.
 
-##To Do List
-- create dashboard page
-  - challenge/report section
-    - 7-Day House Minute chart.
-    - Personal Goals chart.
-  -complete tasks.
-    - change Time to complete
--   - uncheck task complete box
-  - admin assign tasks table.
-    - include calculation of assigned tasks.
-  - admin grade tasks.
-    - add note to user.
-  - add/remove tasks.
-    - go to familySetup page.
+##Prerequisites
+-Apache
+-MySQL
 
-  -familySetup page
-    - calculate assigned tasks totals for users
+##Installing
+-Clone code.
+-Use family_dashboard.sql to setup MySQL tables
+-Create file db_credentials.php to setup connection to database.
+--define("DB_SERVER", "SERVER_NAME");
+--define("DB_USER", "USER_NAME");
+--define("DB_PASS", "USER_PASSWORD");
+--define("DB_NAME", "family_dashboard");
 
-  -Add mysqli_real_escape_string to sql calls.
-  -Add '' to all sql inputs.
+##Built With
+-PHP and JavaScript
+-MySQL database
 
-
-
-##Bugs
-- Fix validateUser
-    - seperate from sqlAddUser
-    - verify it works for Edit User
-- Fix password check at login
-- Need to think about how to handle $errors.
+#Author
+Belinda Caylor
+Copyright 2020 BC Designs

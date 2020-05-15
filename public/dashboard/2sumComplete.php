@@ -47,7 +47,7 @@ $completeTotal = mysqli_fetch_assoc($aryTotalComplete)['SUM(Time)']
   <body>
 
     <div class="chart">
-      <h3>User Percent Time of Complete <?php echo $completeTotal ?></h3>
+      <h3>User Percent Time of Complete</h3>
       <div class="user blank">
 
       </div>
