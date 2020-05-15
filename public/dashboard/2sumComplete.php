@@ -11,7 +11,7 @@ $completeTotal = mysqli_fetch_assoc($aryTotalComplete)['SUM(Time)']
 ?>
       <style>
         .chart {
-          width: 93%;
+          width: 100%;
           /* padding: 0 10px 0px 0px; */
 
         }
@@ -31,14 +31,15 @@ $completeTotal = mysqli_fetch_assoc($aryTotalComplete)['SUM(Time)']
           width: 2%;
         }
         <?php
+          $html = "";
           while($row = mysqli_fetch_assoc($userSumComplete)) {
-            $html = ".user" . $row['User_ID'] . " {";
+            $html .= ".userComplete" . $row['User_ID'] . " {";
             $html .= "background-color: " . $row['Color'] . ";";
             $percentTime = (int)((($row['SUM(Time)'] / $completeTotal) * 100));
             $html .= "width: " . $percentTime . "%;";
             $html .= "}  ";
-            echo $html;
           }
+        echo $html;
         ?>
       </style>
 
@@ -46,13 +47,13 @@ $completeTotal = mysqli_fetch_assoc($aryTotalComplete)['SUM(Time)']
   <body>
 
     <div class="chart">
-      <h3>User Percent Time of Complete</h3>
+      <h3>User Percent Time of Complete <?php echo $completeTotal ?></h3>
       <div class="user blank">
 
       </div>
       <?php
         while($row = mysqli_fetch_assoc($userSumComplete)) {?>
-          <div class="user user<?php echo $row['User_ID'] ?>">
+          <div class="user userComplete<?php echo $row['User_ID'] ?>">
             <?php $percentTime = (int)((($row['SUM(Time)'] / $completeTotal) * 100)); ?>
             <?php echo $row['Initial'] . "<br>" . $percentTime . "%" ?>
           </div>

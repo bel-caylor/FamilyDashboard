@@ -300,7 +300,8 @@ button:hover {
   background: #fff1f1; }
 
 .tblText {
-  font-weight: normal; }
+  font-weight: normal;
+  text-align: left; }
 
 .tblAlert {
   color: red; }

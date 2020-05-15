@@ -39,8 +39,7 @@
                      <!-- Time -->
                        <th class="tblInput"><input class="tblNumber" id="time<?php echo $task['ID'] ?>" type="text" size="1" value="<?php echo $task['Time'] ?>"></th>
                      <!-- Task -->
-                       <?php if ($task['Name'] != "Main") {$Name = $task['Name'] . "-";} else {$Name = "";} ?>
-                       <th colspan="5" class="task"><?php echo $task['Description'] . "-" . $Name . $task['Task']?></th>
+                       <th colspan="5" class="tblText"><?php echo $task['Description'] . "-" . $task['Task']?></th>
                  </tr>
                  <tr id="taskLogNote<?php echo $task['ID'] ?>">
                    <!-- Save -->
