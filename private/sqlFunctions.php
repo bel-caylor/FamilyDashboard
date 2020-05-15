@@ -32,7 +32,7 @@ function sqlCategories($familyID, $type = 0) {
   $sql .= "LEFT JOIN type ON type.ID = category_names.Type_ID ";
   $sql .= "WHERE Family_ID = " . $familyID . " ";
   if ($type != 0 ) {
-    $sql .= "AND type.ID = " . $type . " ";    
+    $sql .= "AND type.ID = " . $type . " ";
   }
   $sql .= "ORDER BY Type.ID, Cat_Name_ID ASC";
   // echo $sql . "<br>";
@@ -367,6 +367,7 @@ function sqlPersonalTasks($userID, $date) {
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `category_names`.`Type_ID` = 2 ";
+  $sql .= "AND tasks.`Assigned_User_ID` = " . $userID . " ";
   $sql .= "AND Start < '" . $date . "' ";
   $sql .= "ORDER BY `Freq_ID` ASC, `Start` ASC";
   return query_db($sql);
