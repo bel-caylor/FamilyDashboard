@@ -40,10 +40,15 @@ function sqlCategories($familyID, $type = 0) {
 }
 
 function sqlTasks($familyID, $catID) {
+  // $date = date_create();
+  // date_modify($date,"+1 days");
+  // $date = date_format($date,"Y-m-d H:i:s");
   $sql = "SELECT tasks.ID AS Task_ID, tasks.Task, `family-members`.ID AS User_ID, `family-members`.Name, `tasks`.Freq_ID, frequency.Frequency, tasks.Start, tasks.Time, tasks.Note ";
   $sql .= "FROM tasks LEFT JOIN `family-members` ON tasks.Assigned_User_ID = `family-members`.ID ";
   $sql .= "LEFT JOIN frequency ON tasks.Freq_ID = frequency.ID ";
-  $sql .= "WHERE tasks.Family_ID = " . $familyID . " AND tasks.Cat_Name_ID = " . $catID;
+  $sql .= "WHERE tasks.Family_ID = " . $familyID . " ";
+  $sql .= "AND tasks.Start < CURRENT_TIMESTAMP + INTERVAL 1 DAY ";
+  $sql .= "AND tasks.Cat_Name_ID = " . $catID . " ";
   // echo $sql . "<br>";
   return query_db($sql);
 }
@@ -350,7 +355,7 @@ function sqlRedoTask($userID) {
   $sql .= "WHERE `task_log`.User_ID = " . $userID . " AND category_names.Type_ID = 1 ";
   $sql .= "AND Redo = 0 ";
   $sql .= "AND Grade < 100 ";
-  $sql .= "AND Timestamp > '" . $date . "' ";
+  $sql .= "AND Timestamp > CURRENT_TIMESTAMP - INTERVAL 3 DAY ";
   $sql .= "ORDER BY `Grade` ASC";
   // echo $sql;
   return query_db($sql);
@@ -375,7 +380,7 @@ function sqlAssignedTasks($userID, $date) {
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID  ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `Assigned_User_ID` = " . $userID . " AND category_names.Type_ID = 1 ";
-  $sql .= "AND Start < '" . $date . "' ";
+  $sql .= "AND Start < CURRENT_TIMESTAMP + INTERVAL 1 DAY ";
   $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   // echo $sql;
   return query_db($sql);
@@ -387,7 +392,7 @@ function sqlHouseTasks($familyID, $date) {
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE tasks.`Family_ID` = " . $familyID . " AND category_names.Type_ID = 1 ";
   $sql .= "AND tasks.`Assigned_User_ID` = 0 ";
-  $sql .= "AND Start < '" . $date . "' ";
+  $sql .= "AND Start < CURRENT_TIMESTAMP + INTERVAL 1 DAY ";
   $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   // echo $sql;
   return query_db($sql);
@@ -399,7 +404,7 @@ function sqlPersonalTasks($userID, $date) {
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
   $sql .= "WHERE `category_names`.`Type_ID` = 2 ";
   $sql .= "AND tasks.`Assigned_User_ID` = " . $userID . " ";
-  $sql .= "AND Start < '" . $date . "' ";
+  $sql .= "AND Start < CURRENT_TIMESTAMP + INTERVAL 1 DAY ";
   $sql .= "ORDER BY `Start` ASC, `Freq_ID` ASC";
   return query_db($sql);
 }
@@ -452,7 +457,8 @@ function sqlUpdateNextStart($input) {
     $newStart = date_format($date,"Y-m-d H:i:s");
   //update start time.
     $sql = "UPDATE `tasks` SET ";
-    $sql .= "Start='" . $newStart . "', ";
+    // $sql .= "Start='" . $newStart . "', ";
+    $sql .= "Start= CURRENT_TIMESTAMP + INTERVAL " . $totalOffset . " HOUR, ";
     $sql .= "Assigned_User_ID = " . $UserID . " ";
     $sql .= "WHERE ID='" . $input['taskID'] . "' ";
     $sql .= "LIMIT 1";
