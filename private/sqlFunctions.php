@@ -548,7 +548,7 @@ function sqlGradeTasks() {
   $sql .= "LEFT JOIN `family-members` ON `family-members`.ID = task_log.User_ID ";
   $sql .= "LEFT JOIN `category_names` ON tasks.Cat_Name_ID = `category_names`.ID ";
   $sql .= "LEFT JOIN category ON `category_names`.Category_ID = category.ID ";
-  $sql .= "WHERE task_log.Family_ID = " . $_SESSION['familyID'] . " AND Grade = '' AND category.type_ID = 1 ";
+  $sql .= "WHERE task_log.Family_ID = " . $_SESSION['familyID'] . " AND Grade IS NULL AND category.type_ID = 1 ";
   $sql .= "ORDER BY task_log.User_ID ASC";
   // echo $sql . "<br>";
   return query_db($sql);
